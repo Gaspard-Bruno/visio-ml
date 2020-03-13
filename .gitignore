@@ -1,0 +1,5 @@
+.DS_Store
+/gitconfig.user
+
+/ImageAnnotate.xcodeproj/xcuserdata
+/ImageAnnotate.xcodeproj/project.xcworkspace/xcuserdata
