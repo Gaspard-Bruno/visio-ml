@@ -8,9 +8,9 @@ struct ImageViewer: View {
 
   var body: some View {
     ZStack(alignment: .topLeading) {
-      ImageBackground()
+      ImageBackground(image: dataStore.selectedImage)
       .gesture(
-        DragGesture()
+        DragGesture(minimumDistance: 0, coordinateSpace: .named("image"))
         .onChanged {
           guard let start = self.start else {
             print("\($0.startLocation)")
@@ -24,19 +24,17 @@ struct ImageViewer: View {
           guard let start = self.start, let size = self.size else {
             return
           }
-          self.dataStore.labels.append(
-            LabelModel(label: "Untitled", coordinates: LabelModel.CoordinatesModel(y: start.y, x: start.x, height: size.height, width: size.width))
+          self.dataStore.counter += 1
+          self.dataStore.annotatedImage.annotation.append(
+            LabelModel(label: "Untitled \(self.dataStore.counter)", coordinates: LabelModel.CoordinatesModel(y: start.y, x: start.x, height: size.height, width: size.width))
           )
           self.start = nil
           self.size = nil
         }
       )
 
-      ForEach(dataStore.labels.indices, id: \.self) { i in
-        LabelOverlay(
-          label: self.dataStore.labels[i],
-          selected: i == self.dataStore.selected
-        )
+      ForEach(dataStore.annotatedImage.annotation) { i in
+        LabelOverlay(label: i)
         .onTapGesture {
           self.dataStore.selected = i
         }

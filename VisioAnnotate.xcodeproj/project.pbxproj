@@ -10,7 +10,7 @@
 		6222F699241B989C001B7A56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F698241B989C001B7A56 /* AppDelegate.swift */; };
 		6222F69B241B989C001B7A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F69A241B989C001B7A56 /* ContentView.swift */; };
 		6222F69D241B989F001B7A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6222F69C241B989F001B7A56 /* Assets.xcassets */; };
-		6222F6A0241B989F001B7A56 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6222F69F241B989F001B7A56 /* Preview Assets.xcassets */; };
+		6222F6A0241B989F001B7A56 /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6222F69F241B989F001B7A56 /* PreviewAssets.xcassets */; };
 		6222F6A3241B989F001B7A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6222F6A1241B989F001B7A56 /* Main.storyboard */; };
 		6222F6AC241B9997001B7A56 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6AB241B9997001B7A56 /* ImageViewer.swift */; };
 		6222F6AE241B99D6001B7A56 /* SidePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6AD241B99D6001B7A56 /* SidePanel.swift */; };
@@ -21,17 +21,21 @@
 		6222F6BA241BCCC6001B7A56 /* LabelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6B9241BCCC6001B7A56 /* LabelDetails.swift */; };
 		6222F6BE241BE4E1001B7A56 /* LabelOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6BD241BE4E1001B7A56 /* LabelOverlay.swift */; };
 		6222F6C0241BEE51001B7A56 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6BF241BEE51001B7A56 /* DataStore.swift */; };
+		62C61DE9241FC5FF000C1BAE /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DE8241FC5FF000C1BAE /* ImageModel.swift */; };
+		62C61DEF241FD5F5000C1BAE /* cat-and-dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C61DEE241FD5F5000C1BAE /* cat-and-dog.png */; };
+		62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DF0241FD620000C1BAE /* DetailView.swift */; };
+		62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DF2241FDE0A000C1BAE /* ImageList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6222F695241B989C001B7A56 /* ImageAnnotate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageAnnotate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6222F695241B989C001B7A56 /* VisioAnnotate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisioAnnotate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6222F698241B989C001B7A56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6222F69A241B989C001B7A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6222F69C241B989F001B7A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6222F69F241B989F001B7A56 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6222F69F241B989F001B7A56 /* PreviewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreviewAssets.xcassets; sourceTree = "<group>"; };
 		6222F6A2241B989F001B7A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6222F6A4241B989F001B7A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6222F6A5241B989F001B7A56 /* ImageAnnotate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImageAnnotate.entitlements; sourceTree = "<group>"; };
+		6222F6A5241B989F001B7A56 /* VisioAnnotate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VisioAnnotate.entitlements; sourceTree = "<group>"; };
 		6222F6AB241B9997001B7A56 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		6222F6AD241B99D6001B7A56 /* SidePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanel.swift; sourceTree = "<group>"; };
 		6222F6AF241B9C98001B7A56 /* AnnotationInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationInspector.swift; sourceTree = "<group>"; };
@@ -41,6 +45,10 @@
 		6222F6B9241BCCC6001B7A56 /* LabelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDetails.swift; sourceTree = "<group>"; };
 		6222F6BD241BE4E1001B7A56 /* LabelOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelOverlay.swift; sourceTree = "<group>"; };
 		6222F6BF241BEE51001B7A56 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		62C61DE8241FC5FF000C1BAE /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		62C61DEE241FD5F5000C1BAE /* cat-and-dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat-and-dog.png"; sourceTree = "<group>"; };
+		62C61DF0241FD620000C1BAE /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		62C61DF2241FDE0A000C1BAE /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		62E4321D241BFE410074FE7F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		62E4321E241BFE410074FE7F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,11 +67,9 @@
 		6222F68C241B989C001B7A56 = {
 			isa = PBXGroup;
 			children = (
-				6222F6A4241B989F001B7A56 /* Info.plist */,
-				6222F6A5241B989F001B7A56 /* ImageAnnotate.entitlements */,
-				62E4321E241BFE410074FE7F /* .gitignore */,
 				62E4321D241BFE410074FE7F /* README.md */,
 				6222F697241B989C001B7A56 /* src */,
+				62C61DF4241FEF0F000C1BAE /* conf */,
 				6222F696241B989C001B7A56 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,7 +77,7 @@
 		6222F696241B989C001B7A56 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6222F695241B989C001B7A56 /* ImageAnnotate.app */,
+				6222F695241B989C001B7A56 /* VisioAnnotate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				6222F69A241B989C001B7A56 /* ContentView.swift */,
+				62C61DF2241FDE0A000C1BAE /* ImageList.swift */,
+				62C61DF0241FD620000C1BAE /* DetailView.swift */,
 				6222F6AB241B9997001B7A56 /* ImageViewer.swift */,
 				6222F6BD241BE4E1001B7A56 /* LabelOverlay.swift */,
 				6222F6B7241BAA3F001B7A56 /* ImageBackground.swift */,
@@ -88,7 +96,7 @@
 				6222F6AD241B99D6001B7A56 /* SidePanel.swift */,
 				6222F6B5241BA009001B7A56 /* model */,
 				6222F6B6241BA021001B7A56 /* support */,
-				6222F69C241B989F001B7A56 /* Assets.xcassets */,
+				62FFC869241FEFD4005DE3E3 /* assets */,
 				6222F6A1241B989F001B7A56 /* Main.storyboard */,
 				6222F69E241B989F001B7A56 /* PreviewContent */,
 			);
@@ -98,7 +106,8 @@
 		6222F69E241B989F001B7A56 /* PreviewContent */ = {
 			isa = PBXGroup;
 			children = (
-				6222F69F241B989F001B7A56 /* Preview Assets.xcassets */,
+				62C61DEE241FD5F5000C1BAE /* cat-and-dog.png */,
+				6222F69F241B989F001B7A56 /* PreviewAssets.xcassets */,
 			);
 			path = PreviewContent;
 			sourceTree = "<group>";
@@ -108,6 +117,7 @@
 			children = (
 				6222F6B1241B9F9E001B7A56 /* AnnotatedImageModel.swift */,
 				6222F6B3241B9FE6001B7A56 /* LabelModel.swift */,
+				62C61DE8241FC5FF000C1BAE /* ImageModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -121,12 +131,30 @@
 			path = support;
 			sourceTree = "<group>";
 		};
+		62C61DF4241FEF0F000C1BAE /* conf */ = {
+			isa = PBXGroup;
+			children = (
+				6222F6A4241B989F001B7A56 /* Info.plist */,
+				6222F6A5241B989F001B7A56 /* VisioAnnotate.entitlements */,
+				62E4321E241BFE410074FE7F /* .gitignore */,
+			);
+			name = conf;
+			sourceTree = "<group>";
+		};
+		62FFC869241FEFD4005DE3E3 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				6222F69C241B989F001B7A56 /* Assets.xcassets */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6222F694241B989C001B7A56 /* ImageAnnotate */ = {
+		6222F694241B989C001B7A56 /* VisioAnnotate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6222F6A8241B989F001B7A56 /* Build configuration list for PBXNativeTarget "ImageAnnotate" */;
+			buildConfigurationList = 6222F6A8241B989F001B7A56 /* Build configuration list for PBXNativeTarget "VisioAnnotate" */;
 			buildPhases = (
 				6222F691241B989C001B7A56 /* Sources */,
 				6222F692241B989C001B7A56 /* Frameworks */,
@@ -136,9 +164,9 @@
 			);
 			dependencies = (
 			);
-			name = ImageAnnotate;
+			name = VisioAnnotate;
 			productName = ImageAnnotate;
-			productReference = 6222F695241B989C001B7A56 /* ImageAnnotate.app */;
+			productReference = 6222F695241B989C001B7A56 /* VisioAnnotate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -156,7 +184,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6222F690241B989C001B7A56 /* Build configuration list for PBXProject "ImageAnnotate" */;
+			buildConfigurationList = 6222F690241B989C001B7A56 /* Build configuration list for PBXProject "VisioAnnotate" */;
 			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -169,7 +197,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6222F694241B989C001B7A56 /* ImageAnnotate */,
+				6222F694241B989C001B7A56 /* VisioAnnotate */,
 			);
 		};
 /* End PBXProject section */
@@ -180,7 +208,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6222F6A3241B989F001B7A56 /* Main.storyboard in Resources */,
-				6222F6A0241B989F001B7A56 /* Preview Assets.xcassets in Resources */,
+				62C61DEF241FD5F5000C1BAE /* cat-and-dog.png in Resources */,
+				6222F6A0241B989F001B7A56 /* PreviewAssets.xcassets in Resources */,
 				6222F69D241B989F001B7A56 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +222,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6222F6BA241BCCC6001B7A56 /* LabelDetails.swift in Sources */,
+				62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */,
+				62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */,
 				6222F6B4241B9FE6001B7A56 /* LabelModel.swift in Sources */,
 				6222F6B8241BAA3F001B7A56 /* ImageBackground.swift in Sources */,
 				6222F6B0241B9C98001B7A56 /* AnnotationInspector.swift in Sources */,
@@ -202,6 +233,7 @@
 				6222F6AC241B9997001B7A56 /* ImageViewer.swift in Sources */,
 				6222F6BE241BE4E1001B7A56 /* LabelOverlay.swift in Sources */,
 				6222F6B2241B9F9E001B7A56 /* AnnotatedImageModel.swift in Sources */,
+				62C61DE9241FC5FF000C1BAE /* ImageModel.swift in Sources */,
 				6222F699241B989C001B7A56 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,7 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ImageAnnotate.entitlements;
+				CODE_SIGN_ENTITLEMENTS = VisioAnnotate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"src/PreviewContent\"";
@@ -350,7 +382,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaspardbruno.etudes.ImageAnnotate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaspardbruno.etudes.VisioAnnotate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -360,7 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ImageAnnotate.entitlements;
+				CODE_SIGN_ENTITLEMENTS = VisioAnnotate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"src/PreviewContent\"";
@@ -373,7 +405,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaspardbruno.etudes.ImageAnnotate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaspardbruno.etudes.VisioAnnotate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -382,7 +414,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6222F690241B989C001B7A56 /* Build configuration list for PBXProject "ImageAnnotate" */ = {
+		6222F690241B989C001B7A56 /* Build configuration list for PBXProject "VisioAnnotate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6222F6A6241B989F001B7A56 /* Debug */,
@@ -391,7 +423,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6222F6A8241B989F001B7A56 /* Build configuration list for PBXNativeTarget "ImageAnnotate" */ = {
+		6222F6A8241B989F001B7A56 /* Build configuration list for PBXNativeTarget "VisioAnnotate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6222F6A9241B989F001B7A56 /* Debug */,

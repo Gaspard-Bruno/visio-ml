@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct SidePanel: View {
+
+  @EnvironmentObject var dataStore: DataStore
+
   var body: some View {
     VStack {
       TabView {
@@ -9,11 +12,12 @@ struct SidePanel: View {
         .tabItem {
           Text("Annotation")
         }
+        Text("Image information")
+        .tag("imageinfo")
+        .tabItem {
+          Text("Image info")
+        }
       }
-      Button("Export JSON") {
-      
-      }
-      .padding()
     }
   }
 }

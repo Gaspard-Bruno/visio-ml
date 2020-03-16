@@ -2,33 +2,38 @@ import SwiftUI
 
 struct LabelDetails: View {
   @Binding var label: LabelModel
-  var index: Int
   @EnvironmentObject var dataStore: DataStore
 
   var selected: Bool {
-    index == dataStore.selected
+    label == dataStore.selected
+  }
+  
+  var _selected: Binding<Bool> {
+    Binding<Bool>(get: {
+      self.selected
+    }, set: {
+      if $0 {
+        self.dataStore.selected = self.label
+      } else {
+        self.dataStore.selected = nil
+      }
+    })
   }
 
   var body: some View {
     VStack(alignment: .leading) {
-      if selected {
-        TextField("Label", text: _label.label)
-      } else {
-        Text("\(label.label)")
-        .onTapGesture {
-          self.dataStore.selected = self.index
-        }
-        .frame(maxWidth: .infinity)
+      Toggle(isOn: _selected) {
+        Text("Select")
       }
-
+      TextField("Label", text: _label.label)
       Text("x: \(label.coordinates.x)")
-      Text("y: \(label.coordinates.x)")
-      Text("width: \(label.coordinates.x)")
-      Text("height: \(label.coordinates.x)")
+      Text("y: \(label.coordinates.y)")
+      Text("width: \(label.coordinates.width)")
+      Text("height: \(label.coordinates.height)")
       if selected {
         Button("Remove") {
           self.dataStore.selected = nil
-          self.dataStore.labels.remove(at: self.index)
+          self.dataStore.annotatedImage.annotation.removeAll { $0 == self.label }
         }
       }
     }
@@ -40,10 +45,7 @@ struct LabelDetails: View {
 
 struct LabelDetails_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      LabelDetails(label: .constant(LabelModel.specimen), index: 0)
-      LabelDetails(label: .constant(LabelModel.specimen), index: 1)
-    }
+    LabelDetails(label: .constant(LabelModel.specimen))
     .previewLayout(.sizeThatFits)
     .environmentObject(DataStore())
   }

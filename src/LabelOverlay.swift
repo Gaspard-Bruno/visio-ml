@@ -3,7 +3,11 @@ import SwiftUI
 struct LabelOverlay: View {
 
   var label: LabelModel
-  var selected: Bool
+  @EnvironmentObject var dataStore: DataStore
+
+  var selected: Bool {
+    dataStore.selected == label
+  }
 
   var color: Color {
     Color(selected ? "labelOverlay" : "labelOverlaySelected")
@@ -29,7 +33,8 @@ struct LabelOverlay: View {
 
 struct LabelOverlay_Previews: PreviewProvider {
   static var previews: some View {
-    LabelOverlay(label: LabelModel.specimen, selected: true)
+    LabelOverlay(label: LabelModel.specimen)
+    .environmentObject(DataStore())
     .previewLayout(.sizeThatFits)
   }
 }

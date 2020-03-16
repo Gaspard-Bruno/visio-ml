@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6222F694241B989C001B7A56"
-               BuildableName = "ImageAnnotate.app"
-               BlueprintName = "ImageAnnotate"
-               ReferencedContainer = "container:ImageAnnotate.xcodeproj">
+               BuildableName = "VisioAnnotate.app"
+               BlueprintName = "VisioAnnotate"
+               ReferencedContainer = "container:VisioAnnotate.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6222F694241B989C001B7A56"
-            BuildableName = "ImageAnnotate.app"
-            BlueprintName = "ImageAnnotate"
-            ReferencedContainer = "container:ImageAnnotate.xcodeproj">
+            BuildableName = "VisioAnnotate.app"
+            BlueprintName = "VisioAnnotate"
+            ReferencedContainer = "container:VisioAnnotate.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6222F694241B989C001B7A56"
-            BuildableName = "ImageAnnotate.app"
-            BlueprintName = "ImageAnnotate"
-            ReferencedContainer = "container:ImageAnnotate.xcodeproj">
+            BuildableName = "VisioAnnotate.app"
+            BlueprintName = "VisioAnnotate"
+            ReferencedContainer = "container:VisioAnnotate.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

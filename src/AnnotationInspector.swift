@@ -7,12 +7,16 @@ struct AnnotationInspector: View {
   var body: some View {
     ScrollView(.vertical) {
       VStack {
-        ForEach(dataStore.labels.indices, id: \.self) { i in
-          LabelDetails(
-            label: self.$dataStore.labels[i],
-            index: i
-          )
+        TextField("Image name", text: $dataStore.annotatedImage.imagefilename)
+        .padding()
+        Divider()
+        ForEach(dataStore.annotatedImage.annotation.indices, id: \.self) { i in
+          LabelDetails(label: self.$dataStore.annotatedImage.annotation[i])
         }
+
+//        ForEach(dataStore.annotatedImage.annotation) {
+//          LabelDetails(label: $0)
+//        }
       }
     }
   }
