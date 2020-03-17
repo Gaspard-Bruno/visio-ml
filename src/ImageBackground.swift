@@ -3,12 +3,19 @@ import SwiftUI
 struct ImageBackground: View {
   
   var image: ImageModel
-
+  var p: GeometryProxy
+  
   var body: some View {
     Image(nsImage: NSImage(byReferencing: image.url))
     .resizable()
     .aspectRatio(contentMode: .fit)
-    .coordinateSpace(name: "image")
+    .anchorPreference(
+      key: ImageSizePrefKey.self,
+      value: .bounds,
+      transform: {
+        self.p[$0].size
+      }
+    )
     .background(Color("selectedBackground"))
     .border(Color.accentColor, width: 1)
   }
@@ -17,6 +24,8 @@ struct ImageBackground: View {
 
 struct ImageBackground_Previews: PreviewProvider {
   static var previews: some View {
-    ImageBackground(image: ImageModel.specimen)
+    GeometryReader {
+      ImageBackground(image: ImageModel.specimen, p: $0)
+    }
   }
 }

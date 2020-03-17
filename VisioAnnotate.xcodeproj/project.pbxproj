@@ -25,6 +25,8 @@
 		62C61DEF241FD5F5000C1BAE /* cat-and-dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C61DEE241FD5F5000C1BAE /* cat-and-dog.png */; };
 		62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DF0241FD620000C1BAE /* DetailView.swift */; };
 		62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DF2241FDE0A000C1BAE /* ImageList.swift */; };
+		62FFC86B241FF2D6005DE3E3 /* ImageSizePrefKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FFC86A241FF2D6005DE3E3 /* ImageSizePrefKey.swift */; };
+		62FFC86D241FF640005DE3E3 /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FFC86C241FF640005DE3E3 /* ImageInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		62C61DF2241FDE0A000C1BAE /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		62E4321D241BFE410074FE7F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		62E4321E241BFE410074FE7F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		62FFC86A241FF2D6005DE3E3 /* ImageSizePrefKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizePrefKey.swift; sourceTree = "<group>"; };
+		62FFC86C241FF640005DE3E3 /* ImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,14 +90,16 @@
 			isa = PBXGroup;
 			children = (
 				6222F69A241B989C001B7A56 /* ContentView.swift */,
+				62FFC86A241FF2D6005DE3E3 /* ImageSizePrefKey.swift */,
 				62C61DF2241FDE0A000C1BAE /* ImageList.swift */,
 				62C61DF0241FD620000C1BAE /* DetailView.swift */,
 				6222F6AB241B9997001B7A56 /* ImageViewer.swift */,
 				6222F6BD241BE4E1001B7A56 /* LabelOverlay.swift */,
 				6222F6B7241BAA3F001B7A56 /* ImageBackground.swift */,
-				6222F6AF241B9C98001B7A56 /* AnnotationInspector.swift */,
-				6222F6B9241BCCC6001B7A56 /* LabelDetails.swift */,
 				6222F6AD241B99D6001B7A56 /* SidePanel.swift */,
+				6222F6AF241B9C98001B7A56 /* AnnotationInspector.swift */,
+				62FFC86C241FF640005DE3E3 /* ImageInfo.swift */,
+				6222F6B9241BCCC6001B7A56 /* LabelDetails.swift */,
 				6222F6B5241BA009001B7A56 /* model */,
 				6222F6B6241BA021001B7A56 /* support */,
 				62FFC869241FEFD4005DE3E3 /* assets */,
@@ -222,10 +228,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6222F6BA241BCCC6001B7A56 /* LabelDetails.swift in Sources */,
+				62FFC86B241FF2D6005DE3E3 /* ImageSizePrefKey.swift in Sources */,
 				62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */,
 				62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */,
 				6222F6B4241B9FE6001B7A56 /* LabelModel.swift in Sources */,
 				6222F6B8241BAA3F001B7A56 /* ImageBackground.swift in Sources */,
+				62FFC86D241FF640005DE3E3 /* ImageInfo.swift in Sources */,
 				6222F6B0241B9C98001B7A56 /* AnnotationInspector.swift in Sources */,
 				6222F69B241B989C001B7A56 /* ContentView.swift in Sources */,
 				6222F6AE241B99D6001B7A56 /* SidePanel.swift in Sources */,

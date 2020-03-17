@@ -67,11 +67,11 @@ extension LabelModel {
       hasher.combine(width)
     }
     
-    init(y: CGFloat, x: CGFloat, height: CGFloat, width: CGFloat) {
-      self.y = y
-      self.x = x
-      self.height = height
-      self.width = width
+    init(y: CGFloat, x: CGFloat, height: CGFloat, width: CGFloat, scale: CGFloat = 1) {
+      self.y = (y / scale).rounded()
+      self.x = (x / scale).rounded()
+      self.height = (height / scale).rounded()
+      self.width = (width / scale).rounded()
     }
 
     var y: CGFloat

@@ -2,7 +2,8 @@ import SwiftUI
 
 struct ContentView: View {
 
-  @ObservedObject var dataStore = DataStore()
+  //@ObservedObject var dataStore = DataStore()
+  @EnvironmentObject var dataStore: DataStore
 
   var body: some View {
     VStack(spacing: 0) {
@@ -32,7 +33,7 @@ struct ContentView: View {
         .frame(minHeight: 500)
       }
     }
-    .environmentObject(dataStore)
+    //.environmentObject(dataStore)
   }
 }
 

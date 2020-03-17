@@ -33,7 +33,7 @@ struct LabelDetails: View {
       if selected {
         Button("Remove") {
           self.dataStore.selected = nil
-          self.dataStore.annotatedImage.annotation.removeAll { $0 == self.label }
+          self.dataStore.annotatedImage!.annotation.removeAll { $0 == self.label }
         }
       }
     }

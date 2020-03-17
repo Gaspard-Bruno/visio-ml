@@ -12,7 +12,7 @@ struct SidePanel: View {
         .tabItem {
           Text("Annotation")
         }
-        Text("Image information")
+        ImageInfo()
         .tag("imageinfo")
         .tabItem {
           Text("Image info")

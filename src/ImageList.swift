@@ -7,7 +7,7 @@ struct ImageList: View {
   
   var body: some View {
     Group {
-      if dropping {
+      if dropping || dataStore.images.count == 0 {
         Color("background")
         .overlay(
           Text("Drop image files into this area.")
@@ -26,6 +26,7 @@ struct ImageList: View {
             }
             let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
             self.dataStore.images.append(ImageModel(url: url))
+            self.dataStore.selectedImage = self.dataStore.images.last!
           }
         }
       }

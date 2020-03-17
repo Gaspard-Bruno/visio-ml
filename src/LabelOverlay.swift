@@ -13,10 +13,14 @@ struct LabelOverlay: View {
     Color(selected ? "labelOverlay" : "labelOverlaySelected")
   }
 
+  var scale: CGFloat {
+    dataStore.selectedImage.currentScale
+  }
+
   var body: some View {
     VStack(alignment: .trailing, spacing: 0) {
       color
-      .frame(width: label.coordinates.width, height: label.coordinates.height)
+      .frame(width: label.coordinates.width * scale, height: label.coordinates.height * scale)
       .opacity(0.5)
       .border(color, width: 1)
 
@@ -27,7 +31,7 @@ struct LabelOverlay: View {
     }
     .alignmentGuide(.leading) { $0[.leading] }
     .alignmentGuide(.top) { $0[.top] }
-    .offset(x: label.coordinates.x, y: label.coordinates.y)
+    .offset(x: label.coordinates.x * scale, y: label.coordinates.y * scale)
   }
 }
 
