@@ -4,7 +4,7 @@ struct ImageInfo: View {
 
   @EnvironmentObject var dataStore: DataStore
 
-  var image: ImageModel {
+  var image: ImageModel! {
     dataStore.selectedImage
   }
 
@@ -20,7 +20,7 @@ struct ImageInfo: View {
     .padding()
     .font(.system(.body, design: .monospaced))
   }
-  var body: some View {
+  var inspector: some View {
     ScrollView(.vertical) {
       VStack {
         //TextField("Image name", text: $dataStore.annotatedImage!.imagefilename)
@@ -31,6 +31,16 @@ struct ImageInfo: View {
       }
     }
   }
+  var body: some View {
+    Group {
+      if image == nil {
+        Text("Please add/select an image.")
+      } else {
+        inspector
+      }
+    }
+  }
+
 }
 
 

@@ -6,11 +6,19 @@ struct ImageViewer: View {
   @State var size: CGSize?
   @EnvironmentObject var dataStore: DataStore
 
+  var annotatedImage: AnnotatedImageModel {
+    selectedImage.annotated
+  }
+
+  var selectedImage: ImageModel {
+    dataStore.selectedImage!
+  }
+
   var labels: some View {
     ForEach(self.dataStore.annotatedImage!.annotation) { i in
       LabelOverlay(label: i)
       .onTapGesture {
-        self.dataStore.selected = i
+        self.dataStore.selectedLabel = i
       }
     }
   }
@@ -27,33 +35,43 @@ struct ImageViewer: View {
       }
     }
   }
+  
+  func updateRect(_ value: DragGesture.Value) {
+    guard let start = self.start else {
+      self.start = value.startLocation
+      return
+    }
+    let end = value.location
+    size = CGSize(width: end.x - start.x, height: end.y - start.y)
+  }
+
+  func createLabel(_ value: DragGesture.Value) {
+    guard let start = start, let size = size else {
+      return
+    }
+    
+    let x = size.width < 0 ? value.location.x : start.x
+    let y = size.height < 0 ? value.location.y : start.y
+    let width = abs(size.width)
+    let height = abs(size.height)
+    
+    dataStore.counter += 1
+    let scale = selectedImage.currentScale
+    let label = LabelModel(label: "Untitled \(dataStore.counter)", coordinates: LabelModel.CoordinatesModel(y: y, x: x, height: height, width: width, scale: scale))
+    dataStore.annotatedImage!.annotation.append(label)
+    dataStore.selectedLabel = selectedImage.annotated.annotation.last
+    self.start = nil
+    self.size = nil
+  }
 
   var body: some View {
     GeometryReader { p in
       ZStack(alignment: .topLeading) {
-        ImageBackground(image: self.dataStore.selectedImage, p: p)
+        ImageBackground(image: self.selectedImage, p: p)
         .gesture(
           DragGesture(minimumDistance: 0, coordinateSpace: .named("image"))
-          .onChanged {
-            guard let start = self.start else {
-              self.start = $0.startLocation
-              return
-            }
-            let end = $0.location
-            self.size = CGSize(width: end.x - start.x, height: end.y - start.y)
-          }
-          .onEnded { _ in
-            guard let start = self.start, let size = self.size else {
-              return
-            }
-            self.dataStore.counter += 1
-            let scale = self.dataStore.selectedImage.currentScale
-            self.dataStore.annotatedImage!.annotation.append(
-              LabelModel(label: "Untitled \(self.dataStore.counter)", coordinates: LabelModel.CoordinatesModel(y: start.y, x: start.x, height: size.height, width: size.width, scale: scale))
-            )
-            self.start = nil
-            self.size = nil
-          }
+          .onChanged(self.updateRect)
+          .onEnded(self.createLabel)
         )
         self.labels
         self.dragLabel

@@ -1,11 +1,17 @@
 import SwiftUI
 
 struct LabelDetails: View {
-  @Binding var label: LabelModel
+  var label: LabelModel
   @EnvironmentObject var dataStore: DataStore
 
+  @State private var labelName: String?
+
+  var selectedLabel: Binding<String> {
+    $dataStore.selectedLabel.label
+  }
+  
   var selected: Bool {
-    label == dataStore.selected
+    label == dataStore.selectedLabel
   }
   
   var _selected: Binding<Bool> {
@@ -13,10 +19,18 @@ struct LabelDetails: View {
       self.selected
     }, set: {
       if $0 {
-        self.dataStore.selected = self.label
+        self.dataStore.selectedLabel = self.label
       } else {
-        self.dataStore.selected = nil
+        self.dataStore.selectedLabel = nil
       }
+    })
+  }
+
+  private var _labelCustomBinding: Binding<String> {
+    Binding<String>(get: {
+      self.labelName == nil ? self.dataStore.selectedLabel.label : self.labelName!
+    }, set: {
+      self.labelName = $0
     })
   }
 
@@ -25,15 +39,28 @@ struct LabelDetails: View {
       Toggle(isOn: _selected) {
         Text("Select")
       }
-      TextField("Label", text: _label.label)
+
+      //TextField("Label", text: selected ? $dataStore.selectedLabel.label : .constant(label.label))
+      
+      if selected {
+        TextField("Label", text: _labelCustomBinding) {
+          self.dataStore.selectedLabel.label = self.labelName!
+
+          // HACK ALERT:
+          self.dataStore.dummyToggle.toggle()
+        }
+      } else {
+        TextField("Label", text: .constant(label.label))
+        .environment(\.isEnabled, false)
+      }
+
       Text("x: \(label.coordinates.x)")
       Text("y: \(label.coordinates.y)")
       Text("width: \(label.coordinates.width)")
       Text("height: \(label.coordinates.height)")
       if selected {
-        Button("Remove") {
-          self.dataStore.selected = nil
-          self.dataStore.annotatedImage!.annotation.removeAll { $0 == self.label }
+        Button("Delete") {
+          self.dataStore.deleteSelectedLabel()
         }
       }
     }
@@ -45,7 +72,7 @@ struct LabelDetails: View {
 
 struct LabelDetails_Previews: PreviewProvider {
   static var previews: some View {
-    LabelDetails(label: .constant(LabelModel.specimen))
+    LabelDetails(label: LabelModel.specimen)
     .previewLayout(.sizeThatFits)
     .environmentObject(DataStore())
   }

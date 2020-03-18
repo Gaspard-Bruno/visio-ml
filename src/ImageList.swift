@@ -43,6 +43,9 @@ struct ImageList: View {
         }
       }
       .listStyle(SidebarListStyle())
+      .onDeleteCommand {
+        self.dataStore.deleteSelectedImage()
+      }
     }
   }
 }

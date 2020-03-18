@@ -6,7 +6,7 @@ struct LabelOverlay: View {
   @EnvironmentObject var dataStore: DataStore
 
   var selected: Bool {
-    dataStore.selected == label
+    dataStore.selectedLabel == label
   }
 
   var color: Color {
@@ -14,7 +14,7 @@ struct LabelOverlay: View {
   }
 
   var scale: CGFloat {
-    dataStore.selectedImage.currentScale
+    dataStore.selectedImage!.currentScale
   }
 
   var body: some View {
