@@ -6,15 +6,7 @@ struct ContentView: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      HStack {
-        Text("Drag new images into the images area on the left.")
-        .padding()
-        Spacer()
-        Button("Export JSON") {
-          self.dataStore.saveJSON()
-        }
-        .padding()
-      }
+      ToolBar()
       Divider()
       NavigationView {
         ImageList()

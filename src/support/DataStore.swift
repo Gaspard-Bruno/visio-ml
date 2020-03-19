@@ -3,6 +3,7 @@ import Foundation
 
 class DataStore: ObservableObject {
 
+  @Published var workingFolder: URL?
   @Published var counter = 0
   @Published var images: [ImageModel] = []
   @Published var selectedImage: ImageModel? {
@@ -12,6 +13,30 @@ class DataStore: ObservableObject {
   }
 
   @Published var selectedLabel: LabelModel!
+
+  func setWorkingFolder(_ url: URL) {
+    var isDirectory: ObjCBool = ObjCBool(false)
+    let exists = FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory)
+    guard exists && isDirectory.boolValue else {
+      return
+    }
+    workingFolder = url
+    refreshContents()
+  }
+
+  func refreshContents() {
+    guard let url = workingFolder else {
+      return
+    }
+    let contents = try! FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles])
+    let pngs = contents.filter { $0.path.lowercased().hasSuffix(".png") }
+    for imageUrl in pngs {
+      guard images.first(where: { $0.url == imageUrl }) == nil else {
+        continue
+      }
+      images.append(ImageModel(url: imageUrl))
+    }
+  }
 
   func deleteSelectedImage() {
     guard
@@ -52,7 +77,11 @@ class DataStore: ObservableObject {
   @Published var dummyToggle = false
 
   func saveJSON() {
-    let url = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0].appendingPathComponent("annotations.json")
+    guard let folderUrl = workingFolder else {
+      return
+    }
+    // let folderUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+    let url = folderUrl.appendingPathComponent("annotations.json")
     guard let data = try? JSONEncoder().encode(annotatedImages) else {
       return
     }
