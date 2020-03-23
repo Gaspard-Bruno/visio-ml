@@ -21,8 +21,13 @@ struct ToolBar: View {
       }
 
       Spacer()
-      Button("Export JSON") {
-        self.dataStore.saveJSON()
+      VStack {
+        Button("Save JSON") {
+          self.dataStore.saveJSON()
+        }
+        Button("Reload JSON") {
+          self.dataStore.loadJSON()
+        }
       }
     }
   }

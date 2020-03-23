@@ -9,14 +9,14 @@ struct AnnotationInspector: View {
   }
 
   var annotatedImage: AnnotatedImageModel {
-    dataStore.selectedImage!.annotated
+    dataStore.selectedAnnotatedImage!
   }
 
   var inspector: some View {
     ScrollView(.vertical) {
       VStack {
         //TextField("Image name", text: $dataStore.annotatedImage.imagefilename)
-        Text("\(dataStore.annotatedImage!.imagefilename)")
+        Text("\(dataStore.selectedImage!.filename)")
         .padding()
         Divider()
         ForEach(annotation) {

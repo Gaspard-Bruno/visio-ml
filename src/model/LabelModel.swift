@@ -40,6 +40,24 @@ class LabelModel: Codable, Identifiable, Equatable, Hashable, ObservableObject {
     try container.encode(coordinates, forKey: .coordinates)
   }
 
+  func flipVertically(withHeight height: CGFloat) -> LabelModel {
+    LabelModel(label: label, coordinates: CoordinatesModel(
+      y: height - coordinates.y - coordinates.height,
+      x: coordinates.x,
+      height: coordinates.height,
+      width: coordinates.width
+    ))
+  }
+
+  func flipHorizontally(withWidth width: CGFloat) -> LabelModel {
+    LabelModel(label: label, coordinates: CoordinatesModel(
+      y: coordinates.y,
+      x: width - coordinates.x - coordinates.width,
+      height: coordinates.height,
+      width: coordinates.width
+    ))
+  }
+
   static var specimen: LabelModel {
     LabelModel(label: "cat", coordinates: CoordinatesModel.specimen)
   }

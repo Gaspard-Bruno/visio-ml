@@ -21,6 +21,7 @@
 		6222F6BA241BCCC6001B7A56 /* LabelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6B9241BCCC6001B7A56 /* LabelDetails.swift */; };
 		6222F6BE241BE4E1001B7A56 /* LabelOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6BD241BE4E1001B7A56 /* LabelOverlay.swift */; };
 		6222F6C0241BEE51001B7A56 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F6BF241BEE51001B7A56 /* DataStore.swift */; };
+		623EC0F5242904D9000E9388 /* SyntheticsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623EC0F4242904D9000E9388 /* SyntheticsSettings.swift */; };
 		6285E1AC2423D0BB008A27B1 /* SelectFolderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285E1AB2423D0BB008A27B1 /* SelectFolderButton.swift */; };
 		6285E1B02423D22B008A27B1 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285E1AF2423D22B008A27B1 /* ToolBar.swift */; };
 		62C61DE9241FC5FF000C1BAE /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DE8241FC5FF000C1BAE /* ImageModel.swift */; };
@@ -49,6 +50,7 @@
 		6222F6B9241BCCC6001B7A56 /* LabelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDetails.swift; sourceTree = "<group>"; };
 		6222F6BD241BE4E1001B7A56 /* LabelOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelOverlay.swift; sourceTree = "<group>"; };
 		6222F6BF241BEE51001B7A56 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		623EC0F4242904D9000E9388 /* SyntheticsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntheticsSettings.swift; sourceTree = "<group>"; };
 		6285E1AB2423D0BB008A27B1 /* SelectFolderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderButton.swift; sourceTree = "<group>"; };
 		6285E1AF2423D22B008A27B1 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		62C61DE8241FC5FF000C1BAE /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				6222F6AD241B99D6001B7A56 /* SidePanel.swift */,
 				6222F6AF241B9C98001B7A56 /* AnnotationInspector.swift */,
 				62FFC86C241FF640005DE3E3 /* ImageInfo.swift */,
+				623EC0F4242904D9000E9388 /* SyntheticsSettings.swift */,
 				6222F6B9241BCCC6001B7A56 /* LabelDetails.swift */,
 				6222F6B5241BA009001B7A56 /* model */,
 				6222F6B6241BA021001B7A56 /* support */,
@@ -249,6 +252,7 @@
 				6222F6BE241BE4E1001B7A56 /* LabelOverlay.swift in Sources */,
 				6222F6B2241B9F9E001B7A56 /* AnnotatedImageModel.swift in Sources */,
 				6285E1B02423D22B008A27B1 /* ToolBar.swift in Sources */,
+				623EC0F5242904D9000E9388 /* SyntheticsSettings.swift in Sources */,
 				62C61DE9241FC5FF000C1BAE /* ImageModel.swift in Sources */,
 				6222F699241B989C001B7A56 /* AppDelegate.swift in Sources */,
 			);

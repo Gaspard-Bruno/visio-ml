@@ -1,24 +1,21 @@
 import SwiftUI
 
-struct ImageInfo: View {
+struct SyntheticsSettings: View {
 
   @EnvironmentObject var dataStore: DataStore
+  @State var flipHorizontal = false
+  @State var flipVertical = false
 
   var image: ImageModel! {
     dataStore.selectedImage
   }
 
   var info: some View {
-    VStack(alignment: .leading) {
-      Text("Actual width: \(image.size.width, specifier: "%.2f")")
-      Text("Actual height: \(image.size.height, specifier: "%.2f")")
-      Text("Aspect ratio: \(image.aspectRatio, specifier: "%.3f")")
-      Text("Scaled width: \(image.currentScaledSize.width, specifier: "%.2f")")
-      Text("Scaled height: \(image.currentScaledSize.height, specifier: "%.2f")")
-      Text("Scale ratio: \(image.currentScale, specifier: "%.3f")")
+    VStack {
+      Toggle("Flip horizontal", isOn: $flipHorizontal)
+      Toggle("Flip vertical", isOn: $flipVertical)
     }
     .padding()
-    .font(.system(.body, design: .monospaced))
   }
   var inspector: some View {
     ScrollView(.vertical) {
@@ -28,6 +25,15 @@ struct ImageInfo: View {
         .padding()
         Divider()
         info
+        Divider()
+        Button("Generate now") {
+          if self.flipVertical {
+            self.dataStore.flipVertically()
+          }
+          if self.flipHorizontal {
+            self.dataStore.flipHorizontally()
+          }
+        }
       }
     }
   }
@@ -44,9 +50,9 @@ struct ImageInfo: View {
 }
 
 
-struct ImageInfo_Previews: PreviewProvider {
+struct SyntheticsSettings_Previews: PreviewProvider {
   static var previews: some View {
-    ImageInfo()
+    SyntheticsSettings()
     .environmentObject(DataStore())
   }
 }

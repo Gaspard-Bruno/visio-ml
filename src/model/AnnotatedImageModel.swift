@@ -1,4 +1,5 @@
 import Combine
+import CoreGraphics
 
 /*
 // JSON file
@@ -53,6 +54,16 @@ class AnnotatedImageModel: Codable, Identifiable, Equatable, Hashable, Observabl
 
   @Published var imagefilename: String
   @Published var annotation: [LabelModel]
+  
+  func flipVertically(withName name: String, height: CGFloat) -> AnnotatedImageModel {
+    let flippedAnnotation = annotation.map { $0.flipVertically(withHeight: height) }
+    return AnnotatedImageModel(imagefilename: name, annotation: flippedAnnotation)
+  }
+
+  func flipHorizontally(withName name: String, width: CGFloat) -> AnnotatedImageModel {
+    let flippedAnnotation = annotation.map { $0.flipHorizontally(withWidth: width) }
+    return AnnotatedImageModel(imagefilename: name, annotation: flippedAnnotation)
+  }
 
   enum CodingKeys: String, CodingKey {
       case imagefilename

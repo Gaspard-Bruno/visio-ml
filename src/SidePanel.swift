@@ -17,6 +17,11 @@ struct SidePanel: View {
         .tabItem {
           Text("Image info")
         }
+        SyntheticsSettings()
+        .tag("syntheticssettings")
+        .tabItem {
+          Text("Synthetics")
+        }
       }
     }
   }

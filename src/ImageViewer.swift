@@ -7,7 +7,7 @@ struct ImageViewer: View {
   @EnvironmentObject var dataStore: DataStore
 
   var annotatedImage: AnnotatedImageModel {
-    selectedImage.annotated
+    dataStore.selectedAnnotatedImage!
   }
 
   var selectedImage: ImageModel {
@@ -15,7 +15,7 @@ struct ImageViewer: View {
   }
 
   var labels: some View {
-    ForEach(self.dataStore.annotatedImage!.annotation) { i in
+    ForEach(self.dataStore.selectedAnnotatedImage!.annotation) { i in
       LabelOverlay(label: i)
       .onTapGesture {
         self.dataStore.selectedLabel = i
@@ -58,8 +58,8 @@ struct ImageViewer: View {
     dataStore.counter += 1
     let scale = selectedImage.currentScale
     let label = LabelModel(label: "Untitled \(dataStore.counter)", coordinates: LabelModel.CoordinatesModel(y: y, x: x, height: height, width: width, scale: scale))
-    dataStore.annotatedImage!.annotation.append(label)
-    dataStore.selectedLabel = selectedImage.annotated.annotation.last
+    dataStore.selectedAnnotatedImage!.annotation.append(label)
+    dataStore.selectedLabel = annotatedImage.annotation.last
     self.start = nil
     self.size = nil
   }

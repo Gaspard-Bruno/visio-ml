@@ -7,7 +7,6 @@ class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
 
   @Published var url: URL
   @Published var currentScaledSize = CGSize(width: 0, height: 0)
-  @Published var annotated: AnnotatedImageModel
   
   var ciImage: CIImage {
     CIImage(contentsOf: url)!
@@ -44,12 +43,40 @@ class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
     hasher.combine(url)
     hasher.combine(currentScaledSize.width)
     hasher.combine(currentScaledSize.height)
-    hasher.combine(annotated)
   }
   
   init(url: URL) {
     self.url = url
-    self.annotated = AnnotatedImageModel(imagefilename: url.lastPathComponent, annotation: [])
+  }
+
+  func flipVertically() -> ImageModel? {
+    let newUrl = url.deletingPathExtension().appendingPathExtension("v_flipped").appendingPathExtension("png")
+    let flipped = ciImage.transformed(by: .init(scaleX: 1, y: -1))
+    let context = CIContext()
+    guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else {
+      return nil
+    }
+    do {
+      try context.writePNGRepresentation(of: flipped, to: newUrl, format: .RGBA8, colorSpace: colorSpace)
+    } catch {
+      return nil
+    }
+    return ImageModel(url: newUrl)
+  }
+
+  func flipHorizontally() -> ImageModel? {
+    let newUrl = url.deletingPathExtension().appendingPathExtension("h_flipped").appendingPathExtension("png")
+    let flipped = ciImage.transformed(by: .init(scaleX: -1, y: 1))
+    let context = CIContext()
+    guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else {
+      return nil
+    }
+    do {
+      try context.writePNGRepresentation(of: flipped, to: newUrl, format: .RGBA8, colorSpace: colorSpace)
+    } catch {
+      return nil
+    }
+    return ImageModel(url: newUrl)
   }
 
   static var specimen: ImageModel {
