@@ -15,6 +15,8 @@ class DataStore: ObservableObject {
 
   @Published var selectedLabel: LabelModel!
 
+  private var folderWatcher: DirectoryWatcher!
+
   var selectedAnnotatedImage: AnnotatedImageModel? {
     guard
       let selectedImage = self.selectedImage
@@ -39,6 +41,12 @@ class DataStore: ObservableObject {
     guard exists && isDirectory.boolValue else {
       return
     }
+    guard let folderWatcher = DirectoryWatcher(url, callback: {
+      self.refreshContents()
+    }) else {
+      return
+    }
+    self.folderWatcher = folderWatcher
     workingFolder = url
     loadJSON()
     refreshContents()
@@ -76,12 +84,35 @@ class DataStore: ObservableObject {
     }
     let contents = try! FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles])
     let pngs = contents.filter { $0.path.lowercased().hasSuffix(".png") }
+    
+    // Remove deleted images
+    for image in images {
+      // Chceck if image is in dir contents
+      if pngs.first(where: { $0 == image.url }) == nil {
+        // If removing the currently selected one, unselect
+        if image == selectedImage {
+          selectedImage = nil
+        }
+        // Check if an annotation was generated for this image
+        if let annotated = annotatedImages.first(where: { $0.imagefilename == image.filename }) {
+          // Delete annotation
+          annotatedImages.removeAll { $0 == annotated }
+          // TODO: Figure out away to keep non-empty annotations (ghost images?)
+        }
+        // Remove image from internal array
+        images.removeAll { $0 == image }
+      }
+    }
+    // Add new images only
     for imageUrl in pngs {
       guard images.first(where: { $0.url == imageUrl }) == nil else {
+        // Image was already there, leave as is
         continue
       }
+      // Add the new image
       images.append(ImageModel(url: imageUrl))
     }
+    // TODO: Look for a way to handle renames
   }
 
   func flipVertically() {
