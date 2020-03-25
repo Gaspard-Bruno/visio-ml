@@ -2,21 +2,21 @@ import SwiftUI
 
 struct AnnotationInspector: View {
 
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var annotation: [LabelModel] {
     annotatedImage.annotation
   }
 
   var annotatedImage: AnnotatedImageModel {
-    dataStore.selectedAnnotatedImage!
+    store.selectedAnnotatedImage!
   }
 
   var inspector: some View {
     ScrollView(.vertical) {
       VStack {
-        //TextField("Image name", text: $dataStore.annotatedImage.imagefilename)
-        Text("\(dataStore.selectedImage!.filename)")
+        //TextField("Image name", text: $store.annotatedImage.imagefilename)
+        Text("\(store.selectedImage!.filename)")
         .padding()
         Divider()
         ForEach(annotation) {
@@ -27,7 +27,7 @@ struct AnnotationInspector: View {
   }
   var body: some View {
     Group {
-      if dataStore.selectedImage == nil {
+      if store.selectedImage == nil {
         Text("Please add/select an image.")
       } else {
         inspector

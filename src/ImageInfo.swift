@@ -2,18 +2,18 @@ import SwiftUI
 
 struct ImageInfo: View {
 
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var image: ImageModel! {
-    dataStore.selectedImage
+    store.selectedImage
   }
 
   var viewportSize: CGSize! {
-    dataStore.viewportSize
+    store.viewportSize
   }
 
   var scaleFactor: CGFloat! {
-    dataStore.currentScaleFactor
+    store.currentScaleFactor
   }
 
   var info: some View {
@@ -33,8 +33,8 @@ struct ImageInfo: View {
   var inspector: some View {
     ScrollView(.vertical) {
       VStack {
-        //TextField("Image name", text: $dataStore.annotatedImage!.imagefilename)
-        Text("\(dataStore.selectedImage!.filename)")
+        //TextField("Image name", text: $store.annotatedImage!.imagefilename)
+        Text("\(store.selectedImage!.filename)")
         .padding()
         Divider()
         info

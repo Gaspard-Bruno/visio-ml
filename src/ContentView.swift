@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var body: some View {
     VStack(spacing: 0) {
@@ -11,7 +11,7 @@ struct ContentView: View {
       NavigationView {
         ImageList()
         Group {
-          if dataStore.selectedImage == nil {
+          if store.selectedImage == nil {
             Color("background")
             .overlay(
               Text("Please select an image from the side bar.")
@@ -28,7 +28,7 @@ struct ContentView: View {
       guard let size = $0  else {
         return
       }
-      self.dataStore.viewportSize = size
+      self.store.viewportSize = size
     }
   }
 }

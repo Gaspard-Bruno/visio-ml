@@ -4,25 +4,25 @@ struct ImageViewer: View {
 
   @State var start: CGPoint!
   @State var size: CGSize?
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var annotatedImage: AnnotatedImageModel! {
-    dataStore.selectedAnnotatedImage
+    store.selectedAnnotatedImage
   }
 
   var selectedImage: ImageModel! {
-    dataStore.selectedImage
+    store.selectedImage
   }
 
   var viewportSize: CGSize! {
-    dataStore.viewportSize
+    store.viewportSize
   }
 
   var labels: some View {
-    ForEach(self.dataStore.selectedAnnotatedImage!.annotation) { i in
+    ForEach(self.store.selectedAnnotatedImage!.annotation) { i in
       LabelOverlay(label: i)
       .onTapGesture {
-        self.dataStore.selectedLabel = i
+        self.store.selectedLabel = i
       }
     }
   }
@@ -65,13 +65,13 @@ struct ImageViewer: View {
     repeat {
       count += 1
       name = "label_\(count)"
-    } while (dataStore.selectedAnnotatedImage!.annotation.first(where: { $0.label == name }) != nil)
+    } while (store.selectedAnnotatedImage!.annotation.first(where: { $0.label == name }) != nil)
 
-    let scale = dataStore.currentScaleFactor!
+    let scale = store.currentScaleFactor!
     
     let label = LabelModel(label: name, coordinates: LabelModel.CoordinatesModel(y: y, x: x, height: height, width: width, scale: scale))
-    dataStore.selectedAnnotatedImage!.annotation.append(label)
-    dataStore.selectedLabel = annotatedImage.annotation.last
+    store.selectedAnnotatedImage!.annotation.append(label)
+    store.selectedLabel = annotatedImage.annotation.last
     self.start = nil
     self.size = nil
   }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SidePanel: View {
 
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var body: some View {
     VStack {

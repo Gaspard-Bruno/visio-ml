@@ -4,10 +4,10 @@ struct ToolBar: View {
   
   @State var targetting = false
 
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var workingFolder: URL! {
-    dataStore.workingFolder
+    store.workingFolder
   }
 
   var normalContent: some View {
@@ -23,10 +23,10 @@ struct ToolBar: View {
       Spacer()
       VStack {
         Button("Save JSON") {
-          self.dataStore.saveJSON()
+          self.store.saveJSON()
         }
         Button("Reload JSON") {
-          self.dataStore.loadJSON()
+          self.store.loadJSON()
         }
       }
     }
@@ -60,7 +60,7 @@ struct ToolBar: View {
             return
           }
           let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
-          self.dataStore.setWorkingFolder(url)
+          self.store.setWorkingFolder(url)
         }
       }
       return true

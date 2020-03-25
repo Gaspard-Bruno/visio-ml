@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -61,6 +61,8 @@
 		62DBEC8A242A2305009A96E9 /* DirectoryWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryWatcher.swift; sourceTree = "<group>"; };
 		62E4321D241BFE410074FE7F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		62E4321E241BFE410074FE7F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		62EADC03242BD9260066EFF7 /* gitconfig */ = {isa = PBXFileReference; lastKnownFileType = text; path = gitconfig; sourceTree = "<group>"; };
+		62EADC04242BD94A0066EFF7 /* VisioAnnotate.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = VisioAnnotate.xcconfig; sourceTree = "<group>"; };
 		62FFC86A241FF2D6005DE3E3 /* ImageSizePrefKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizePrefKey.swift; sourceTree = "<group>"; };
 		62FFC86C241FF640005DE3E3 /* ImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 			children = (
 				62E4321D241BFE410074FE7F /* README.md */,
 				6222F697241B989C001B7A56 /* src */,
+				62EADC02242BD8DC0066EFF7 /* conf */,
 				62C61DF4241FEF0F000C1BAE /* conf */,
 				6222F696241B989C001B7A56 /* Products */,
 			);
@@ -132,6 +135,7 @@
 		6222F6B5241BA009001B7A56 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6222F6BF241BEE51001B7A56 /* DataStore.swift */,
 				6222F6B1241B9F9E001B7A56 /* AnnotatedImageModel.swift */,
 				6222F6B3241B9FE6001B7A56 /* LabelModel.swift */,
 				62C61DE8241FC5FF000C1BAE /* ImageModel.swift */,
@@ -142,7 +146,6 @@
 		6222F6B6241BA021001B7A56 /* support */ = {
 			isa = PBXGroup;
 			children = (
-				6222F6BF241BEE51001B7A56 /* DataStore.swift */,
 				6222F698241B989C001B7A56 /* AppDelegate.swift */,
 				62DBEC8A242A2305009A96E9 /* DirectoryWatcher.swift */,
 			);
@@ -152,11 +155,20 @@
 		62C61DF4241FEF0F000C1BAE /* conf */ = {
 			isa = PBXGroup;
 			children = (
-				6222F6A4241B989F001B7A56 /* Info.plist */,
-				6222F6A5241B989F001B7A56 /* VisioAnnotate.entitlements */,
+				62EADC03242BD9260066EFF7 /* gitconfig */,
 				62E4321E241BFE410074FE7F /* .gitignore */,
 			);
 			name = conf;
+			sourceTree = "<group>";
+		};
+		62EADC02242BD8DC0066EFF7 /* conf */ = {
+			isa = PBXGroup;
+			children = (
+				62EADC04242BD94A0066EFF7 /* VisioAnnotate.xcconfig */,
+				6222F6A4241B989F001B7A56 /* Info.plist */,
+				6222F6A5241B989F001B7A56 /* VisioAnnotate.entitlements */,
+			);
+			path = conf;
 			sourceTree = "<group>";
 		};
 		62FFC869241FEFD4005DE3E3 /* assets */ = {
@@ -203,7 +215,7 @@
 				};
 			};
 			buildConfigurationList = 6222F690241B989C001B7A56 /* Build configuration list for PBXProject "VisioAnnotate" */;
-			compatibilityVersion = "Xcode 11.0";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -391,23 +403,26 @@
 		};
 		6222F6A9241B989F001B7A56 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62EADC04242BD94A0066EFF7 /* VisioAnnotate.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = VisioAnnotate.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(inherited)";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"src/PreviewContent\"";
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEVELOPMENT_ASSET_PATHS = "$(inherited)";
 				DEVELOPMENT_TEAM = 9EMZ8KV4WF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(inherited)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaspardbruno.etudes.VisioAnnotate;
+				MARKETING_VERSION = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -415,23 +430,26 @@
 		};
 		6222F6AA241B989F001B7A56 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62EADC04242BD94A0066EFF7 /* VisioAnnotate.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = VisioAnnotate.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(inherited)";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"src/PreviewContent\"";
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEVELOPMENT_ASSET_PATHS = "$(inherited)";
 				DEVELOPMENT_TEAM = 9EMZ8KV4WF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(inherited)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaspardbruno.etudes.VisioAnnotate;
+				MARKETING_VERSION = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

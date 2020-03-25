@@ -2,12 +2,12 @@ import SwiftUI
 
 struct ImageList: View {
   
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
   @State var dropping = false
   
   var body: some View {
     Group {
-      if dropping || dataStore.images.count == 0 {
+      if dropping || store.images.count == 0 {
         Color("background")
         .overlay(
           Text("Drop image files into this area.")
@@ -25,8 +25,8 @@ struct ImageList: View {
               return
             }
             let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
-            self.dataStore.images.append(ImageModel(url: url))
-            self.dataStore.selectedImage = self.dataStore.images.last!
+            self.store.images.append(ImageModel(url: url))
+            self.store.selectedImage = self.store.images.last!
           }
         }
       }
@@ -36,15 +36,15 @@ struct ImageList: View {
   
   var list: some View {
     VStack {
-      List(selection: $dataStore.selectedImage) {
-        ForEach(dataStore.images) {
+      List(selection: $store.selectedImage) {
+        ForEach(store.images) {
           Text("\($0.filename)")
             .tag($0)
         }
       }
       .listStyle(SidebarListStyle())
       .onDeleteCommand {
-        self.dataStore.deleteSelectedImage()
+        self.store.deleteSelectedImage()
       }
     }
   }

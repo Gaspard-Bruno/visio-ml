@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SelectFolderButton: View {
 
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var body: some View {
     Button("Select Folder…") {
@@ -16,7 +16,7 @@ struct SelectFolderButton: View {
       guard result == .OK, let url = panel.url else {
         return
       }
-      self.dataStore.setWorkingFolder(url)
+      self.store.setWorkingFolder(url)
     }
   }
 }

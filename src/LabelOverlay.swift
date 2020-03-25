@@ -3,10 +3,10 @@ import SwiftUI
 struct LabelOverlay: View {
 
   var label: LabelModel
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   var selected: Bool {
-    dataStore.selectedLabel == label
+    store.selectedLabel == label
   }
 
   var color: Color {
@@ -14,7 +14,7 @@ struct LabelOverlay: View {
   }
 
   var scale: CGFloat! {
-    dataStore.currentScaleFactor
+    store.currentScaleFactor
   }
 
   var width: CGFloat {

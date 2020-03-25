@@ -2,12 +2,12 @@ import SwiftUI
 
 struct SyntheticsSettings: View {
 
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
   @State var flipHorizontal = false
   @State var flipVertical = false
 
   var image: ImageModel! {
-    dataStore.selectedImage
+    store.selectedImage
   }
 
   var info: some View {
@@ -20,18 +20,18 @@ struct SyntheticsSettings: View {
   var inspector: some View {
     ScrollView(.vertical) {
       VStack {
-        //TextField("Image name", text: $dataStore.annotatedImage!.imagefilename)
-        Text("\(dataStore.selectedImage!.filename)")
+        //TextField("Image name", text: $store.annotatedImage!.imagefilename)
+        Text("\(store.selectedImage!.filename)")
         .padding()
         Divider()
         info
         Divider()
         Button("Generate now") {
           if self.flipVertical {
-            self.dataStore.flipVertically()
+            self.store.flipVertically()
           }
           if self.flipHorizontal {
-            self.dataStore.flipHorizontally()
+            self.store.flipHorizontally()
           }
         }
       }

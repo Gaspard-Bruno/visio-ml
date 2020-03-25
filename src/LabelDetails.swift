@@ -2,16 +2,16 @@ import SwiftUI
 
 struct LabelDetails: View {
   var label: LabelModel
-  @EnvironmentObject var dataStore: DataStore
+  @EnvironmentObject var store: DataStore
 
   @State private var labelName: String?
 
   var selectedLabel: Binding<String> {
-    $dataStore.selectedLabel.label
+    $store.selectedLabel.label
   }
   
   var selected: Bool {
-    label == dataStore.selectedLabel
+    label == store.selectedLabel
   }
   
   var _selected: Binding<Bool> {
@@ -19,16 +19,16 @@ struct LabelDetails: View {
       self.selected
     }, set: {
       if $0 {
-        self.dataStore.selectedLabel = self.label
+        self.store.selectedLabel = self.label
       } else {
-        self.dataStore.selectedLabel = nil
+        self.store.selectedLabel = nil
       }
     })
   }
 
   private var _labelCustomBinding: Binding<String> {
     Binding<String>(get: {
-      self.labelName == nil ? self.dataStore.selectedLabel.label : self.labelName!
+      self.labelName == nil ? self.store.selectedLabel.label : self.labelName!
     }, set: {
       self.labelName = $0
     })
@@ -40,14 +40,14 @@ struct LabelDetails: View {
         Text("Select")
       }
 
-      //TextField("Label", text: selected ? $dataStore.selectedLabel.label : .constant(label.label))
+      //TextField("Label", text: selected ? $store.selectedLabel.label : .constant(label.label))
       
       if selected {
         TextField("Label", text: _labelCustomBinding) {
-          self.dataStore.selectedLabel.label = self.labelName!
+          self.store.selectedLabel.label = self.labelName!
 
           // HACK ALERT:
-          self.dataStore.dummyToggle.toggle()
+          self.store.dummyToggle.toggle()
         }
       } else {
         TextField("Label", text: .constant(label.label))
@@ -60,7 +60,7 @@ struct LabelDetails: View {
       Text("height: \(label.coordinates.height)")
       if selected {
         Button("Delete") {
-          self.dataStore.deleteSelectedLabel()
+          self.store.deleteSelectedLabel()
         }
       }
     }
