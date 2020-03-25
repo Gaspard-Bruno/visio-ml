@@ -4,9 +4,21 @@ import Foundation
 class DataStore: ObservableObject {
 
   @Published var workingFolder: URL?
-  @Published var counter = 0
-  @Published var annotatedImages: [AnnotatedImageModel] = []
+
+  @Published var counter = 0 // For "Untitled #" labels
+
   @Published var images: [ImageModel] = []
+  @Published var annotatedImages: [AnnotatedImageModel] = []
+
+  @Published var viewportSize: CGSize?
+
+  var currentScaleFactor: CGFloat? {
+    guard let viewportSize = self.viewportSize, let image = selectedImage else {
+      return nil
+    }
+    return viewportSize.width / image.size.width
+  }
+
   @Published var selectedImage: ImageModel? {
     willSet {
       selectedLabel = nil
@@ -15,7 +27,7 @@ class DataStore: ObservableObject {
 
   @Published var selectedLabel: LabelModel!
 
-  private var folderWatcher: DirectoryWatcher!
+  private var folderWatcher: DirectoryWatcher?
 
   var selectedAnnotatedImage: AnnotatedImageModel? {
     guard
@@ -125,7 +137,6 @@ class DataStore: ObservableObject {
     }
     let annotatedFlipped = annotatedImage.flipVertically(withName: flipped.filename, height: flipped.ciImage.extent.height)
     annotatedImages.append(annotatedFlipped)
-    images.append(flipped)
   }
 
   func flipHorizontally() {
@@ -138,7 +149,6 @@ class DataStore: ObservableObject {
     }
     let annotatedFlipped = annotatedImage.flipHorizontally(withName: flipped.filename, width: flipped.ciImage.extent.width)
     annotatedImages.append(annotatedFlipped)
-    images.append(flipped)
   }
 
   func deleteSelectedImage() {

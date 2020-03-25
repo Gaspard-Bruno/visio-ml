@@ -6,7 +6,6 @@ import CoreImage
 class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
 
   @Published var url: URL
-  @Published var currentScaledSize = CGSize(width: 0, height: 0)
   
   var ciImage: CIImage {
     CIImage(contentsOf: url)!
@@ -23,12 +22,8 @@ class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
     size.width / size.height
   }
 
-  var currentScale: CGFloat {
-    currentScaledSize.width / size.width
-  }
-
   static func == (lhs: ImageModel, rhs: ImageModel) -> Bool {
-    lhs.url == rhs.url && lhs.currentScaledSize == rhs.currentScaledSize
+    lhs.url == rhs.url
   }
 
   var filename: String {
@@ -41,8 +36,6 @@ class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
 
   func hash(into hasher: inout Hasher) {
     hasher.combine(url)
-    hasher.combine(currentScaledSize.width)
-    hasher.combine(currentScaledSize.height)
   }
   
   init(url: URL) {

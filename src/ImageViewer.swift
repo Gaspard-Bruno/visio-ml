@@ -6,12 +6,16 @@ struct ImageViewer: View {
   @State var size: CGSize?
   @EnvironmentObject var dataStore: DataStore
 
-  var annotatedImage: AnnotatedImageModel {
-    dataStore.selectedAnnotatedImage!
+  var annotatedImage: AnnotatedImageModel! {
+    dataStore.selectedAnnotatedImage
   }
 
-  var selectedImage: ImageModel {
-    dataStore.selectedImage!
+  var selectedImage: ImageModel! {
+    dataStore.selectedImage
+  }
+
+  var viewportSize: CGSize! {
+    dataStore.viewportSize
   }
 
   var labels: some View {
@@ -55,28 +59,40 @@ struct ImageViewer: View {
     let width = abs(size.width)
     let height = abs(size.height)
     
-    dataStore.counter += 1
-    let scale = selectedImage.currentScale
-    let label = LabelModel(label: "Untitled \(dataStore.counter)", coordinates: LabelModel.CoordinatesModel(y: y, x: x, height: height, width: width, scale: scale))
+    // Find an available name
+    var count = 0
+    var name = ""
+    repeat {
+      count += 1
+      name = "label_\(count)"
+    } while (dataStore.selectedAnnotatedImage!.annotation.first(where: { $0.label == name }) != nil)
+
+    let scale = dataStore.currentScaleFactor!
+    
+    let label = LabelModel(label: name, coordinates: LabelModel.CoordinatesModel(y: y, x: x, height: height, width: width, scale: scale))
     dataStore.selectedAnnotatedImage!.annotation.append(label)
     dataStore.selectedLabel = annotatedImage.annotation.last
     self.start = nil
     self.size = nil
   }
+  
+  func body(_ p: GeometryProxy) -> some View {
+    ZStack(alignment: .topLeading) {
+      ImageBackground(image: selectedImage, p: p)
+      .gesture(
+        DragGesture(minimumDistance: 0, coordinateSpace: .named("image"))
+        .onChanged(updateRect)
+        .onEnded(createLabel)
+      )
+      if viewportSize != nil {
+        labels
+      }
+      dragLabel
+    }
+  }
 
   var body: some View {
-    GeometryReader { p in
-      ZStack(alignment: .topLeading) {
-        ImageBackground(image: self.selectedImage, p: p)
-        .gesture(
-          DragGesture(minimumDistance: 0, coordinateSpace: .named("image"))
-          .onChanged(self.updateRect)
-          .onEnded(self.createLabel)
-        )
-        self.labels
-        self.dragLabel
-      }
-    }
+    GeometryReader { self.body($0) }
   }
 }
 

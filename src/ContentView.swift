@@ -24,6 +24,12 @@ struct ContentView: View {
         .frame(minHeight: 500)
       }
     }
+    .onPreferenceChange(ImageSizePrefKey.self) {
+      guard let size = $0  else {
+        return
+      }
+      self.dataStore.viewportSize = size
+    }
   }
 }
 
