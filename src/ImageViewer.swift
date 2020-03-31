@@ -32,9 +32,8 @@ struct ImageViewer: View {
       if start != nil && size != nil {
         Color.blue
         .frame(width: size!.width, height: size!.height)
-        .alignmentGuide(.leading) { $0[.leading] }
-        .alignmentGuide(.top) { $0[.top] }
-        .offset(x: start.x, y: start.y)
+        .offset(x: start.x - size!.width / 2, y: start.y - size!.height / 2)
+        //.position(x: start.x, y: start.y)
         .opacity(0.5)
       }
     }
@@ -46,7 +45,7 @@ struct ImageViewer: View {
       return
     }
     let end = value.location
-    size = CGSize(width: end.x - start.x, height: end.y - start.y)
+    size = CGSize(width: (end.x - start.x) * 2, height: (end.y - start.y) * 2)
   }
 
   func createLabel(_ value: DragGesture.Value) {
@@ -54,11 +53,11 @@ struct ImageViewer: View {
       return
     }
     
-    let x = size.width < 0 ? value.location.x : start.x
-    let y = size.height < 0 ? value.location.y : start.y
     let width = abs(size.width)
     let height = abs(size.height)
-    
+    let x = size.width < 0 ? value.location.x + width / 2 : start.x
+    let y = size.height < 0 ? value.location.y + height / 2 : start.y
+
     // Find an available name
     var count = 0
     var name = ""

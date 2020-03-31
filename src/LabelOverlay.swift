@@ -25,6 +25,14 @@ struct LabelOverlay: View {
     label.coordinates.height * scale
   }
 
+  var x: CGFloat {
+    (label.coordinates.x - label.coordinates.width / 2) * scale
+  }
+  
+  var y: CGFloat {
+    (label.coordinates.y - label.coordinates.height / 2) * scale
+  }
+
   var body: some View {
     VStack(alignment: .trailing, spacing: 0) {
       color
@@ -41,9 +49,7 @@ struct LabelOverlay: View {
       .background(color)
       .offset(x: width / 2, y: height / 2)
     )
-    .alignmentGuide(.leading) { $0[.leading] }
-    .alignmentGuide(.top) { $0[.top] }
-    .offset(x: label.coordinates.x * scale, y: label.coordinates.y * scale)
+    .offset(x: x, y: y)
   }
 }
 
