@@ -55,6 +55,10 @@ class AnnotatedImageModel: Codable, Identifiable, Equatable, Hashable, Observabl
   @Published var imagefilename: String
   @Published var annotation: [LabelModel]
   
+  func applyBackground(withName name: String) -> AnnotatedImageModel {
+    AnnotatedImageModel(imagefilename: name, annotation: annotation)
+  }
+
   func flipVertically(withName name: String, height: CGFloat) -> AnnotatedImageModel {
     let flippedAnnotation = annotation.map { $0.flipVertically(withHeight: height) }
     return AnnotatedImageModel(imagefilename: name, annotation: flippedAnnotation)

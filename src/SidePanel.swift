@@ -22,6 +22,11 @@ struct SidePanel: View {
         .tabItem {
           Text("Synthetics")
         }
+        BackgroundSettings()
+        .tag("backgroundsettings")
+        .tabItem {
+          Text("Backgrounds")
+        }
       }
     }
   }

@@ -42,7 +42,7 @@ class LabelModel: Codable, Identifiable, Equatable, Hashable, ObservableObject {
 
   func flipVertically(withHeight height: CGFloat) -> LabelModel {
     LabelModel(label: label, coordinates: CoordinatesModel(
-      y: height - coordinates.y - coordinates.height,
+      y: height - coordinates.y,
       x: coordinates.x,
       height: coordinates.height,
       width: coordinates.width
@@ -52,7 +52,7 @@ class LabelModel: Codable, Identifiable, Equatable, Hashable, ObservableObject {
   func flipHorizontally(withWidth width: CGFloat) -> LabelModel {
     LabelModel(label: label, coordinates: CoordinatesModel(
       y: coordinates.y,
-      x: width - coordinates.x - coordinates.width,
+      x: width - coordinates.x,
       height: coordinates.height,
       width: coordinates.width
     ))

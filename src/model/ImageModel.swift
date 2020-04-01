@@ -42,6 +42,24 @@ class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
     self.url = url
   }
 
+  func applyBackground(_ bg: ImageModel) -> ImageModel? {
+    let newUrl = url
+      .deletingPathExtension()
+      .appendingPathExtension(bg.filename)
+    let croppedBg = bg.ciImage.cropped(to: ciImage.extent)
+    let withBg = ciImage.composited(over: croppedBg)
+    let context = CIContext()
+    guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else {
+      return nil
+    }
+    do {
+      try context.writePNGRepresentation(of: withBg, to: newUrl, format: .RGBA8, colorSpace: colorSpace)
+    } catch {
+      return nil
+    }
+    return ImageModel(url: newUrl)
+  }
+
   func flipVertically() -> ImageModel? {
     let newUrl = url.deletingPathExtension().appendingPathExtension("v_flipped").appendingPathExtension("png")
     let flipped = ciImage.transformed(by: .init(scaleX: 1, y: -1))

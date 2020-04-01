@@ -127,6 +127,17 @@ class DataStore: ObservableObject {
     // TODO: Look for a way to handle renames
   }
 
+  func applyBackground(_ bg: ImageModel) {
+    guard
+      let image = selectedImage,
+      let annotatedImage = selectedAnnotatedImage,
+      let withBackground = image.applyBackground(bg)
+    else {
+        return
+    }
+    let annotatedWithBg = annotatedImage.applyBackground(withName: withBackground.filename)
+    annotatedImages.append(annotatedWithBg)
+  }
   func flipVertically() {
     guard
       let image = selectedImage,
