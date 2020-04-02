@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		621233AB243642B800803D81 /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621233AA243642B800803D81 /* WorkspaceModel.swift */; };
 		6222F699241B989C001B7A56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F698241B989C001B7A56 /* AppDelegate.swift */; };
 		6222F69B241B989C001B7A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6222F69A241B989C001B7A56 /* ContentView.swift */; };
 		6222F69D241B989F001B7A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6222F69C241B989F001B7A56 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		621233AA243642B800803D81 /* WorkspaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		6222F695241B989C001B7A56 /* VisioAnnotate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisioAnnotate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6222F698241B989C001B7A56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6222F69A241B989C001B7A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		6222F6B5241BA009001B7A56 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				621233AA243642B800803D81 /* WorkspaceModel.swift */,
 				6222F6BF241BEE51001B7A56 /* DataStore.swift */,
 				6222F6B1241B9F9E001B7A56 /* AnnotatedImageModel.swift */,
 				6222F6B3241B9FE6001B7A56 /* LabelModel.swift */,
@@ -258,6 +261,7 @@
 				6222F6BA241BCCC6001B7A56 /* LabelDetails.swift in Sources */,
 				62FFC86B241FF2D6005DE3E3 /* ImageSizePrefKey.swift in Sources */,
 				62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */,
+				621233AB243642B800803D81 /* WorkspaceModel.swift in Sources */,
 				628B23AB2434CC0B00A18EE0 /* BackgroundSettings.swift in Sources */,
 				62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */,
 				6222F6B4241B9FE6001B7A56 /* LabelModel.swift in Sources */,

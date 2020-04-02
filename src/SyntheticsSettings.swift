@@ -3,8 +3,10 @@ import SwiftUI
 struct SyntheticsSettings: View {
 
   @EnvironmentObject var store: DataStore
-  @State var flipHorizontal = false
-  @State var flipVertical = false
+
+  var workspace: WorkspaceModel {
+    store.workspace
+  }
 
   var image: ImageModel! {
     store.selectedImage
@@ -12,8 +14,8 @@ struct SyntheticsSettings: View {
 
   var info: some View {
     VStack {
-      Toggle("Flip horizontal", isOn: $flipHorizontal)
-      Toggle("Flip vertical", isOn: $flipVertical)
+      Toggle("Flip horizontal", isOn: $store.workspace.flipHorizonal)
+      Toggle("Flip vertical", isOn: $store.workspace.flipVertical)
     }
     .padding()
   }
@@ -27,10 +29,10 @@ struct SyntheticsSettings: View {
         info
         Divider()
         Button("Generate now") {
-          if self.flipVertical {
+          if self.workspace.flipVertical {
             self.store.flipVertically()
           }
-          if self.flipHorizontal {
+          if self.workspace.flipHorizonal {
             self.store.flipHorizontally()
           }
         }

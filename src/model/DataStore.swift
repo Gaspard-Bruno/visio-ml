@@ -4,6 +4,28 @@ import Foundation
 class DataStore: ObservableObject {
 
   @Published var workingFolder: URL?
+  @Published var workspace = WorkspaceModel() {
+    didSet {
+      guard let dirUrl = workingFolder?.appendingPathComponent(".visioannotate") else {
+          return
+      }
+      var isDirectory: ObjCBool = ObjCBool(false)
+      let exists = FileManager.default.fileExists(atPath: dirUrl.path, isDirectory: &isDirectory)
+      if !exists || !isDirectory.boolValue {
+        do {
+          try FileManager.default.createDirectory(at: dirUrl, withIntermediateDirectories: false)
+        } catch {
+          print("\(error.localizedDescription)")
+          return
+        }
+      }
+      let url = dirUrl.appendingPathComponent("workspace.json")
+      guard let data = try? JSONEncoder().encode(workspace) else {
+        return
+      }
+      try! data.write(to: url)
+    }
+  }
 
   @Published var counter = 0 // For "Untitled #" labels
 
@@ -60,8 +82,26 @@ class DataStore: ObservableObject {
     }
     self.folderWatcher = folderWatcher
     workingFolder = url
+    loadWorkspace()
     loadJSON()
     refreshContents()
+  }
+
+  func loadWorkspace() {
+    guard
+      let url = workingFolder?.appendingPathComponent(".visioannotate") else {
+        return
+    }
+    var isDirectory: ObjCBool = ObjCBool(false)
+    let exists = FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory)
+    guard
+      exists && isDirectory.boolValue,
+      let contents = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles]),
+      let jsonFile = contents.first(where: { $0.lastPathComponent == "workspace.json" })
+    else {
+      return
+    }
+    workspace = load(jsonFile)
   }
 
   func loadJSON() {
