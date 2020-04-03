@@ -3,10 +3,11 @@ import SwiftUI
 struct ContentView: View {
 
   @EnvironmentObject var store: DataStore
+  @State var showSettings = false
 
   var body: some View {
     VStack(spacing: 0) {
-      ToolBar()
+      ToolBar(settingsHandle: $showSettings)
       Divider()
       NavigationView {
         ImageList()
@@ -23,6 +24,10 @@ struct ContentView: View {
         }
         .frame(minHeight: 500)
       }
+    }
+    .sheet(isPresented: $showSettings) {
+      WorkspaceSettings(settingsHandle: self.$showSettings)
+      .environmentObject(self.store)
     }
     .onPreferenceChange(ImageSizePrefKey.self) {
       guard let size = $0  else {
