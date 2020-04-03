@@ -5,40 +5,36 @@ struct BackgroundSettings: View {
   @EnvironmentObject var store: DataStore
   @State var dropping = false
   
-  @State var images: [ImageModel] = []
-  
-  var image: ImageModel! {
-    store.selectedImage
+  var backgrounds: [URL] {
+    store.workspace.backgrounds
   }
-
-  var inspector: some View {
+  
+  var body: some View {
     ScrollView(.vertical) {
       VStack {
-        //TextField("Image name", text: $store.annotatedImage!.imagefilename)
-        Text("\(store.selectedImage!.filename)")
+        VStack {
+          Toggle("Randomize position (experimental)", isOn: $store.workspace.randomBgPosition)
+        }
         .padding()
-        Divider()
-        if dropping || store.images.count == 0 {
-          Color.clear
-          .overlay(
+
+        if dropping || backgrounds.count == 0 {
+          VStack {
+            Spacer()
             Text("Drop background files into this area.")
-          )
+            Spacer()
+          }
+          .padding()
         } else {
-          ForEach(images) { img in
+          ForEach(backgrounds, id: \.self) { bg in
             HStack {
-              Text("\(img.filename)")
+              Text("\(bg.lastPathComponent)")
               Spacer()
               Button("Delete") {
-                self.images.removeAll {
-                  $0 == img
+                self.store.workspace.removeBackground(bg)
+                DispatchQueue.main.async {
+                  self.store.dummyToggle.toggle()
                 }
               }
-            }
-          }
-          Divider()
-          Button("Generate now") {
-            for i in self.images {
-              self.store.applyBackground(i)
             }
           }
         }
@@ -52,20 +48,14 @@ struct BackgroundSettings: View {
               return
             }
             let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
-            self.images.append(ImageModel(url: url))
+            self.store.workspace.addBackground(url)
           }
         }
       }
-      return true
-    }
-  }
-  var body: some View {
-    Group {
-      if image == nil {
-        Text("Please add/select an image.")
-      } else {
-        inspector
+      DispatchQueue.main.async {
+        self.store.dummyToggle.toggle()
       }
+      return true
     }
   }
 }

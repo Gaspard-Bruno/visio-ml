@@ -26,6 +26,12 @@
 		6285E1AC2423D0BB008A27B1 /* SelectFolderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285E1AB2423D0BB008A27B1 /* SelectFolderButton.swift */; };
 		6285E1B02423D22B008A27B1 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6285E1AF2423D22B008A27B1 /* ToolBar.swift */; };
 		628B23AB2434CC0B00A18EE0 /* BackgroundSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B23AA2434CC0B00A18EE0 /* BackgroundSettings.swift */; };
+		6291C32E24372D8F00B2156F /* WorkspaceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6291C32D24372D8F00B2156F /* WorkspaceSettings.swift */; };
+		6291C330243737B500B2156F /* DataStore+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6291C32F243737B500B2156F /* DataStore+Filter.swift */; };
+		6291C332243738C600B2156F /* FlipFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6291C3312437381E00B2156F /* FlipFilter.swift */; };
+		6291C3342437394200B2156F /* BackgroundFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6291C3332437394200B2156F /* BackgroundFilter.swift */; };
+		6291C33724377EE300B2156F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6291C33624377EE300B2156F /* Filter.swift */; };
+		6291C33924377F3400B2156F /* IdentityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6291C33824377F3400B2156F /* IdentityFilter.swift */; };
 		62C61DE9241FC5FF000C1BAE /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DE8241FC5FF000C1BAE /* ImageModel.swift */; };
 		62C61DEF241FD5F5000C1BAE /* cat-and-dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 62C61DEE241FD5F5000C1BAE /* cat-and-dog.png */; };
 		62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DF0241FD620000C1BAE /* DetailView.swift */; };
@@ -58,6 +64,12 @@
 		6285E1AB2423D0BB008A27B1 /* SelectFolderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderButton.swift; sourceTree = "<group>"; };
 		6285E1AF2423D22B008A27B1 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		628B23AA2434CC0B00A18EE0 /* BackgroundSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSettings.swift; sourceTree = "<group>"; };
+		6291C32D24372D8F00B2156F /* WorkspaceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettings.swift; sourceTree = "<group>"; };
+		6291C32F243737B500B2156F /* DataStore+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataStore+Filter.swift"; sourceTree = "<group>"; };
+		6291C3312437381E00B2156F /* FlipFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipFilter.swift; sourceTree = "<group>"; };
+		6291C3332437394200B2156F /* BackgroundFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFilter.swift; sourceTree = "<group>"; };
+		6291C33624377EE300B2156F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		6291C33824377F3400B2156F /* IdentityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityFilter.swift; sourceTree = "<group>"; };
 		62C61DE8241FC5FF000C1BAE /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		62C61DEE241FD5F5000C1BAE /* cat-and-dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cat-and-dog.png"; sourceTree = "<group>"; };
 		62C61DF0241FD620000C1BAE /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -105,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				6222F69A241B989C001B7A56 /* ContentView.swift */,
+				6291C32D24372D8F00B2156F /* WorkspaceSettings.swift */,
 				6285E1AB2423D0BB008A27B1 /* SelectFolderButton.swift */,
 				6285E1AF2423D22B008A27B1 /* ToolBar.swift */,
 				62FFC86A241FF2D6005DE3E3 /* ImageSizePrefKey.swift */,
@@ -140,6 +153,8 @@
 		6222F6B5241BA009001B7A56 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6291C3352437764700B2156F /* filter */,
+				6291C32C24372CBA00B2156F /* filters */,
 				621233AA243642B800803D81 /* WorkspaceModel.swift */,
 				6222F6BF241BEE51001B7A56 /* DataStore.swift */,
 				6222F6B1241B9F9E001B7A56 /* AnnotatedImageModel.swift */,
@@ -156,6 +171,25 @@
 				62DBEC8A242A2305009A96E9 /* DirectoryWatcher.swift */,
 			);
 			path = support;
+			sourceTree = "<group>";
+		};
+		6291C32C24372CBA00B2156F /* filters */ = {
+			isa = PBXGroup;
+			children = (
+				6291C3312437381E00B2156F /* FlipFilter.swift */,
+				6291C33824377F3400B2156F /* IdentityFilter.swift */,
+				6291C3332437394200B2156F /* BackgroundFilter.swift */,
+			);
+			path = filters;
+			sourceTree = "<group>";
+		};
+		6291C3352437764700B2156F /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				6291C33624377EE300B2156F /* Filter.swift */,
+				6291C32F243737B500B2156F /* DataStore+Filter.swift */,
+			);
+			path = filter;
 			sourceTree = "<group>";
 		};
 		62C61DF4241FEF0F000C1BAE /* conf */ = {
@@ -257,16 +291,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6291C33924377F3400B2156F /* IdentityFilter.swift in Sources */,
 				62DBEC8B242A2305009A96E9 /* DirectoryWatcher.swift in Sources */,
 				6222F6BA241BCCC6001B7A56 /* LabelDetails.swift in Sources */,
 				62FFC86B241FF2D6005DE3E3 /* ImageSizePrefKey.swift in Sources */,
+				6291C332243738C600B2156F /* FlipFilter.swift in Sources */,
 				62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */,
 				621233AB243642B800803D81 /* WorkspaceModel.swift in Sources */,
 				628B23AB2434CC0B00A18EE0 /* BackgroundSettings.swift in Sources */,
 				62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */,
 				6222F6B4241B9FE6001B7A56 /* LabelModel.swift in Sources */,
 				6222F6B8241BAA3F001B7A56 /* ImageBackground.swift in Sources */,
+				6291C330243737B500B2156F /* DataStore+Filter.swift in Sources */,
 				62FFC86D241FF640005DE3E3 /* ImageInfo.swift in Sources */,
+				6291C3342437394200B2156F /* BackgroundFilter.swift in Sources */,
 				6222F6B0241B9C98001B7A56 /* AnnotationInspector.swift in Sources */,
 				6222F69B241B989C001B7A56 /* ContentView.swift in Sources */,
 				6222F6AE241B99D6001B7A56 /* SidePanel.swift in Sources */,
@@ -275,6 +313,8 @@
 				6222F6AC241B9997001B7A56 /* ImageViewer.swift in Sources */,
 				6222F6BE241BE4E1001B7A56 /* LabelOverlay.swift in Sources */,
 				6222F6B2241B9F9E001B7A56 /* AnnotatedImageModel.swift in Sources */,
+				6291C33724377EE300B2156F /* Filter.swift in Sources */,
+				6291C32E24372D8F00B2156F /* WorkspaceSettings.swift in Sources */,
 				6285E1B02423D22B008A27B1 /* ToolBar.swift in Sources */,
 				623EC0F5242904D9000E9388 /* SyntheticsSettings.swift in Sources */,
 				62C61DE9241FC5FF000C1BAE /* ImageModel.swift in Sources */,

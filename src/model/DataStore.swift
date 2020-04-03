@@ -51,6 +51,12 @@ class DataStore: ObservableObject {
 
   private var folderWatcher: DirectoryWatcher?
 
+  var matchingAnnotatedImages: [AnnotatedImageModel] {
+    images.map {
+      getAnnotatedImage($0)
+    }
+  }
+
   var selectedAnnotatedImage: AnnotatedImageModel? {
     guard
       let selectedImage = self.selectedImage
@@ -165,41 +171,6 @@ class DataStore: ObservableObject {
       images.append(ImageModel(url: imageUrl))
     }
     // TODO: Look for a way to handle renames
-  }
-
-  func applyBackground(_ bg: ImageModel) {
-    guard
-      let image = selectedImage,
-      let annotatedImage = selectedAnnotatedImage,
-      let withBackground = image.applyBackground(bg)
-    else {
-        return
-    }
-    let annotatedWithBg = annotatedImage.applyBackground(withName: withBackground.filename)
-    annotatedImages.append(annotatedWithBg)
-  }
-  func flipVertically() {
-    guard
-      let image = selectedImage,
-      let annotatedImage = selectedAnnotatedImage,
-      let flipped = image.flipVertically()
-    else {
-        return
-    }
-    let annotatedFlipped = annotatedImage.flipVertically(withName: flipped.filename, height: flipped.ciImage.extent.height)
-    annotatedImages.append(annotatedFlipped)
-  }
-
-  func flipHorizontally() {
-    guard
-      let image = selectedImage,
-      let annotatedImage = selectedAnnotatedImage,
-      let flipped = image.flipHorizontally()
-    else {
-        return
-    }
-    let annotatedFlipped = annotatedImage.flipHorizontally(withName: flipped.filename, width: flipped.ciImage.extent.width)
-    annotatedImages.append(annotatedFlipped)
   }
 
   func deleteSelectedImage() {

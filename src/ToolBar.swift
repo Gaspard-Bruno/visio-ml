@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ToolBar: View {
   
+  @Binding var settingsHandle: Bool
   @State var targetting = false
 
   @EnvironmentObject var store: DataStore
@@ -21,14 +22,18 @@ struct ToolBar: View {
       }
 
       Spacer()
-      VStack {
-        Button("Save JSON") {
+      HStack {
+        Button("􀈄 Annotations") {
           self.store.saveJSON()
         }
-        Button("Reload JSON") {
+        Button("􀅈") {
           self.store.loadJSON()
         }
+        Button("􀍟 Settings…") {
+          self.settingsHandle.toggle()
+        }
       }
+      .environment(\.isEnabled, store.workingFolder != nil)
     }
   }
 
@@ -71,6 +76,6 @@ struct ToolBar: View {
 
 struct ToolBar_Previews: PreviewProvider {
   static var previews: some View {
-    ToolBar()
+    ToolBar(settingsHandle: .constant(false))
   }
 }
