@@ -30,7 +30,7 @@ class DataStore: ObservableObject {
   @Published var counter = 0 // For "Untitled #" labels
 
   @Published var images: [ImageModel] = []
-  @Published var annotatedImages: [AnnotatedImageModel] = []
+  @Published var annotatedImages: [ImageAnnotationModel] = []
 
   @Published var viewportSize: CGSize?
 
@@ -51,13 +51,13 @@ class DataStore: ObservableObject {
 
   private var folderWatcher: DirectoryWatcher?
 
-  var matchingAnnotatedImages: [AnnotatedImageModel] {
+  var matchingAnnotatedImages: [ImageAnnotationModel] {
     images.map {
       getAnnotatedImage($0)
     }
   }
 
-  var selectedAnnotatedImage: AnnotatedImageModel? {
+  var selectedAnnotatedImage: ImageAnnotationModel? {
     guard
       let selectedImage = self.selectedImage
     else {
@@ -66,9 +66,9 @@ class DataStore: ObservableObject {
     return getAnnotatedImage(selectedImage)
   }
 
-  func getAnnotatedImage(_ imageModel: ImageModel) -> AnnotatedImageModel {
+  func getAnnotatedImage(_ imageModel: ImageModel) -> ImageAnnotationModel {
     guard let annotatedImage = annotatedImages.first(where: { $0.imagefilename == imageModel.filename }) else {
-      let newAnnotatedImage = AnnotatedImageModel(imagefilename: imageModel.filename, annotation: [])
+      let newAnnotatedImage = ImageAnnotationModel(imagefilename: imageModel.filename, annotation: [])
       annotatedImages.append(newAnnotatedImage)
       return newAnnotatedImage
     }

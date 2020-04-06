@@ -6,7 +6,7 @@ struct ImageViewer: View {
   @State var size: CGSize?
   @EnvironmentObject var store: DataStore
 
-  var annotatedImage: AnnotatedImageModel! {
+  var annotatedImage: ImageAnnotationModel! {
     store.selectedAnnotatedImage
   }
 

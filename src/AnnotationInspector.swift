@@ -8,7 +8,7 @@ struct AnnotationInspector: View {
     annotatedImage.annotation
   }
 
-  var annotatedImage: AnnotatedImageModel {
+  var annotatedImage: ImageAnnotationModel {
     store.selectedAnnotatedImage!
   }
 

@@ -4,27 +4,16 @@ struct FlipFilter: Filter {
 
   struct Input: FilterInOut {
     var images: [ImageModel]
-    var annotatedImages: [AnnotatedImageModel]
+    var annotatedImages: [ImageAnnotationModel]
     var horizontal: Bool
     var vertical: Bool
   }
   
   var parameters: Input
 
-  func apply() -> FilterInOut {
+  func apply(image: ImageModel, annotated: ImageAnnotationModel) -> FilterResult {
     var resultingImages: [ImageModel] = []
-    var resultingAnnotated: [AnnotatedImageModel] = []
-    for i in parameters.images.indices {
-      let result = apply(image: parameters.images[i], annotated: parameters.annotatedImages[i])
-      resultingImages.append(contentsOf: result.images)
-      resultingAnnotated.append(contentsOf: result.annotatedImages)
-    }
-    return FilterResult(images: resultingImages, annotatedImages: resultingAnnotated)
-  }
-
-  func apply(image: ImageModel, annotated: AnnotatedImageModel) -> FilterResult {
-    var resultingImages: [ImageModel] = []
-    var resultingAnnotated: [AnnotatedImageModel] = []
+    var resultingAnnotated: [ImageAnnotationModel] = []
 
     if parameters.horizontal, let flipped = image.flipHorizontally() {
       resultingImages.append(flipped)
@@ -78,15 +67,15 @@ extension ImageModel {
   }
 }
 
-extension AnnotatedImageModel {
-  func flipVertically(withName name: String, height: CGFloat) -> AnnotatedImageModel {
+extension ImageAnnotationModel {
+  func flipVertically(withName name: String, height: CGFloat) -> ImageAnnotationModel {
     let flippedAnnotation = annotation.map { $0.flipVertically(withHeight: height) }
-    return AnnotatedImageModel(imagefilename: name, annotation: flippedAnnotation)
+    return ImageAnnotationModel(imagefilename: name, annotation: flippedAnnotation)
   }
 
-  func flipHorizontally(withName name: String, width: CGFloat) -> AnnotatedImageModel {
+  func flipHorizontally(withName name: String, width: CGFloat) -> ImageAnnotationModel {
     let flippedAnnotation = annotation.map { $0.flipHorizontally(withWidth: width) }
-    return AnnotatedImageModel(imagefilename: name, annotation: flippedAnnotation)
+    return ImageAnnotationModel(imagefilename: name, annotation: flippedAnnotation)
   }
 }
 
