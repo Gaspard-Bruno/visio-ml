@@ -10,7 +10,7 @@ struct SyntheticsSettings: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      VStack {
+      VStack(alignment: .leading) {
         Toggle("Flip horizontal", isOn: $store.workspace.flipHorizonal)
         Toggle("Flip vertical", isOn: $store.workspace.flipVertical)
       }

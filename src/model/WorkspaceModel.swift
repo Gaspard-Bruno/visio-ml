@@ -5,10 +5,10 @@ class WorkspaceModel: Codable, ObservableObject {
 
   init() { }
 
-  @Published var flipHorizonal = false
-  @Published var flipVertical = false
+  @Published var flipHorizonal = true
+  @Published var flipVertical = true
 
-  @Published var randomBgPosition = false
+  @Published var randomBgPosition = true
   @Published var backgrounds: [URL] = []
 
   enum CodingKeys: String, CodingKey {

@@ -32,6 +32,7 @@ struct WorkspaceSettings: View {
       }
       .padding()
     }
+    .frame(width: 600)
     .frame(maxWidth: .infinity)
     .frame(minHeight: 400)
   }

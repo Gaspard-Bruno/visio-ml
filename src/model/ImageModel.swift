@@ -10,6 +10,7 @@ class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
   var ciImage: CIImage {
     CIImage(contentsOf: url)!
   }
+  
   var nsImage: NSImage {
     NSImage(byReferencing: url)
   }
@@ -41,7 +42,11 @@ class ImageModel: Identifiable, Equatable, Hashable, ObservableObject {
   init(url: URL) {
     self.url = url
   }
-
+  
+  var transformationX = CGFloat()
+  
+  var transformationY = CGFloat()
+  
   static var specimen: ImageModel {
     //ImageModel(url: Bundle.main.url(forResource: "cat-and-dog", withExtension: "png", subdirectory: "samples")!)
     ImageModel(url: Bundle.main.url(forResource: "cat-and-dog", withExtension: "png")!)

@@ -103,7 +103,9 @@
 				62C61DF4241FEF0F000C1BAE /* conf */,
 				6222F696241B989C001B7A56 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		6222F696241B989C001B7A56 /* Products */ = {
 			isa = PBXGroup;
