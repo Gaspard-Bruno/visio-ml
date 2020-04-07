@@ -36,33 +36,41 @@ struct BackgroundFilter: Filter {
       .appendingPathExtension(bgUrl.lastPathComponent)
 
     let bgImage = CIImage(contentsOf: bgUrl)!
+    let width = image.ciImage.extent.maxX
+    let height = image.ciImage.extent.maxY
+    let bgSize = bgImage.extent
 
     if parameters.randomBgPosition {
-      let bgSize = bgImage.extent
-      let upBoundX = bgSize.maxX - image.ciImage.extent.maxX
+      let upBoundX = bgSize.maxX - width
       let randomX = CGFloat.random(in: 0 ..< upBoundX)
-      let upBoundY = bgSize.maxY - image.ciImage.extent.maxY
+      let upBoundY = bgSize.maxY - height
       let randomY = CGFloat.random(in: 0 ..< upBoundY)
       let transformation = CGAffineTransform(translationX: randomX, y: randomY)
-      
+print("Random: \(randomX), \(randomY)")
       let transformed = image.ciImage.transformed(by: transformation)
       resultingCiImage = transformed.composited(over: bgImage)
 
-      // Crop to the max of the synthetic image???
-      // withBg = withBg.cropped(to: bg.ciImage.extent)
-      var regions: [LabelModel] = []
-      for area in annotation.annotation {
-        let center = CGPoint(x: area.coordinates.x, y: area.coordinates.y)
-        let newCenter = center.applying(transformation)
-        let coordinates = LabelModel.CoordinatesModel(y: newCenter.y, x: newCenter.x, height: area.coordinates.height, width: area.coordinates.width)
-        let label = LabelModel(label: area.label, coordinates: coordinates)
-        regions.append(label)
+      var newLabels: [LabelModel] = []
+      for label in annotation.annotation {
+        let newCenter = CGPoint(x: label.coordinates.x, y: label.coordinates.y + (bgSize.maxY - height)).applying(CGAffineTransform(translationX: transformation.tx, y: -transformation.ty))
+        let newCoordinates = LabelModel.CoordinatesModel(y: newCenter.y, x: newCenter.x, height: label.coordinates.height, width: label.coordinates.width)
+        let newLabel = LabelModel(label: label.label, coordinates: newCoordinates)
+        newLabels.append(newLabel)
       }
-      resultingAnnotation = ImageAnnotationModel(imagefilename: newUrl.lastPathComponent, annotation: regions)
+      resultingAnnotation = ImageAnnotationModel(imagefilename: newUrl.lastPathComponent, annotation: newLabels)
+
     } else {
       let croppedBg = bgImage.cropped(to: image.ciImage.extent)
       resultingCiImage = image.ciImage.composited(over: croppedBg)
-      resultingAnnotation = ImageAnnotationModel(imagefilename: newUrl.lastPathComponent, annotation: annotation.annotation)
+      
+      var newLabels: [LabelModel] = []
+      for label in annotation.annotation {
+        let newCenter = CGPoint(x: label.coordinates.x, y: label.coordinates.y)
+        let newCoordinates = LabelModel.CoordinatesModel(y: newCenter.y, x: newCenter.x, height: label.coordinates.height, width: label.coordinates.width)
+        let newLabel = LabelModel(label: label.label, coordinates: newCoordinates)
+        newLabels.append(newLabel)
+      }
+      resultingAnnotation = ImageAnnotationModel(imagefilename: newUrl.lastPathComponent, annotation: newLabels)
     }
     
     let context = CIContext()
