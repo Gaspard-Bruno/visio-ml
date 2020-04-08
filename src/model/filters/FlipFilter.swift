@@ -5,27 +5,38 @@ struct FlipFilter: Filter {
   struct Input: FilterInOut {
     var images: [ImageModel]
     var annotatedImages: [ImageAnnotationModel]
-    var horizontal: Bool
-    var vertical: Bool
+    var workspace: WorkspaceModel
   }
   
   var parameters: Input
+  
+  var horizontal: Bool {
+    parameters.workspace.flipHorizonal
+  }
+
+  var vertical: Bool {
+    parameters.workspace.flipVertical
+  }
+
+  var doubleFlip: Bool {
+    parameters.workspace.doubleFlip
+  }
 
   func apply(image: ImageModel, annotated: ImageAnnotationModel) -> FilterResult {
     var resultingImages: [ImageModel] = []
     var resultingAnnotated: [ImageAnnotationModel] = []
 
-    if parameters.horizontal, let flipped = image.flipHorizontally() {
+    if horizontal, let flipped = image.flipHorizontally() {
       resultingImages.append(flipped)
       let annotatedFlipped = annotated.flipHorizontally(withName: flipped.filename, width: flipped.ciImage.extent.width)
       resultingAnnotated.append(annotatedFlipped)
-      if parameters.vertical, let doubleFlipped = flipped.flipVertically()  {
+      if vertical, doubleFlip, let doubleFlipped = flipped.flipVertically()  {
         resultingImages.append(doubleFlipped)
         let annotatedFlipped = annotatedFlipped.flipVertically(withName: doubleFlipped.filename, height: doubleFlipped.ciImage.extent.height)
         resultingAnnotated.append(annotatedFlipped)
       }
     }
-    if parameters.vertical, let flipped = image.flipVertically()  {
+    if vertical, let flipped = image.flipVertically()  {
       resultingImages.append(flipped)
       let annotatedFlipped = annotated.flipVertically(withName: flipped.filename, height: flipped.ciImage.extent.height)
       resultingAnnotated.append(annotatedFlipped)

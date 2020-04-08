@@ -74,6 +74,14 @@ extension LabelModel {
       self.width = (width / scale).rounded()
     }
 
+    convenience init(_ rect: CGRect) {
+      self.init(y: rect.midY, x: rect.midX, height: rect.size.height, width: rect.size.width)
+    }
+
+    var asRect: CGRect {
+      CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height)
+    }
+
     var y: CGFloat
     var x: CGFloat
     var height: CGFloat
