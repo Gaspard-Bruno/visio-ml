@@ -4,7 +4,6 @@ struct WorkspaceSettings: View {
 
   @Binding var settingsHandle: Bool
   @EnvironmentObject var store: DataStore
-  @State var selectionOnly = false
 
   var backgroundsFolder: String {
     guard let url = store.workspace.backgroundsFolder else {
@@ -34,7 +33,7 @@ struct WorkspaceSettings: View {
       Section(
         footer: Text("Apply filter to the currently selected imaged only.")
       ) {
-        Toggle("Current selection only", isOn: $selectionOnly)
+        Toggle("Current selection only", isOn: $store.workspace.selectionOnly)
       }
       Divider()
       Section(
@@ -49,7 +48,7 @@ struct WorkspaceSettings: View {
       Divider()
       Section(
         header: Text("Synthetic options"),
-        footer: Text("Choose a folder containing all backgrounds")
+        footer: Text("These effects will be applied on each processed image.")
       ) {
         Toggle("Include empty background", isOn: $store.workspace.noBackground)
         Toggle("Apply to every background", isOn: $store.workspace.everyBackground)
@@ -68,13 +67,15 @@ struct WorkspaceSettings: View {
         Button(action: {
           self.store.applyFilters()
         }) {
-          Text("􀍱 Generate")
+          // 􀍱
+          Text("Generate")
         }
         Button(action: {
           self.settingsHandle.toggle()
         }) {
           // Image("symbols/info.circle")
-          Text("􀆄 Close")
+          // 􀆄
+          Text("Close")
         }
         } }
     }.frame(maxWidth: .infinity) }

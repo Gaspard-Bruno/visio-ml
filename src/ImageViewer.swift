@@ -91,7 +91,11 @@ struct ImageViewer: View {
   }
 
   var body: some View {
-    GeometryReader { self.body($0) }
+    Group {
+      if selectedImage != nil {
+        GeometryReader { self.body($0) }
+      }
+    }
   }
 }
 

@@ -17,35 +17,42 @@ struct ImageList: View {
       }
     }
     .frame(minWidth: 225, maxWidth: 300)
-    .onDrop(of: ["public.file-url"], isTargeted: $dropping) {
-      for itemProvider in $0 {
-        itemProvider.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
-          DispatchQueue.main.async {
-            guard let urlData = urlData as? Data else {
-              return
-            }
-            let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
-            self.store.images.append(ImageModel(url: url))
-            self.store.selectedImage = self.store.images.last!
-          }
-        }
-      }
-      return true
-    }
+    //.onDrop(of: ["public.file-url"], isTargeted: $dropping) {
+    //  for itemProvider in $0 {
+    //    itemProvider.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
+    //      DispatchQueue.main.async {
+    //        guard let urlData = urlData as? Data else {
+    //          return
+    //        }
+    //        let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
+    //        self.store.images.append(ImageModel(url: url))
+    //        self.store.selectedImage = self.store.images.last!
+    //      }
+    //    }
+    //  }
+    //  return true
+    //}
   }
   
   var list: some View {
     VStack {
-      List(selection: $store.selectedImage) {
+//      List(selection: .constant(Set<String>())) {
+//        ForEach(store.images) {
+//          Text("\($0.filename)")
+//            .tag($0)
+//        }
+//      }
+      List(selection: $store.selectedImages) {
         ForEach(store.images) {
           Text("\($0.filename)")
             .tag($0)
         }
       }
-      .listStyle(SidebarListStyle())
-      .onDeleteCommand {
-        self.store.deleteSelectedImage()
-      }
+      //.listStyle(DefaultListStyle())
+      //.listStyle(SidebarListStyle())
+      //.onDeleteCommand {
+      //  self.store.deleteSelectedImage()
+      //}
     }
   }
 }

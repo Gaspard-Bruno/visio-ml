@@ -40,11 +40,15 @@ class DataStore: ObservableObject {
     }
     return viewportSize.width / image.size.width
   }
-
-  @Published var selectedImage: ImageModel? {
+  
+  @Published var selectedImages: Set<ImageModel> = [] {
     willSet {
       selectedLabel = nil
     }
+  }
+
+  var selectedImage: ImageModel? {
+    selectedImages.count == 1 ? selectedImages.first! : nil
   }
 
   @Published var selectedLabel: LabelModel!
@@ -53,6 +57,18 @@ class DataStore: ObservableObject {
 
   var matchingAnnotatedImages: [ImageAnnotationModel] {
     images.map {
+      getAnnotatedImage($0)
+    }
+  }
+
+  var selectedImagesArray: [ImageModel] {
+    images.filter {
+      selectedImages.contains($0)
+    }
+  }
+
+  var matchingSelectedAnnotatedImages: [ImageAnnotationModel] {
+    selectedImagesArray.map {
       getAnnotatedImage($0)
     }
   }
@@ -148,8 +164,8 @@ class DataStore: ObservableObject {
       // Chceck if image is in dir contents
       if pngs.first(where: { $0 == image.url }) == nil {
         // If removing the currently selected one, unselect
-        if image == selectedImage {
-          selectedImage = nil
+        if selectedImages.contains(image) {
+          selectedImages.remove(image)
         }
         // Check if an annotation was generated for this image
         if let annotated = annotatedImages.first(where: { $0.imagefilename == image.filename }) {
@@ -173,14 +189,14 @@ class DataStore: ObservableObject {
     // TODO: Look for a way to handle renames
   }
 
-  func deleteSelectedImage() {
-    guard
-      let image = selectedImage else {
-        return
-    }
-    selectedImage = nil
-    images.removeAll { $0 == image }
-  }
+  //func deleteSelectedImage() {
+  //  guard
+  //    let image = selectedImage else {
+  //      return
+  //  }
+  //  selectedImage = nil
+  //  images.removeAll { $0 == image }
+  //}
 
   func deleteSelectedLabel() {
     guard

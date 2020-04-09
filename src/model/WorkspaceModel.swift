@@ -5,6 +5,7 @@ class WorkspaceModel: Codable, ObservableObject {
 
   init() { }
 
+  @Published var selectionOnly = false
   @Published var noBackground = true
   @Published var everyBackground = true
   @Published var randomPosition = true

@@ -43,6 +43,13 @@ struct BackgroundFilter: Filter {
     var resultingImages: [ImageModel] = []
     var resultingAnnotated: [ImageAnnotationModel] = []
     
+    let backgrounds: [URL]
+    if parameters.workspace.everyBackground {
+      backgrounds = self.backgrounds
+    } else {
+      backgrounds = [ self.backgrounds[Int.random(in: 0 ..< self.backgrounds.count)] ]
+    }
+    
     for url in backgrounds {
       let (imageOut, annotationOut) = applyBackground(image, annotated, url)
       resultingImages.append(imageOut)
@@ -63,14 +70,13 @@ struct BackgroundFilter: Filter {
       .deletingPathExtension()
       .appendingPathExtension(bgUrl.lastPathComponent)
 
-    let bgImage = CIImage(contentsOf: bgUrl)!
+    var bgImage = CIImage(contentsOf: bgUrl)!
+
     let width = image.ciImage.extent.maxX
     let height = image.ciImage.extent.maxY
     let size = CGSize(width: width, height: height)
-    let bgSize = CGSize(width: bgImage.extent.maxX, height: bgImage.extent.maxY)
 
     let randomScaleX = parameters.workspace.randomScale ? CGFloat.random(in: 0.75 ..< 1.25) : 1
-
     let randomScaleY =
       parameters.workspace.randomScale
         ? parameters.workspace.keepAspectRatio
@@ -81,6 +87,26 @@ struct BackgroundFilter: Filter {
     let scaleTransform = CGAffineTransform(scaleX: randomScaleX, y: randomScaleY)
     let scaledSize = size.applying(scaleTransform)
     
+    var bgSize = CGSize(width: bgImage.extent.maxX, height: bgImage.extent.maxY)
+
+    // If background doesn't fit, we scale it up
+    if scaledSize.width > bgSize.width || scaledSize.height > bgSize.height {
+      let bgScaleX: CGFloat
+      let bgScaleY: CGFloat
+      if scaledSize.width > bgSize.width {
+        bgScaleX = scaledSize.width / bgSize.width
+      } else {
+        bgScaleX = 1
+      }
+      if scaledSize.height > bgSize.height {
+        bgScaleY = scaledSize.height / bgSize.height
+      } else {
+        bgScaleY = 1
+      }
+      bgImage = bgImage.transformed(by: CGAffineTransform(scaleX: bgScaleX, y: bgScaleY))
+      bgSize = CGSize(width: bgImage.extent.maxX, height: bgImage.extent.maxY)
+    }
+
     let upBoundX = bgSize.width - scaledSize.width
     let randomX = parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundX) : 0
     let upBoundY = bgSize.height - scaledSize.height
