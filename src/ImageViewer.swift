@@ -96,6 +96,7 @@ struct ImageViewer: View {
         GeometryReader { self.body($0) }
       }
     }
+    .background(KeyboardHandler())
   }
 }
 

@@ -59,8 +59,14 @@ struct LabelDetails: View {
       Text("width: \(label.coordinates.width)")
       Text("height: \(label.coordinates.height)")
       if selected {
-        Button("Delete") {
-          self.store.deleteSelectedLabel()
+        VStack {
+          Button("Delete") {
+            self.store.deleteSelectedLabel()
+          }
+          Group {
+            Text("Or press ") + Text("delete").italic()
+          }
+          .font(.footnote)
         }
       }
     }
