@@ -23,6 +23,7 @@ struct ContentView: View {
           }
         }
         .frame(minHeight: 500)
+        .overlay(KeyboardHandler())
       }
     }
     .sheet(isPresented: $showSettings) {
