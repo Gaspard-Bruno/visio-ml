@@ -23,9 +23,9 @@ struct ContentView: View {
           }
         }
         .frame(minHeight: 500)
-        .overlay(KeyboardHandler())
       }
     }
+    .overlay(KeyboardHandler())
     .sheet(isPresented: $showSettings) {
       WorkspaceSettings(settingsHandle: self.$showSettings)
       .environmentObject(self.store)

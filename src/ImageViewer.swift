@@ -24,6 +24,14 @@ struct ImageViewer: View {
       .onTapGesture {
         self.store.selectedLabel = i
       }
+      .gesture(
+        DragGesture(minimumDistance: 0)
+        .onChanged {
+          self.store.selectedLabel = i
+          self.updateMovingRect($0)
+        }
+        .onEnded(self.updateLabelPosition)
+      )
     }
   }
   
@@ -46,6 +54,21 @@ struct ImageViewer: View {
     }
     let end = value.location
     size = CGSize(width: (end.x - start.x) * 2, height: (end.y - start.y) * 2)
+  }
+
+  func updateMovingRect(_ value: DragGesture.Value) {
+    let scale = store.currentScaleFactor!
+    let labelRect = store.selectedLabel.coordinates.asRect
+    start = CGPoint(
+      x: value.location.x * scale,
+      y: value.location.y * scale
+    )
+    size = CGSize(
+      width: labelRect.width * scale,
+      height: labelRect.height * scale
+    )
+    //let end = CGPoint(x: start.x + store.selectedLabel.coordinates.width, y: start.x + store.selectedLabel.coordinates.height)
+    
   }
 
   func createLabel(_ value: DragGesture.Value) {
@@ -75,6 +98,19 @@ struct ImageViewer: View {
     self.size = nil
   }
   
+  func updateLabelPosition(_ value: DragGesture.Value) {
+    guard let start = start else {
+      return
+    }
+    
+    let scale = store.currentScaleFactor!
+    store.selectedLabel.coordinates.x = round(start.x / scale)
+    store.selectedLabel.coordinates.y = round(start.y / scale)
+    self.start = nil
+    self.size = nil
+    self.store.dummyToggle.toggle()
+  }
+
   func body(_ p: GeometryProxy) -> some View {
     ZStack(alignment: .topLeading) {
       ImageBackground(image: selectedImage, p: p)
