@@ -1,0 +1,15 @@
+#
+# To decrypt:
+#
+#   gpg --output gitconfig.user --decrypt gitconfig.users/[USER].gpg && git config include.path ../gitconfig
+
+#
+# To encrypt:
+#
+#   gpg --output gitconfig.users/[USER].gpg --encrypt --recipient [USER] gitconfig.user
+#
+
+[commit]
+	gpgsign = true
+[include]
+  path = gitconfig.user

@@ -1,0 +1,5 @@
+.DS_Store
+/gitconfig.user
+
+/AnnotateCatalyst.xcodeproj/xcuserdata
+/AnnotateCatalyst.xcodeproj/project.xcworkspace/xcuserdata
