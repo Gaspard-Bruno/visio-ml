@@ -25,61 +25,75 @@ struct WorkspaceSettings: View {
         return
       }
       self.store.workspace.backgroundsFolder = url
+      DispatchQueue.main.async {
+        self.store.dummyToggle.toggle()
+      }
     }
   }
 
   var body: some View {
-    ScrollView(.vertical) { Form {
-      Section(
-        footer: Text("Apply filter to the currently selected imaged only.")
-      ) {
-        Toggle("Current selection only", isOn: $store.workspace.selectionOnly)
-      }
-      Divider()
-      Section(
-        header: Text("Backgrounds folder"),
-        footer: Text("Choose a folder containing all backgrounds")
-      ) {
-        HStack {
-          selectFolder
-          Text("\(backgroundsFolder)")
+    ScrollView(.vertical) {
+      Form {
+        Section(
+          footer: Text("Apply filter to the currently selected imaged only.")
+        ) {
+          Toggle("Current selection only", isOn: $store.workspace.selectionOnly)
         }
-      }
-      Divider()
-      Section(
-        header: Text("Synthetic options"),
-        footer: Text("These effects will be applied on each processed image.")
-      ) {
-        Toggle("Include empty background", isOn: $store.workspace.noBackground)
-        Toggle("Apply to every background", isOn: $store.workspace.everyBackground)
-        Toggle("Randomize position", isOn: $store.workspace.randomPosition)
-        Toggle("Randomize scale", isOn: $store.workspace.randomScale)
-        Toggle("Keep aspect ratio", isOn: $store.workspace.keepAspectRatio).padding(.horizontal)
-        Toggle("Flip horizontal", isOn: $store.workspace.flipHorizonal)
-        Toggle("Flip vertical", isOn: $store.workspace.flipVertical)
-        Toggle("Double flip", isOn: $store.workspace.doubleFlip)
-          .padding(.horizontal)
-        Toggle("Add random noise", isOn: $store.workspace.noiseLayer)
-      }
-      Spacer()
-      Section { HStack {
+        Divider()
+        Section(
+          header: Text("Backgrounds folder"),
+          footer: Text("Choose a folder containing all backgrounds")
+        ) {
+          HStack {
+            selectFolder
+            Text("\(backgroundsFolder)").truncationMode(.middle).fixedSize()
+          }
+        }
+        Divider()
+        Section(
+          header: Text("Synthetic options"),
+          footer: Text("These effects will be applied on each processed image.")
+        ) {
+          Toggle("Include empty background", isOn: $store.workspace.noBackground)
+          Toggle("Apply to every background", isOn: $store.workspace.everyBackground)
+          Toggle("Randomize position", isOn: $store.workspace.randomPosition)
+          Toggle("Randomize scale", isOn: $store.workspace.randomScale)
+          Toggle("Keep aspect ratio", isOn: $store.workspace.keepAspectRatio).padding(.horizontal)
+          Toggle("Flip horizontal", isOn: $store.workspace.flipHorizonal)
+          Toggle("Flip vertical", isOn: $store.workspace.flipVertical)
+          Toggle("Double flip", isOn: $store.workspace.doubleFlip)
+            .padding(.horizontal)
+          Toggle("Add random noise", isOn: $store.workspace.noiseLayer)
+        }
         Spacer()
-        Button(action: {
-          self.store.applyFilters()
-        }) {
-          // 􀍱
-          Text("Generate")
+        Section {
+          HStack {
+            Spacer()
+            Button(action: {
+              self.store.applyFilters()
+            }) {
+              // 􀍱
+              Text("Generate")
+            }
+            Button(action: {
+              self.settingsHandle.toggle()
+            }) {
+              // Image("symbols/info.circle")
+              // 􀆄
+              Text("Close")
+            }
+          }
         }
-        Button(action: {
-          self.settingsHandle.toggle()
-        }) {
-          // Image("symbols/info.circle")
-          // 􀆄
-          Text("Close")
+        Section {
+          VStack {
+            Text("\(round(Double(store.workspace.processedFiles) / Double(store.workspace.totalFiles > 0 ? store.workspace.totalFiles : 1) * 100), specifier: "%.0f")% (images \(store.workspace.processedFiles) of \(store.workspace.totalFiles) processed)")
+          }
         }
-        } }
-    }.frame(maxWidth: .infinity) }
+      }
+      .frame(maxWidth: .infinity)
+    }
     .padding()
+    .frame(minWidth: 500)
     .frame(maxWidth: .infinity)
   }
 }

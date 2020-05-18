@@ -41,7 +41,20 @@ class DataStore: ObservableObject {
     return viewportSize.width / image.size.width
   }
   
-  @Published var selectedImages: Set<ImageModel> = [] {
+  //@Published var selectedImages: Set<ImageModel> = [] {
+  //  willSet {
+  //    selectedLabel = nil
+  //  }
+  //}
+
+  var selectedImages: Set<ImageModel> {
+    guard let selectedSingleImage = selectedSingleImage else {
+      return []
+    }
+    return [selectedSingleImage]
+  }
+
+  @Published var selectedSingleImage: ImageModel? = nil {
     willSet {
       selectedLabel = nil
     }
@@ -165,7 +178,8 @@ class DataStore: ObservableObject {
       if pngs.first(where: { $0 == image.url }) == nil {
         // If removing the currently selected one, unselect
         if selectedImages.contains(image) {
-          selectedImages.remove(image)
+          // selectedImages.remove(image)
+          selectedSingleImage = nil
         }
         // Check if an annotation was generated for this image
         if let annotated = annotatedImages.first(where: { $0.imagefilename == image.filename }) {

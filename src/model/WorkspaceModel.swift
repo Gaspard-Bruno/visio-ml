@@ -6,6 +6,10 @@ class WorkspaceModel: Codable, ObservableObject {
   init() { }
 
   @Published var selectionOnly = false
+  @Published var dummyToggle = false
+  @Published var processedFiles = 0
+  @Published var totalFiles = 0
+
   @Published var noBackground = true
   @Published var everyBackground = true
   @Published var randomPosition = true

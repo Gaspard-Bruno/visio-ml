@@ -54,8 +54,10 @@ struct BackgroundFilter: Filter {
       let (imageOut, annotationOut) = applyBackground(image, annotated, url)
       resultingImages.append(imageOut)
       resultingAnnotated.append(annotationOut)
+      DispatchQueue.main.async {
+        self.parameters.workspace.processedFiles += 1
+      }
     }
-    
     return FilterResult(images: resultingImages, annotatedImages: resultingAnnotated)
   }
   

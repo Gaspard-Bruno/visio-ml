@@ -42,7 +42,7 @@ struct ImageList: View {
 //            .tag($0)
 //        }
 //      }
-      List(selection: $store.selectedImages) {
+      List(selection: $store.selectedSingleImage) {
         ForEach(store.images) {
           Text("\($0.filename)")
             .tag($0)

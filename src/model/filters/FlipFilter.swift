@@ -30,16 +30,26 @@ struct FlipFilter: Filter {
       resultingImages.append(flipped)
       let annotatedFlipped = annotated.flipHorizontally(withName: flipped.filename, width: flipped.ciImage.extent.width)
       resultingAnnotated.append(annotatedFlipped)
+      DispatchQueue.main.async {
+        self.parameters.workspace.processedFiles += 1
+      }
+
       if vertical, doubleFlip, let doubleFlipped = flipped.flipVertically()  {
         resultingImages.append(doubleFlipped)
         let annotatedFlipped = annotatedFlipped.flipVertically(withName: doubleFlipped.filename, height: doubleFlipped.ciImage.extent.height)
         resultingAnnotated.append(annotatedFlipped)
+        DispatchQueue.main.async {
+          self.parameters.workspace.processedFiles += 1
+        }
       }
     }
     if vertical, let flipped = image.flipVertically()  {
       resultingImages.append(flipped)
       let annotatedFlipped = annotated.flipVertically(withName: flipped.filename, height: flipped.ciImage.extent.height)
       resultingAnnotated.append(annotatedFlipped)
+      DispatchQueue.main.async {
+        self.parameters.workspace.processedFiles += 1
+      }
     }
     return FilterResult(images: resultingImages, annotatedImages: resultingAnnotated)
   }
