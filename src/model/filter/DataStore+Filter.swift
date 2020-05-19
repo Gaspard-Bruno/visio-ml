@@ -33,7 +33,6 @@ extension DataStore {
     
     DispatchQueue.global(qos: .userInteractive).async {
       let workspace = self.workspace
-      var annotatedImages = self.annotatedImages
 
       let flipFilter = FlipFilter(parameters: .init(images: startingImages, annotatedImages: startingAnnotatedImages, workspace: workspace))
       let flipResult = flipFilter.apply()
@@ -45,9 +44,9 @@ extension DataStore {
       let backgroundFilterResult2 = backgroundFilter2.apply()
       
       DispatchQueue.main.async {
-        annotatedImages.append(contentsOf: flipResult.annotatedImages)
-        annotatedImages.append(contentsOf: backgroundFilterResult.annotatedImages)
-        annotatedImages.append(contentsOf: backgroundFilterResult2.annotatedImages)
+        self.annotatedImages.append(contentsOf: flipResult.annotatedImages)
+        self.annotatedImages.append(contentsOf: backgroundFilterResult.annotatedImages)
+        self.annotatedImages.append(contentsOf: backgroundFilterResult2.annotatedImages)
       }
       DispatchQueue.main.async {
         self.dummyToggle.toggle()
