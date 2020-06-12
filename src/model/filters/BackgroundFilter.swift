@@ -124,8 +124,58 @@ struct BackgroundFilter: Filter {
     //let croppedBg = bgImage.cropped(to: image.ciImage.extent)
     //resultingCiImage = image.ciImage.composited(over: croppedBg)
 
-    if parameters.workspace.noiseLayer {
-      let coloredNoise = CIFilter(name:"CIRandomGenerator")!
+    // TODO: randomize
+    let ws = parameters.workspace
+    let indices = [
+      ws.embossFilter ? 0 : nil,
+      ws.blurFilter ? 1 : nil,
+      ws.colorFilter ? 2 : nil,
+      ws.noiseLayer ? 3 : nil,
+    ].compactMap { $0 }
+    
+    var embossFilter = false
+    var blurFilter = false
+    var colorFilter = false
+    var noiseLayer = false
+
+    if indices.count > 0 {
+      let index = Int.random(in: 0 ..< indices.count)
+      let filterId = indices[index]
+      embossFilter = filterId == 0
+      blurFilter = filterId == 1
+      colorFilter = filterId == 2
+      noiseLayer = filterId == 3
+    }
+    
+    if embossFilter {
+      let floatArr: [CGFloat] = [1, 0, -1, 2, 0, -1, 1, 0, -1]
+      let convolution = CIFilter(name:"CIConvolution3X3", parameters: [
+        kCIInputImageKey: resultingCiImage,
+        kCIInputWeightsKey: CIVector(values: floatArr, count: Int(floatArr.count)),
+        kCIInputBiasKey: NSNumber(value: 0.5),
+      ])!
+      resultingCiImage = convolution.outputImage!.cropped(to: resultingCiImage.extent)
+    }
+
+    if blurFilter {
+      let blur = CIFilter(name: "CIGaussianBlur", parameters: [
+        kCIInputImageKey: resultingCiImage,
+        kCIInputRadiusKey: NSNumber(value: 10.0)
+      ])!
+      resultingCiImage = blur.outputImage!
+    }
+
+    if colorFilter {
+      let color = CIFilter(name: "CIColorMonochrome", parameters: [
+        kCIInputImageKey: resultingCiImage,
+        kCIInputColorKey: CIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1)),
+        kCIInputIntensityKey: NSNumber(value: 1.0)
+      ])!
+      resultingCiImage = color.outputImage!
+    }
+
+    if noiseLayer {
+      let coloredNoise = CIFilter(name: "CIRandomGenerator")!
       let noiseImage = coloredNoise.outputImage!
       let whitenVector = CIVector(x: 0, y: 1, z: 0, w: 0)
       let fineGrain = CIVector(x:0, y:0.005, z:0, w:0)

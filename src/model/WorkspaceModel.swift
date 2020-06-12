@@ -18,6 +18,9 @@ class WorkspaceModel: Codable, ObservableObject {
   @Published var flipHorizonal = true
   @Published var flipVertical = true
   @Published var doubleFlip = true
+  @Published var embossFilter = false
+  @Published var blurFilter = false
+  @Published var colorFilter = false
   @Published var noiseLayer = true
 
   @Published var backgroundsFolder: URL?
@@ -31,6 +34,9 @@ class WorkspaceModel: Codable, ObservableObject {
       case flipHorizonal
       case flipVertical
       case doubleFlip
+      case embossFilter
+      case blurFilter
+      case colorFilter
       case noiseLayer
       case backgroundsFolder
   }
@@ -61,6 +67,15 @@ class WorkspaceModel: Codable, ObservableObject {
     if let doubleFlip = try? values.decode(Bool.self, forKey: .doubleFlip) {
       self.doubleFlip = doubleFlip
     }
+    if let embossFilter = try? values.decode(Bool.self, forKey: .embossFilter) {
+      self.embossFilter = embossFilter
+    }
+    if let blurFilter = try? values.decode(Bool.self, forKey: .blurFilter) {
+      self.blurFilter = blurFilter
+    }
+    if let colorFilter = try? values.decode(Bool.self, forKey: .colorFilter) {
+      self.colorFilter = colorFilter
+    }
     if let noiseLayer = try? values.decode(Bool.self, forKey: .noiseLayer) {
       self.noiseLayer = noiseLayer
     }
@@ -79,6 +94,9 @@ class WorkspaceModel: Codable, ObservableObject {
     try container.encode(flipHorizonal, forKey: .flipHorizonal)
     try container.encode(flipVertical, forKey: .flipVertical)
     try container.encode(doubleFlip, forKey: .doubleFlip)
+    try container.encode(embossFilter, forKey: .embossFilter)
+    try container.encode(blurFilter, forKey: .blurFilter)
+    try container.encode(colorFilter, forKey: .colorFilter)
     try container.encode(noiseLayer, forKey: .noiseLayer)
     try container.encode(backgroundsFolder, forKey: .backgroundsFolder)
   }

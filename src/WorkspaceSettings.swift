@@ -54,16 +54,23 @@ struct WorkspaceSettings: View {
           header: Text("Synthetic options"),
           footer: Text("These effects will be applied on each processed image.")
         ) {
-          Toggle("Include empty background", isOn: $store.workspace.noBackground)
-          Toggle("Apply to every background", isOn: $store.workspace.everyBackground)
-          Toggle("Randomize position", isOn: $store.workspace.randomPosition)
-          Toggle("Randomize scale", isOn: $store.workspace.randomScale)
-          Toggle("Keep aspect ratio", isOn: $store.workspace.keepAspectRatio).padding(.horizontal)
-          Toggle("Flip horizontal", isOn: $store.workspace.flipHorizonal)
-          Toggle("Flip vertical", isOn: $store.workspace.flipVertical)
-          Toggle("Double flip", isOn: $store.workspace.doubleFlip)
-            .padding(.horizontal)
-          Toggle("Add random noise", isOn: $store.workspace.noiseLayer)
+          Group {
+            Toggle("Include empty background", isOn: $store.workspace.noBackground)
+            Toggle("Apply to every background", isOn: $store.workspace.everyBackground)
+            Toggle("Randomize position", isOn: $store.workspace.randomPosition)
+            Toggle("Randomize scale", isOn: $store.workspace.randomScale)
+            Toggle("Keep aspect ratio", isOn: $store.workspace.keepAspectRatio).padding(.horizontal)
+            Toggle("Flip horizontal", isOn: $store.workspace.flipHorizonal)
+            Toggle("Flip vertical", isOn: $store.workspace.flipVertical)
+            Toggle("Double flip", isOn: $store.workspace.doubleFlip)
+              .padding(.horizontal)
+            Toggle("Emboss", isOn: $store.workspace.embossFilter)
+            Toggle("Gaussian blur", isOn: $store.workspace.blurFilter)
+          }
+          Group {
+            Toggle("Color distortion", isOn: $store.workspace.colorFilter)
+            Toggle("Add random noise", isOn: $store.workspace.noiseLayer)
+          }
         }
         Spacer()
         Section {
