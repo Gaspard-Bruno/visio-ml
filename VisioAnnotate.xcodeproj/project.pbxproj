@@ -37,6 +37,13 @@
 		62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DF0241FD620000C1BAE /* DetailView.swift */; };
 		62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C61DF2241FDE0A000C1BAE /* ImageList.swift */; };
 		62DBEC8B242A2305009A96E9 /* DirectoryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBEC8A242A2305009A96E9 /* DirectoryWatcher.swift */; };
+		62E0B295249B60F200E5BC48 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0B294249B60F200E5BC48 /* CIImage.swift */; };
+		62E0B297249B610200E5BC48 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0B296249B610200E5BC48 /* CGSize.swift */; };
+		62E0B299249B610500E5BC48 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0B298249B610500E5BC48 /* CGPoint.swift */; };
+		62E0B29B249B610900E5BC48 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0B29A249B610900E5BC48 /* CGRect.swift */; };
+		62E0B29D249B610B00E5BC48 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0B29C249B610B00E5BC48 /* CGFloat.swift */; };
+		62E0B29F249B61A000E5BC48 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0B29E249B61A000E5BC48 /* Image.swift */; };
+		62E0B2A1249B626C00E5BC48 /* CGAffineTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E0B2A0249B626C00E5BC48 /* CGAffineTransform.swift */; };
 		62FFC86B241FF2D6005DE3E3 /* ImageSizePrefKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FFC86A241FF2D6005DE3E3 /* ImageSizePrefKey.swift */; };
 		62FFC86D241FF640005DE3E3 /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FFC86C241FF640005DE3E3 /* ImageInfo.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +82,13 @@
 		62C61DF0241FD620000C1BAE /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		62C61DF2241FDE0A000C1BAE /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		62DBEC8A242A2305009A96E9 /* DirectoryWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryWatcher.swift; sourceTree = "<group>"; };
+		62E0B294249B60F200E5BC48 /* CIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIImage.swift; sourceTree = "<group>"; };
+		62E0B296249B610200E5BC48 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		62E0B298249B610500E5BC48 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		62E0B29A249B610900E5BC48 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
+		62E0B29C249B610B00E5BC48 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		62E0B29E249B61A000E5BC48 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		62E0B2A0249B626C00E5BC48 /* CGAffineTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGAffineTransform.swift; sourceTree = "<group>"; };
 		62E4321D241BFE410074FE7F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		62E4321E241BFE410074FE7F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		62EADC03242BD9260066EFF7 /* gitconfig */ = {isa = PBXFileReference; lastKnownFileType = text; path = gitconfig; sourceTree = "<group>"; };
@@ -170,6 +184,13 @@
 			isa = PBXGroup;
 			children = (
 				6222F698241B989C001B7A56 /* AppDelegate.swift */,
+				62E0B294249B60F200E5BC48 /* CIImage.swift */,
+				62E0B29C249B610B00E5BC48 /* CGFloat.swift */,
+				62E0B29A249B610900E5BC48 /* CGRect.swift */,
+				62E0B298249B610500E5BC48 /* CGPoint.swift */,
+				62E0B296249B610200E5BC48 /* CGSize.swift */,
+				62E0B29E249B61A000E5BC48 /* Image.swift */,
+				62E0B2A0249B626C00E5BC48 /* CGAffineTransform.swift */,
 				62DBEC8A242A2305009A96E9 /* DirectoryWatcher.swift */,
 			);
 			path = support;
@@ -295,11 +316,13 @@
 			files = (
 				6291C33924377F3400B2156F /* IdentityFilter.swift in Sources */,
 				62DBEC8B242A2305009A96E9 /* DirectoryWatcher.swift in Sources */,
+				62E0B29D249B610B00E5BC48 /* CGFloat.swift in Sources */,
 				623B6A80246A99CD000CB349 /* KeyboardHandler.swift in Sources */,
 				6222F6BA241BCCC6001B7A56 /* LabelDetails.swift in Sources */,
 				62FFC86B241FF2D6005DE3E3 /* ImageSizePrefKey.swift in Sources */,
 				6291C332243738C600B2156F /* FlipFilter.swift in Sources */,
 				62C61DF1241FD620000C1BAE /* DetailView.swift in Sources */,
+				62E0B299249B610500E5BC48 /* CGPoint.swift in Sources */,
 				62A42765243B834F006F0E3D /* AnnotatedImageModel.swift in Sources */,
 				621233AB243642B800803D81 /* WorkspaceModel.swift in Sources */,
 				62C61DF3241FDE0A000C1BAE /* ImageList.swift in Sources */,
@@ -308,18 +331,23 @@
 				6291C330243737B500B2156F /* DataStore+Filter.swift in Sources */,
 				62FFC86D241FF640005DE3E3 /* ImageInfo.swift in Sources */,
 				6222F6B0241B9C98001B7A56 /* AnnotationInspector.swift in Sources */,
+				62E0B295249B60F200E5BC48 /* CIImage.swift in Sources */,
 				6222F69B241B989C001B7A56 /* ContentView.swift in Sources */,
 				6222F6AE241B99D6001B7A56 /* SidePanel.swift in Sources */,
 				6285E1AC2423D0BB008A27B1 /* SelectFolderButton.swift in Sources */,
+				62E0B2A1249B626C00E5BC48 /* CGAffineTransform.swift in Sources */,
 				6222F6C0241BEE51001B7A56 /* DataStore.swift in Sources */,
 				62A42767243B8495006F0E3D /* BackgroundFilter.swift in Sources */,
 				6222F6AC241B9997001B7A56 /* ImageViewer.swift in Sources */,
 				6222F6BE241BE4E1001B7A56 /* LabelOverlay.swift in Sources */,
 				6222F6B2241B9F9E001B7A56 /* ImageAnnotationModel.swift in Sources */,
+				62E0B297249B610200E5BC48 /* CGSize.swift in Sources */,
 				6291C33724377EE300B2156F /* Filter.swift in Sources */,
+				62E0B29F249B61A000E5BC48 /* Image.swift in Sources */,
 				6291C32E24372D8F00B2156F /* WorkspaceSettings.swift in Sources */,
 				6285E1B02423D22B008A27B1 /* ToolBar.swift in Sources */,
 				62C61DE9241FC5FF000C1BAE /* ImageModel.swift in Sources */,
+				62E0B29B249B610900E5BC48 /* CGRect.swift in Sources */,
 				6222F699241B989C001B7A56 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
