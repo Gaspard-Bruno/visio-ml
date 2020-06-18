@@ -77,9 +77,9 @@ struct BackgroundFilter: Filter {
 
     // Randomized angle and scale factors
     let randomAngle =
-      CGFloat.pi / 4
+      // CGFloat.pi / 4
       // CGFloat(0)
-      // parameters.workspace.randomScale ? CGFloat.random(in: -.pi ..< .pi) : 0
+      parameters.workspace.randomScale ? CGFloat.random(in: -.pi ..< .pi) : 0
 
     let randomScaleX =
       // CGFloat(1)

@@ -23,7 +23,7 @@ extension CGRect {
     CGRect(
       origin: CGPoint(
         x: self.origin.x,
-        y: container.size.height - self.origin.y
+        y: container.size.height - self.origin.y - size.height
       ),
       size: self.size
     )
