@@ -62,63 +62,73 @@ struct BackgroundFilter: Filter {
   }
   
   
-  func applyBackground(_ image: ImageModel, _ annotation: ImageAnnotationModel, _ bgUrl: URL)  -> (ImageModel, ImageAnnotationModel) {
+  func applyBackground(_ imageModel: ImageModel, _ annotation: ImageAnnotationModel, _ bgUrl: URL)  -> (ImageModel, ImageAnnotationModel) {
 
     var resultingImage: ImageModel
     var resultingAnnotation: ImageAnnotationModel
     var resultingCiImage: CIImage
 
-    let newUrl = image.url
+    let newUrl = imageModel.url
       .deletingPathExtension()
       .appendingPathExtension(bgUrl.lastPathComponent)
 
+    let image = imageModel.ciImage
     var bgImage = CIImage(contentsOf: bgUrl)!
 
-    let width = image.ciImage.extent.maxX
-    let height = image.ciImage.extent.maxY
-    let size = CGSize(width: width, height: height)
+    // Randomized angle and scale factors
+    let randomAngle =
+      // CGFloat.pi / 4
+      // CGFloat(0)
+      parameters.workspace.randomScale ? CGFloat.random(in: -.pi ..< .pi) : 0
 
-    let randomScaleX = parameters.workspace.randomScale ? CGFloat.random(in: 0.75 ..< 1.25) : 1
+    let randomScaleX =
+      // CGFloat(1)
+      parameters.workspace.randomScale ? CGFloat.random(in: 0.75 ..< 1.25) : 1
     let randomScaleY =
-      parameters.workspace.randomScale
-        ? parameters.workspace.keepAspectRatio
-          ? randomScaleX
-          : CGFloat.random(in: 0.75 ..< 1.25)
-        : 1
+      // CGFloat(1)
+      parameters.workspace.randomScale ? parameters.workspace.keepAspectRatio ? randomScaleX : CGFloat.random(in: 0.75 ..< 1.25) : 1
 
-    let scaleTransform = CGAffineTransform(scaleX: randomScaleX, y: randomScaleY)
-    let scaledSize = size.applying(scaleTransform)
+    // Rotate image
+    let rotatedImage = image.rotateInPlace(angle: randomAngle)
     
-    var bgSize = CGSize(width: bgImage.extent.maxX, height: bgImage.extent.maxY)
-
+    // Scale rotated image
+    let scaleTransform = CGAffineTransform(scaleX: randomScaleX, y: randomScaleY)
+    let scaledRotatedImage = rotatedImage.transformed(by: scaleTransform)
+        
     // If background doesn't fit, we scale it up
-    if scaledSize.width > bgSize.width || scaledSize.height > bgSize.height {
+    let scaledRotatedSize = scaledRotatedImage.extent.size
+    var bgSize = bgImage.extent.size
+    if scaledRotatedSize.width > bgSize.width || scaledRotatedSize.height > bgSize.height {
       let bgScaleX: CGFloat
       let bgScaleY: CGFloat
-      if scaledSize.width > bgSize.width {
-        bgScaleX = scaledSize.width / bgSize.width
+      if scaledRotatedSize.width > bgSize.width {
+        bgScaleX = scaledRotatedSize.width / bgSize.width
       } else {
         bgScaleX = 1
       }
-      if scaledSize.height > bgSize.height {
-        bgScaleY = scaledSize.height / bgSize.height
+      if scaledRotatedSize.height > bgSize.height {
+        bgScaleY = scaledRotatedSize.height / bgSize.height
       } else {
         bgScaleY = 1
       }
       bgImage = bgImage.transformed(by: CGAffineTransform(scaleX: bgScaleX, y: bgScaleY))
-      bgSize = CGSize(width: bgImage.extent.maxX, height: bgImage.extent.maxY)
+      bgSize = bgImage.extent.size
     }
 
-    let upBoundX = bgSize.width - scaledSize.width
-    let randomX = parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundX) : 0
-    let upBoundY = bgSize.height - scaledSize.height
-    let randomY =  parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundY) : 0
+    let upBoundX = bgSize.width - scaledRotatedSize.width
+    let upBoundY = bgSize.height - scaledRotatedSize.height
+
+    let randomX =
+      //CGFloat(0)
+      parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundX) : 0
+
+    let randomY =
+      // CGFloat(0)
+      parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundY) : 0
+
     let translateTransform = CGAffineTransform(translationX: randomX, y: randomY)
-
-    let transform = scaleTransform.concatenating(translateTransform)
-
-    let transformed = image.ciImage.transformed(by: transform)
-    resultingCiImage = transformed.composited(over: bgImage)
+    let translatedScaledRotatedImage = scaledRotatedImage.transformed(by: translateTransform)
+    resultingCiImage = translatedScaledRotatedImage.composited(over: bgImage)
 
     // if crop {
     //let croppedBg = bgImage.cropped(to: image.ciImage.extent)
@@ -230,13 +240,14 @@ struct BackgroundFilter: Filter {
       resultingCiImage = oldFilmImage.cropped(to: resultingCiImage.extent)
     }
     
+    let rotateTransform = CGAffineTransform(rotationAngle: randomAngle, center: image.extent.center)
     var newLabels: [LabelModel] = []
     for label in annotation.annotation {
-
-      let scaledAnnotation = label.coordinates.asRect.applying(scaleTransform)
-      let transformedAnnotation = moveAnnotation(scaledAnnotation, from: scaledSize, to: bgSize).applying(makeAnnotationTransform(translateTransform))
-
-      let newCoordinates = LabelModel.CoordinatesModel(transformedAnnotation)
+      let annotation = label.coordinates.asRect.flipCoordSystem(container: image.extent)
+      let rotatedAnnotation = annotation.applying(rotateTransform).pixelRound.reframe(source: image.extent, target: rotatedImage.extent)
+      let scaledRotatedAnnotation = rotatedAnnotation.applying(scaleTransform).pixelRound
+      let translatedScaledRotatedAnnotation = scaledRotatedAnnotation.applying(translateTransform)
+      let newCoordinates = LabelModel.CoordinatesModel(translatedScaledRotatedAnnotation.flipCoordSystem(container: resultingCiImage.extent))
       let newLabel = LabelModel(label: label.label, coordinates: newCoordinates)
       newLabels.append(newLabel)
     }
