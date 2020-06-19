@@ -118,13 +118,13 @@ struct BackgroundFilter: Filter {
     let upBoundX = bgSize.width - scaledRotatedSize.width
     let upBoundY = bgSize.height - scaledRotatedSize.height
 
-    let randomX =
+    let randomX: CGFloat =
       //CGFloat(0)
-      parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundX) : 0
+      upBoundX == 0 ? 0 : parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundX) : 0
 
-    let randomY =
+    let randomY: CGFloat =
       // CGFloat(0)
-      parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundY) : 0
+      upBoundY == 0 ? 0 : parameters.workspace.randomPosition ? CGFloat.random(in: 0 ..< upBoundY) : 0
 
     let translateTransform = CGAffineTransform(translationX: randomX, y: randomY)
     let translatedScaledRotatedImage = scaledRotatedImage.transformed(by: translateTransform)
