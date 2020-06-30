@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AnnotationInspector: View {
 
-  @EnvironmentObject var store: DataStore
+  @ObservedObject var store = DataStore.shared
 
   var annotation: [LabelModel] {
     annotatedImage.annotation
@@ -40,6 +40,6 @@ struct AnnotationInspector: View {
 struct AnnotationInspector_Previews: PreviewProvider {
   static var previews: some View {
     AnnotationInspector()
-    .environmentObject(DataStore())
+    .environmentObject(DataStore.shared)
   }
 }

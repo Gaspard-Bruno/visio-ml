@@ -9,7 +9,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     // Create the SwiftUI view that provides the window contents.
-    let contentView = ContentView().environmentObject(DataStore())
+    let contentView = ContentView().environmentObject(DataStore.shared)
     
     // Create the window and set the content view. 
     window = NSWindow(

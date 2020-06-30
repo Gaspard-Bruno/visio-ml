@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LabelDetails: View {
   var label: LabelModel
-  @EnvironmentObject var store: DataStore
+  @ObservedObject var store = DataStore.shared
 
   @State private var labelName: String?
   @State private var x: CGFloat?
@@ -181,6 +181,6 @@ struct LabelDetails_Previews: PreviewProvider {
   static var previews: some View {
     LabelDetails(label: LabelModel.specimen)
     .previewLayout(.sizeThatFits)
-    .environmentObject(DataStore())
+    .environmentObject(DataStore.shared)
   }
 }

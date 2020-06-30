@@ -57,6 +57,6 @@ struct ImageInfo: View {
 struct ImageInfo_Previews: PreviewProvider {
   static var previews: some View {
     ImageInfo()
-    .environmentObject(DataStore())
+    .environmentObject(DataStore.shared)
   }
 }

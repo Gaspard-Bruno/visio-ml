@@ -56,7 +56,7 @@ struct LabelOverlay: View {
 struct LabelOverlay_Previews: PreviewProvider {
   static var previews: some View {
     LabelOverlay(label: LabelModel.specimen)
-    .environmentObject(DataStore())
+    .environmentObject(DataStore.shared)
     .previewLayout(.sizeThatFits)
   }
 }

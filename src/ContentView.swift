@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-  @EnvironmentObject var store: DataStore
+  @ObservedObject var store = DataStore.shared
   @State var showSettings = false
 
   var body: some View {

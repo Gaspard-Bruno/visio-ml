@@ -1,8 +1,12 @@
 import Combine
 import Foundation
 
-class DataStore: ObservableObject {
+final class DataStore: ObservableObject {
 
+  static let shared = DataStore()
+  
+  private init() { }
+  
   @Published var workingFolder: URL?
   @Published var workspace = WorkspaceModel() {
     didSet {
