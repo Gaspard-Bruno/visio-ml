@@ -1,0 +1,16 @@
+CHANGES
+-------
+
+ - Fresh top-level views using only SwiftUI layout primitives to prevent recurrent bugs (no more AppKit views)
+ - Re-designed viewer area, toolbar, navigator, inspector, status bar
+ - Show/hide navigator with animation from the toolbar
+ - New open button with extended functionality (display and clear folder)
+ - Pick active image for viewing (single selection) or mark images for processing (multiple selection)
+ - New inspector tabs implementation
+ - New coordinate system for viewer
+ - New internal annotation representation (closer to CoreML API)
+ - Re-imagined synthetics container panel and new modal dialog architecture
+ - Better status, help and empty-state messages
+ - Smooth image viewer and visual annotation manipulation (fixed severe performance issue)
+ - Support for re-positioning annotations (drag-and-drop)
+ 
