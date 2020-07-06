@@ -18,12 +18,14 @@ struct ContentView: View {
         Toolbar()
         HStack(spacing: 0) {
           // Navigator
-          if appData.navigationState.isNavigatorVisible {
+          if appData.workingFolder != nil && appData.navigationState.isNavigatorVisible {
             ImageNavigator()
           }
           ViewerPanel()
           .layoutPriority(-1)
-          InspectorPanel()
+          if appData.workingFolder != nil {
+            InspectorPanel()
+          }
         }
         StatusBar()
       }

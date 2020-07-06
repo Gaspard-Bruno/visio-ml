@@ -15,10 +15,11 @@ struct Toolbar: View {
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        OpenButton()
+        WorkingFolderIndicator()
         Button("JSON Export") {
           self.appData.saveJSON()
         }
+        .environment(\.isEnabled, appData.workingFolder != nil)
       }
       Spacer()
       Button("Synthetics…") {
@@ -26,17 +27,18 @@ struct Toolbar: View {
           self.appData.currentModal = "synthetics"
         }
       }
+      .environment(\.isEnabled, appData.workingFolder != nil)
       Button("Navigator") {
         withAnimation {
           self.appData.toggleNavigator()
         }
       }
+      .environment(\.isEnabled, appData.workingFolder != nil)
     }
     .padding()
     .frame(height: 80)
     .frame(maxWidth: .infinity)
     .border(Color(NSColor.separatorColor), width: 1)
-
   }
 }
 

@@ -41,6 +41,7 @@ struct AnnotatedImage {
 
   var url: URL
   var annotations = [Annotation]()
+  var isEnabled = true
   var isActive = false
   var isMarked = false
   

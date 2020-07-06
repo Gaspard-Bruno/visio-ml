@@ -15,11 +15,13 @@ struct StatusBar: View {
   var body: some View {
     HStack {
       if appData.workingFolder == nil {
-        Text("Please open a working folder")
+        Text("No working folder selected")
       } else if appData.annotatedImages.count == 0 {
         Text("Current working folder contains no images")
+      } else if appData.pendingImages > 0 {
+        Text("\(appData.pendingImages) processing. \(appData.annotatedImages.count - appData.pendingImages) images available")
       } else {
-        Text("\(appData.annotatedImages.count) images loaded")
+        Text("\(appData.annotatedImages.count) images available")
       }
       Spacer()
     }

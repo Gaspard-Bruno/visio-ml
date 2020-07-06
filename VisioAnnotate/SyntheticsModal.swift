@@ -11,15 +11,30 @@ import SwiftUI
 struct SyntheticsModal: View {
 
   @ObservedObject var appData = AppData.shared
+  
+  @State var selectionOnly = false
 
   var body: some View {
     VStack {
       Text("Synthetic image generator")
+      Form {
+        Toggle("Apply to selected images only", isOn: $selectionOnly)
+        Section(header: Text("Filters")) {
+          Toggle("Gaussian Blur", isOn: .constant(true))
+          Toggle("Color Monochrome", isOn: .constant(true))
+        }
+        .environment(\.isEnabled, false)
+      }
       Spacer()
       HStack {
         Spacer()
         Button("Generate") {
-        
+          withAnimation {
+            self.appData.currentModal = nil
+          }
+          DispatchQueue.main.async {
+            self.appData.generateSynthetics(selectionOnly: self.selectionOnly)
+          }
         }
         Button("Close") {
           withAnimation {

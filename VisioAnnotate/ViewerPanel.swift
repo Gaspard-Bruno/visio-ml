@@ -14,10 +14,16 @@ struct ViewerPanel: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      if appData.activeImage != nil {
+      if appData.workingFolder == nil {
+        VStack {
+          Text("Please select a working folder to begin.")
+          OpenButton()
+        }
+      } else if appData.activeImage != nil {
         ImageViewer(image: $appData.annotatedImages[appData.activeImageIndex!], scaleFactor: appData.currentScaleFactor!)
       } else {
         Text("No image selected")
+        .foregroundColor(.secondary)
       }
     }
     .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)

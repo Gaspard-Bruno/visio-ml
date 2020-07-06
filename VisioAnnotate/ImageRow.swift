@@ -40,13 +40,19 @@ struct ImageRow: View {
       : Color(NSColor.windowBackgroundColor)
     )
     .foregroundColor(
-      annotatedImage.isActive
+      !annotatedImage.isEnabled
+      ? Color(NSColor.disabledControlTextColor)
+      : annotatedImage.isActive
       ? Color(NSColor.selectedTextColor)
       : Color(NSColor.textColor)
     )
     .onTapGesture {
+      guard self.annotatedImage.isEnabled else {
+        return
+      }
       self.appData.activateImage(self.annotatedImage)
     }
+    .environment(\.isEnabled, annotatedImage.isEnabled)
   }
 }
 

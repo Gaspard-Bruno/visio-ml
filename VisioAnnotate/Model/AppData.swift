@@ -19,6 +19,12 @@ class AppData: ObservableObject {
     }
     return viewportSize.width / image.ciImage.extent.size.width
   }
+  
+  var pendingImages: Int {
+    annotatedImages.reduce(0) {
+      $0 + ($1.isEnabled ? 0 : 1)
+    }
+  }
 
   private var folderWatcher: DirectoryWatcher?
 
@@ -74,6 +80,10 @@ class AppData: ObservableObject {
     workingFolder = url
     loadJSON()
     refreshImages()
+    navigationState.isNavigatorVisible = true
+    if annotatedImages.count > 0 {
+      annotatedImages[0].isActive = true
+    }
   }
 
   func refreshImages() {
@@ -139,5 +149,5 @@ class AppData: ObservableObject {
       return
     }
     try! data.write(to: url)
-  }
+  }  
 }
