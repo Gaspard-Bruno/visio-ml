@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import CoreImage
 
 class AppData: ObservableObject {
 
@@ -14,10 +15,10 @@ class AppData: ObservableObject {
   @Published var viewportSize: CGSize = CGSize.zero
 
   var currentScaleFactor: CGFloat? {
-    guard let image = activeImage else {
+    guard let image = activeImage, let ciImage = CIImage(contentsOf: image.url) else {
       return nil
     }
-    return viewportSize.width / image.ciImage.extent.size.width
+    return viewportSize.width / ciImage.extent.size.width
   }
   
   var pendingImages: Int {
@@ -26,7 +27,7 @@ class AppData: ObservableObject {
     }
   }
 
-  private var folderWatcher: DirectoryWatcher?
+  var folderWatcher: DirectoryWatcher?
 
   var activeImage: AnnotatedImage? {
     guard let activeImageIndex = activeImageIndex else {

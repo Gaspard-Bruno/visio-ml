@@ -1,5 +1,4 @@
 import Foundation
-import CoreImage
 
 /*
 // JSON file
@@ -49,10 +48,6 @@ struct AnnotatedImage {
     url.lastPathComponent
   }
 
-  var ciImage: CIImage {
-    CIImage(contentsOf: url)!
-  }
-  
   var hasActiveAnnotation: Bool {
     annotations.firstIndex { $0.isSelected } != nil
   }
@@ -61,6 +56,10 @@ struct AnnotatedImage {
     annotations.first { $0.isSelected }!
   }
   
+  var fileExists: Bool {
+    FileManager.default.fileExists(atPath: url.path)
+  }
+
   mutating func addAnnotation(withCoordinates coordinates: CGRect) {
     // Find an available name
     var count = 0

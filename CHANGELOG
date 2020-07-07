@@ -1,6 +1,8 @@
 CHANGES
 -------
 
+Week 1 (Partial)
+
  - Fresh top-level views using only SwiftUI layout primitives to prevent recurrent bugs (no more AppKit views)
  - Re-designed viewer area, toolbar, navigator, inspector, status bar
  - Show/hide navigator with animation from the toolbar
@@ -13,4 +15,11 @@ CHANGES
  - Better status, help and empty-state messages
  - Smooth image viewer and visual annotation manipulation (fixed severe performance issue)
  - Support for re-positioning annotations (drag-and-drop)
+
+Week 2 (On-going)
+
+ - Launch state improved with hidden/disabled controls and call to action
+ - Filters overhauled to handle chaining and arbitrary combinations
+ - Synthetic generation now non-blocking, allows user to keep interacting with main app window
+ - Synthetics progress report improved and moved to the status bar
  

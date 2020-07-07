@@ -19,8 +19,11 @@ struct ViewerPanel: View {
           Text("Please select a working folder to begin.")
           OpenButton()
         }
-      } else if appData.activeImage != nil {
+      } else if appData.activeImage != nil && appData.activeImage!.fileExists {
         ImageViewer(image: $appData.annotatedImages[appData.activeImageIndex!], scaleFactor: appData.currentScaleFactor!)
+      } else if appData.activeImage != nil && !appData.activeImage!.fileExists {
+        Text("Image file currently not present in file system.")
+        .foregroundColor(.secondary)
       } else {
         Text("No image selected")
         .foregroundColor(.secondary)

@@ -7,13 +7,14 @@
 //
 
 import SwiftUI
+import CoreImage
 
 struct ImageInspector: View {
 
   @ObservedObject var appData = AppData.shared
 
   var imagePresent: Bool {
-    appData.activeImage != nil
+    appData.activeImage != nil && appData.activeImage!.fileExists
   }
 
   var image: AnnotatedImage {
@@ -21,7 +22,7 @@ struct ImageInspector: View {
   }
   
   var imageSize: CGSize {
-    image.ciImage.extent.size
+    CIImage(contentsOf: image.url)!.extent.size
   }
   
   var scaledSize: CGSize {
@@ -40,8 +41,11 @@ struct ImageInspector: View {
         Text("Scaled height: \(scaledSize.height, specifier: "%.2f")")
         Text("Scale factor: \(appData.currentScaleFactor!, specifier: "%.3f")")
         Spacer()
+      } else if appData.activeImage != nil {
+        Text("No image selected.")
+        .foregroundColor(.secondary)
       } else {
-        Text("No image present")
+        Text("Image missing from file system.")
         .foregroundColor(.secondary)
       }
     }

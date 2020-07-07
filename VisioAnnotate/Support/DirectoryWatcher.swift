@@ -43,6 +43,14 @@ public class DirectoryWatcher : NSObject {
     return true
   }
   
+  public func suspend() {
+    dispatchSource?.suspend()
+  }
+
+  public func resume() {
+    dispatchSource?.resume()
+  }
+
   public func stop() {
     // Leave if not monitoring
     guard let dispatchSource = dispatchSource else {

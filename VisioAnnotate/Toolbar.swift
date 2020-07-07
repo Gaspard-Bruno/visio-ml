@@ -27,7 +27,7 @@ struct Toolbar: View {
           self.appData.currentModal = "synthetics"
         }
       }
-      .environment(\.isEnabled, appData.workingFolder != nil)
+      .environment(\.isEnabled, appData.workingFolder != nil && appData.pendingImages == 0)
       Button("Navigator") {
         withAnimation {
           self.appData.toggleNavigator()
