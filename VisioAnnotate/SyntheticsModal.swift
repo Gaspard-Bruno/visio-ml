@@ -19,9 +19,20 @@ struct SyntheticsModal: View {
       Text("Synthetic image generator")
       Form {
         Toggle("Apply to selected images only", isOn: $selectionOnly)
-        Section(header: Text("Filters")) {
+        Section(header: Text("Geometric Filters")) {
+          Toggle("Flip", isOn: .constant(true))
+          Toggle("Scale", isOn: .constant(true))
+          Toggle("Rotate", isOn: .constant(true))
+        }
+        Section(header: Text("Effects")) {
           Toggle("Gaussian Blur", isOn: .constant(true))
           Toggle("Color Monochrome", isOn: .constant(true))
+          Toggle("Emboss", isOn: .constant(true))
+          Toggle("Noise", isOn: .constant(true))
+        }
+        Section(header: Text("Options")) {
+          Toggle("Combine multiple filters", isOn: .constant(true))
+          Toggle("Randomize parameters multiple times", isOn: .constant(true))
         }
         .environment(\.isEnabled, false)
       }

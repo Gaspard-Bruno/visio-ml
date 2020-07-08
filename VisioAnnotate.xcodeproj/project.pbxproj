@@ -18,9 +18,12 @@
 		620D3DEA24ACD6D100A26F9A /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620D3DE924ACD6D100A26F9A /* ImageRow.swift */; };
 		620D3DEC24ACD7B000A26F9A /* ImageNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620D3DEB24ACD7B000A26F9A /* ImageNavigator.swift */; };
 		620D3DEE24ACE5F500A26F9A /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620D3DED24ACE5F500A26F9A /* NavigationState.swift */; };
-		620D3DF024ACE6BB00A26F9A /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620D3DEF24ACE6BB00A26F9A /* Navigator.swift */; };
 		620D3DF224ACE6E500A26F9A /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620D3DF124ACE6E500A26F9A /* Toolbar.swift */; };
 		620D3DF424ACEAAB00A26F9A /* OpenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620D3DF324ACEAAB00A26F9A /* OpenButton.swift */; };
+		622284D124B61C5F003F98AF /* SyntheticsTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622284D024B61C5F003F98AF /* SyntheticsTask.swift */; };
+		622284D324B61CE3003F98AF /* SyntheticsProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622284D224B61CE2003F98AF /* SyntheticsProcessor.swift */; };
+		622284D524B61D46003F98AF /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622284D424B61D46003F98AF /* UUID.swift */; };
+		622284D724B636FB003F98AF /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622284D624B636FB003F98AF /* KeyboardHandler.swift */; };
 		6274619724ADD792003485E7 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = 6274619624ADD792003485E7 /* CHANGELOG */; };
 		6274619924ADE3BF003485E7 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274619824ADE3BF003485E7 /* ImageViewer.swift */; };
 		6274619B24ADE3DC003485E7 /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274619A24ADE3DC003485E7 /* StatusBar.swift */; };
@@ -39,7 +42,7 @@
 		627461B724AE1DB2003485E7 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627461AF24AE1D7C003485E7 /* CGFloat.swift */; };
 		62917DF624AF76EF00D258F4 /* ViewerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF524AF76EF00D258F4 /* ViewerPanel.swift */; };
 		62917DF824B3436300D258F4 /* WorkingFolderIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF724B3436300D258F4 /* WorkingFolderIndicator.swift */; };
-		62917DFA24B367F800D258F4 /* generateSynthetics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF924B367F800D258F4 /* generateSynthetics.swift */; };
+		62917DFA24B367F800D258F4 /* AppData+generateSynthetics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,9 +60,12 @@
 		620D3DE924ACD6D100A26F9A /* ImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRow.swift; sourceTree = "<group>"; };
 		620D3DEB24ACD7B000A26F9A /* ImageNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNavigator.swift; sourceTree = "<group>"; };
 		620D3DED24ACE5F500A26F9A /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
-		620D3DEF24ACE6BB00A26F9A /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		620D3DF124ACE6E500A26F9A /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		620D3DF324ACEAAB00A26F9A /* OpenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenButton.swift; sourceTree = "<group>"; };
+		622284D024B61C5F003F98AF /* SyntheticsTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntheticsTask.swift; sourceTree = "<group>"; };
+		622284D224B61CE2003F98AF /* SyntheticsProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntheticsProcessor.swift; sourceTree = "<group>"; };
+		622284D424B61D46003F98AF /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
+		622284D624B636FB003F98AF /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		6274619624ADD792003485E7 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
 		6274619824ADE3BF003485E7 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		6274619A24ADE3DC003485E7 /* StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBar.swift; sourceTree = "<group>"; };
@@ -78,7 +84,7 @@
 		627461AF24AE1D7C003485E7 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		62917DF524AF76EF00D258F4 /* ViewerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerPanel.swift; sourceTree = "<group>"; };
 		62917DF724B3436300D258F4 /* WorkingFolderIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingFolderIndicator.swift; sourceTree = "<group>"; };
-		62917DF924B367F800D258F4 /* generateSynthetics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generateSynthetics.swift; sourceTree = "<group>"; };
+		62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppData+generateSynthetics.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +127,7 @@
 				627461A424AE1D59003485E7 /* ImageSizePrefKey.swift */,
 				6274619824ADE3BF003485E7 /* ImageViewer.swift */,
 				6274619C24ADE5CC003485E7 /* InspectorPanel.swift */,
-				620D3DEF24ACE6BB00A26F9A /* Navigator.swift */,
+				622284D624B636FB003F98AF /* KeyboardHandler.swift */,
 				620D3DF324ACEAAB00A26F9A /* OpenButton.swift */,
 				6274619A24ADE3DC003485E7 /* StatusBar.swift */,
 				627461A224ADF563003485E7 /* SyntheticsModal.swift */,
@@ -151,10 +157,12 @@
 			isa = PBXGroup;
 			children = (
 				620D3DE524ACD51400A26F9A /* AnnotatedImage.swift */,
-				62917DF924B367F800D258F4 /* generateSynthetics.swift */,
 				620D3DE724ACD56900A26F9A /* Annotation.swift */,
 				620D3DE324ACD32500A26F9A /* AppData.swift */,
+				62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */,
 				620D3DED24ACE5F500A26F9A /* NavigationState.swift */,
+				622284D224B61CE2003F98AF /* SyntheticsProcessor.swift */,
+				622284D024B61C5F003F98AF /* SyntheticsTask.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -170,6 +178,7 @@
 				627461AA24AE1D7C003485E7 /* CIImage.swift */,
 				627461A924AE1D7C003485E7 /* DirectoryWatcher.swift */,
 				627461AC24AE1D7C003485E7 /* Image.swift */,
+				622284D424B61D46003F98AF /* UUID.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -247,13 +256,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				627461B324AE1DB2003485E7 /* CGPoint.swift in Sources */,
-				62917DFA24B367F800D258F4 /* generateSynthetics.swift in Sources */,
+				62917DFA24B367F800D258F4 /* AppData+generateSynthetics.swift in Sources */,
 				627461B124AE1DB2003485E7 /* DirectoryWatcher.swift in Sources */,
 				627461B424AE1DB2003485E7 /* Image.swift in Sources */,
 				620D3DEA24ACD6D100A26F9A /* ImageRow.swift in Sources */,
 				627461B524AE1DB2003485E7 /* CGSize.swift in Sources */,
+				622284D124B61C5F003F98AF /* SyntheticsTask.swift in Sources */,
 				620D3DEE24ACE5F500A26F9A /* NavigationState.swift in Sources */,
-				620D3DF024ACE6BB00A26F9A /* Navigator.swift in Sources */,
+				622284D324B61CE3003F98AF /* SyntheticsProcessor.swift in Sources */,
 				620D3DE624ACD51400A26F9A /* AnnotatedImage.swift in Sources */,
 				627461A324ADF563003485E7 /* SyntheticsModal.swift in Sources */,
 				620D3DE824ACD56A00A26F9A /* Annotation.swift in Sources */,
@@ -265,6 +275,7 @@
 				620D3DEC24ACD7B000A26F9A /* ImageNavigator.swift in Sources */,
 				627461B024AE1DB2003485E7 /* CGRect.swift in Sources */,
 				620D3DF224ACE6E500A26F9A /* Toolbar.swift in Sources */,
+				622284D724B636FB003F98AF /* KeyboardHandler.swift in Sources */,
 				62917DF624AF76EF00D258F4 /* ViewerPanel.swift in Sources */,
 				627461A524AE1D59003485E7 /* ImageSizePrefKey.swift in Sources */,
 				620D3DF424ACEAAB00A26F9A /* OpenButton.swift in Sources */,
@@ -272,6 +283,7 @@
 				6274619924ADE3BF003485E7 /* ImageViewer.swift in Sources */,
 				6274619B24ADE3DC003485E7 /* StatusBar.swift in Sources */,
 				627461B724AE1DB2003485E7 /* CGFloat.swift in Sources */,
+				622284D524B61D46003F98AF /* UUID.swift in Sources */,
 				620D3DD024ACD0A600A26F9A /* AppDelegate.swift in Sources */,
 				627461B224AE1DB2003485E7 /* CIImage.swift in Sources */,
 				620D3DE424ACD32500A26F9A /* AppData.swift in Sources */,
