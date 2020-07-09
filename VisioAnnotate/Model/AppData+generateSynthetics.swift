@@ -1,6 +1,11 @@
 import Foundation
 
 extension AppData {
+
+  func makeTask(_ image: AnnotatedImage, _ ops: [SyntheticsTask.Operation]) -> SyntheticsTask {
+    SyntheticsTask(annotatedImage: image, settings: syntheticsSettings, operations: ops)
+  }
+
   func generateSynthetics(selectionOnly: Bool) {
   
     folderWatcher?.suspend()
@@ -11,22 +16,27 @@ extension AppData {
 
     let tasks = initialSet.flatMap {
       [
-        SyntheticsTask(annotatedImage: $0, operations: [.rotate]),
-        SyntheticsTask(annotatedImage: $0, operations: [.scale, .rotate]),
-        SyntheticsTask(annotatedImage: $0, operations: [.rotate, .scale]),
-        SyntheticsTask(annotatedImage: $0, operations: [.scale]),
-        SyntheticsTask(annotatedImage: $0, operations: [.emboss]),
-        SyntheticsTask(annotatedImage: $0, operations: [.scale, .emboss]),
-        SyntheticsTask(annotatedImage: $0, operations: [.emboss, .scale]),
-        SyntheticsTask(annotatedImage: $0, operations: [.flip, .noise]),
-        SyntheticsTask(annotatedImage: $0, operations: [.blur]),
-        SyntheticsTask(annotatedImage: $0, operations: [.monochrome]),
-        SyntheticsTask(annotatedImage: $0, operations: [.blur, .monochrome]),
-        SyntheticsTask(annotatedImage: $0, operations: [.monochrome, .blur]),
-        SyntheticsTask(annotatedImage: $0, operations: [.flip, .blur]),
-        SyntheticsTask(annotatedImage: $0, operations: [.flip, .monochrome]),
-        SyntheticsTask(annotatedImage: $0, operations: [.flip, .blur, .monochrome]),
-        SyntheticsTask(annotatedImage: $0, operations: [.flip, .monochrome, .blur])
+        makeTask($0, [.background]),
+        makeTask($0, [.scale, .rotate, .background]),
+        makeTask($0, [.scale, .rotate, .background]),
+        makeTask($0, [.background, .monochrome, .noise]),
+        makeTask($0, [.background, .monochrome, .noise]),
+        makeTask($0, [.rotate]),
+        makeTask($0, [.scale, .rotate]),
+        makeTask($0, [.rotate, .scale]),
+        makeTask($0, [.scale]),
+        makeTask($0, [.emboss]),
+        makeTask($0, [.scale, .emboss]),
+        makeTask($0, [.emboss, .scale]),
+        makeTask($0, [.flip, .noise]),
+        makeTask($0, [.blur]),
+        makeTask($0, [.monochrome]),
+        makeTask($0, [.blur, .monochrome]),
+        makeTask($0, [.monochrome, .blur]),
+        makeTask($0, [.flip, .blur]),
+        makeTask($0, [.flip, .monochrome]),
+        makeTask($0, [.flip, .blur, .monochrome]),
+        makeTask($0, [.flip, .monochrome, .blur])
       ]
     }
     tasks.forEach {

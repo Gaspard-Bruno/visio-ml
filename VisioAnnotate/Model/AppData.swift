@@ -10,9 +10,8 @@ class AppData: ObservableObject {
   @Published var annotatedImages = [AnnotatedImage]()
   @Published var workingFolder: URL?
   @Published var currentModal: String?
-
-  @Published var annotationCounter = 0 // For "Untitled #" labels
   @Published var viewportSize: CGSize = CGSize.zero
+  @Published var syntheticsSettings = SyntheticsSettings()
 
   var currentScaleFactor: CGFloat? {
     guard let image = activeImage, let ciImage = CIImage(contentsOf: image.url) else {
@@ -150,5 +149,17 @@ class AppData: ObservableObject {
       return
     }
     try! data.write(to: url)
-  }  
+  }
+  
+  func removeActiveAnnotation() {
+    annotatedImages.removeActiveAnnotation()
+  }
+
+  func activateNextImage() {
+    annotatedImages.activateNext()
+  }
+
+  func activatePreviousImage() {
+    annotatedImages.activateNext(reverse: true)
+  }
 }

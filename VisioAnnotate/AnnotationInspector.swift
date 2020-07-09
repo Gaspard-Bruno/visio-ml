@@ -10,14 +10,11 @@ import SwiftUI
 
 struct AnnotationInspector: View {
 
+  @Binding var annotations: [Annotation]
   @ObservedObject var appData = AppData.shared
 
   var imagePresent: Bool {
     appData.activeImage != nil
-  }
-
-  var image: AnnotatedImage {
-    appData.activeImage!
   }
 
   var annotationsPresent: Bool {
@@ -25,23 +22,28 @@ struct AnnotationInspector: View {
   }
 
   var annotationSelected: Bool {
-    annotationsPresent && image.hasActiveAnnotation
+    annotations.hasSelected
   }
 
   var annotation: Annotation {
-    image.activeAnnotation
-  }
-
-  var annotations: [Annotation] {
-    image.annotations
+    annotations[annotations.selectedIndex]
   }
 
   var annotationBody: some View {
     VStack(alignment: .leading) {
       Text("\(annotation.label)")
       Divider()
+      TextField(annotation.label, text: $annotations[annotations.selectedIndex].label)
+      Divider()
+      Group {
+        Text("X: \(annotation.coordinates.origin.x, specifier: "%.2f")")
+        Text("Y: \(annotation.coordinates.origin.y, specifier: "%.2f")")
+        Text("Width: \(annotation.width, specifier: "%.2f")")
+        Text("Height: \(annotation.height, specifier: "%.2f")")
+      }
+      Divider()
       Button("Remove") {
-        // self.image.remove(annotation: annotation)
+        self.annotations.removeSelectedAnnotation()
       }
       Spacer()
       Text("\(annotations.count) annotations total")
@@ -51,15 +53,16 @@ struct AnnotationInspector: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      if !imagePresent {
-        Text("Select an image from the navigator")
-        .foregroundColor(.secondary)
-      } else if !annotationsPresent {
+      if !annotationsPresent {
         Text("Create an annotation by dragging ontop of the image")
         .foregroundColor(.secondary)
+        .padding()
+        Spacer()
       } else if !annotationSelected {
         Text("Select an annotation to view/edit details")
         .foregroundColor(.secondary)
+        .padding()
+        Spacer()
       } else {
         annotationBody
       }
@@ -69,6 +72,6 @@ struct AnnotationInspector: View {
 
 struct AnnotationInspector_Previews: PreviewProvider {
   static var previews: some View {
-    AnnotationInspector()
+    AnnotationInspector(annotations: .constant([Annotation]()))
   }
 }

@@ -35,6 +35,7 @@ struct InspectorTab: View {
 
 struct InspectorPanel: View {
 
+  @ObservedObject var appData = AppData.shared
   @State var currentInspector = "annotation"
 
   var body: some View {
@@ -47,7 +48,7 @@ struct InspectorPanel: View {
       .fixedSize()
       Group {
         if currentInspector == "annotation" {
-          AnnotationInspector()
+          AnnotationInspector(annotations: $appData.annotatedImages[appData.activeImageIndex!].annotations)
           .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else if currentInspector == "image" {
           ImageInspector()

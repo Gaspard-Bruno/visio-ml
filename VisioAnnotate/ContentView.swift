@@ -38,7 +38,7 @@ struct ContentView: View {
               self.appData.currentModal = nil
             }
           }
-          SyntheticsModal()
+          SyntheticsModal(settings: $appData.syntheticsSettings)
         }
         .transition(.opacity)
       }

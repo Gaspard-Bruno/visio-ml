@@ -69,3 +69,23 @@ extension Annotation: Codable {
     try container.encode(jsonCoordinates, forKey: .coordinates)
   }
 }
+
+extension Array where Element == Annotation {
+
+  var hasSelected: Bool {
+    firstIndex { $0.isSelected } != nil
+  }
+
+  var selectedIndex: Int {
+    firstIndex { $0.isSelected }!
+  }
+
+  mutating func removeSelectedAnnotation() {
+    guard
+      let i = firstIndex(where: { $0.isSelected } )
+    else {
+      return
+    }
+    self.remove(at: i)
+  }
+}

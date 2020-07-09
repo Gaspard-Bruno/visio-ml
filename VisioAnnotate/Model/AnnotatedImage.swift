@@ -95,6 +95,11 @@ struct AnnotatedImage {
   mutating func remove(annotation: Annotation) {
     annotations.removeAll { $0.id == annotation.id }
   }
+
+  mutating func removeActiveAnnotation() {
+    annotations.removeSelectedAnnotation()
+  }
+
 }
 
 extension AnnotatedImage: Identifiable {
@@ -118,5 +123,31 @@ extension AnnotatedImage: Codable {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(shortName, forKey: .imagefilename)
     try container.encode(annotations, forKey: .annotation)
+  }
+}
+
+extension Array where Element == AnnotatedImage {
+
+  var marked: [AnnotatedImage] {
+    filter { $0.isMarked }
+  }
+
+  mutating func removeActiveAnnotation() {
+    guard
+      let i = firstIndex(where: { $0.isActive } )
+    else {
+      return
+    }
+    self[i].removeActiveAnnotation()
+  }
+  
+  mutating func activateNext(reverse: Bool = false) {
+    guard let i = firstIndex(where: { $0.isActive } ) else {
+      return
+    }
+    if (reverse && i > 0) || (!reverse && i < count - 1 ) {
+      self[i].isActive.toggle()
+      self[reverse ? i - 1 : i + 1].isActive.toggle()
+    }
   }
 }

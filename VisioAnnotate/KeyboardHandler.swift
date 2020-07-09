@@ -27,11 +27,11 @@ struct KeyboardHandler: NSViewRepresentable {
       }
       switch specialKey {
       case .delete:
-        print("Deleting")
+        AppData.shared.removeActiveAnnotation()
       case .upArrow:
-        print("Up")
+        AppData.shared.activatePreviousImage()
       case .downArrow:
-        print("Down")
+        AppData.shared.activateNextImage()
       default:
         print("No action")
       }

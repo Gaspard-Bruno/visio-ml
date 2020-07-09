@@ -27,3 +27,7 @@ Week 2 (On-going)
  - Refreshed the synthetics modal to reflect the available filters
  - Enabled new filter combinations
  - Initial keyboard support
+ - Background filter, initial implementation
+ - Key bindings for move up / down (select image), delete annotation
+ - Improvements to synthetics UI
+ - Sepparate facility to store and pass synthetics options
