@@ -16,7 +16,7 @@ Week 1 (Partial)
  - Smooth image viewer and visual annotation manipulation (fixed severe performance issue)
  - Support for re-positioning annotations (drag-and-drop)
 
-Week 2 (On-going)
+Week 2
 
  - Launch state improved with hidden/disabled controls and call to action
  - Filters overhauled to handle chaining and arbitrary combinations
@@ -31,3 +31,19 @@ Week 2 (On-going)
  - Key bindings for move up / down (select image), delete annotation
  - Improvements to synthetics UI
  - Sepparate facility to store and pass synthetics options
+ - Crop filter!
+ - New curated and tested filter combinations
+ - Total of synthetics to be created before hitting generate
+ - Automatically saving/restoring workspace (synthetics background setting)
+
+
+KNOWN ISSUES
+------------
+
+ - Pressing del, up/down performs the expected action but also sounds an alert
+ - Image navigator does not automatically scroll while selecting items using keyboard
+ - Synthetics interface does not yet allow for picking specific filters
+ - UI freezes briefly when too many images are about to be generated
+ - Incompatible with previous version workspace (remove .visioannotate folder to work-around this issue)
+ - [NEEDS CONFIRMATION] Sometimes empty PNGs are generated and reported not to be written to disk
+ - [NEEDS CONFIRMATION] Sometimes the image inspector is active showing a file missing note instead of "no active/selected image"

@@ -1,11 +1,3 @@
-//
-//  ImageViewer.swift
-//  VisioAnnotate
-//
-//  Created by dl on 2020-07-02.
-//  Copyright © 2020 Gaspard+Bruno. All rights reserved.
-//
-
 import SwiftUI
 
 struct ImageViewer: View {
@@ -64,6 +56,7 @@ struct ImageViewer: View {
       .overlay(
         self.annotationsBody
       )
+      .clipped()
     }
   }
   

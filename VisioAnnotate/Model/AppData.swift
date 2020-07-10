@@ -6,12 +6,32 @@ class AppData: ObservableObject {
 
   static let shared = AppData()
   
-  @Published var navigationState = NavigationState()
+  @Published var navigation = NavigationState()
+  @Published var settings = WorkspaceSettings() {
+    didSet {
+      guard let dirUrl = workingFolder?.appendingPathComponent(".visioannotate") else {
+          return
+      }
+      var isDirectory: ObjCBool = ObjCBool(false)
+      let exists = FileManager.default.fileExists(atPath: dirUrl.path, isDirectory: &isDirectory)
+      if !exists || !isDirectory.boolValue {
+        do {
+          try FileManager.default.createDirectory(at: dirUrl, withIntermediateDirectories: false)
+        } catch {
+          print("\(error.localizedDescription)")
+          return
+        }
+      }
+      let url = dirUrl.appendingPathComponent("workspace.json")
+      guard let data = try? JSONEncoder().encode(settings) else {
+        return
+      }
+      try! data.write(to: url)
+    }
+  }
   @Published var annotatedImages = [AnnotatedImage]()
   @Published var workingFolder: URL?
-  @Published var currentModal: String?
   @Published var viewportSize: CGSize = CGSize.zero
-  @Published var syntheticsSettings = SyntheticsSettings()
 
   var currentScaleFactor: CGFloat? {
     guard let image = activeImage, let ciImage = CIImage(contentsOf: image.url) else {
@@ -40,7 +60,7 @@ class AppData: ObservableObject {
   }
 
   func toggleNavigator() {
-    navigationState.isNavigatorVisible.toggle()
+    navigation.isNavigatorVisible.toggle()
   }
   
   func activateImage(_ annotatedImage: AnnotatedImage) {
@@ -62,6 +82,7 @@ class AppData: ObservableObject {
 
   func unsetWorkingFolder() {
     annotatedImages = []
+    settings = WorkspaceSettings()
     workingFolder = nil
   }
   
@@ -78,9 +99,10 @@ class AppData: ObservableObject {
     }
     self.folderWatcher = folderWatcher
     workingFolder = url
+    loadSettings()
     loadJSON()
     refreshImages()
-    navigationState.isNavigatorVisible = true
+    navigation.isNavigatorVisible = true
     if annotatedImages.count > 0 {
       annotatedImages[0].isActive = true
     }
@@ -113,6 +135,23 @@ class AppData: ObservableObject {
     // TODO: Handle renames
   }
 
+  func loadSettings() {
+    guard
+      let url = workingFolder?.appendingPathComponent(".visioannotate") else {
+        return
+    }
+    var isDirectory: ObjCBool = ObjCBool(false)
+    let exists = FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory)
+    guard
+      exists && isDirectory.boolValue,
+      let contents = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles]),
+      let jsonFile = contents.first(where: { $0.lastPathComponent == "workspace.json" })
+    else {
+      return
+    }
+    settings = load(jsonFile)
+  }
+
   func loadJSON() {
     guard
       let url = workingFolder,
@@ -143,7 +182,6 @@ class AppData: ObservableObject {
     guard let folderUrl = workingFolder else {
       return
     }
-    // let folderUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
     let url = folderUrl.appendingPathComponent("annotations.json")
     guard let data = try? JSONEncoder().encode(annotatedImages) else {
       return

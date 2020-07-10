@@ -4,25 +4,14 @@ import CoreImage
 class SyntheticsTask {
 
   let source: AnnotatedImage
-  let settings: SyntheticsSettings
+  let settings: WorkspaceSettings
   let operations: [Operation]
   let resultUrl: URL
 
   var resultAnnotations: [Annotation]!
   var resultImage: CIImage!
-
-  enum Operation {
-    case flip
-    case scale
-    case rotate
-    case background
-    case blur
-    case monochrome
-    case emboss
-    case noise
-  }
   
-  init(annotatedImage: AnnotatedImage, settings: SyntheticsSettings, operations: [Operation]) {
+  init(annotatedImage: AnnotatedImage, settings: WorkspaceSettings, operations: [Operation]) {
     self.source = annotatedImage
     self.settings = settings
     self.operations = operations
@@ -44,6 +33,7 @@ class SyntheticsTask {
       return Annotation(label: annotation.label, coordinates: newCoords)
     }
     resultImage = resultImage.transformed(by: .init(scaleX: -1, y: 1))
+    resultImage = resultImage.transformed(by: .init(translationX: -resultImage.extent.origin.x, y: -resultImage.extent.origin.y))
   }
 
   func applyScale() {
@@ -115,12 +105,46 @@ class SyntheticsTask {
     let randomY = CGFloat.random(in: 0 ... upBoundY)
 
     let translateTransform = CGAffineTransform(translationX: randomX, y: randomY)
+    let originalExtent = resultImage.extent
     resultImage = resultImage.transformed(by: translateTransform).composited(over: bgImage)
 
     resultAnnotations = resultAnnotations.map { (annotation: Annotation) in
       let newCoords = annotation.coordinates
+        .flipCoordSystem(container: originalExtent)
         .applying(translateTransform)
+        .flipCoordSystem(container: resultImage.extent)
       return Annotation(label: annotation.label, coordinates: newCoords)
+    }
+  }
+
+  func applyCrop() {
+
+    let randomX = CGFloat.random(in: 0 ... resultImage.extent.width / 5)
+    let randomY = CGFloat.random(in: 0 ... resultImage.extent.height / 5)
+    let randomWidth = CGFloat.random(in: (resultImage.extent.width - randomX) * 2 / 3 ... resultImage.extent.width - randomX)
+    let randomHeight = CGFloat.random(in: (resultImage.extent.height - randomY) * 2 / 3 ... resultImage.extent.height - randomY)
+    let cropExtent = CGRect(x: randomX, y: randomY, width: randomWidth, height: randomHeight)
+
+    let originalExtent = resultImage.extent
+    let translation = CGAffineTransform(translationX: -randomX, y: -randomY)
+    resultImage = resultImage.cropped(to: cropExtent).transformed(by: translation)
+
+    resultAnnotations = resultAnnotations.compactMap { (annotation: Annotation) in
+
+      let coords = annotation.coordinates
+        .centerToBottomLeftCoords
+        .flipCoordSystem(container: originalExtent)
+        .applying(translation)
+      
+      return coords.intersects(resultImage.extent)
+      ? Annotation(
+        label: annotation.label,
+        coordinates: coords
+          .intersection(resultImage.extent)
+          .flipCoordSystem(container: resultImage.extent)
+          .bottomLeftToCenterCoords
+      )
+      : nil
     }
   }
 
@@ -239,6 +263,8 @@ class SyntheticsTask {
         applyEmboss()
       case .noise:
         applyNoise()
+      case .crop:
+        applyCrop()
       }
     }
     SyntheticsProcessor.shared.save(resultImage, toUrl: resultUrl)

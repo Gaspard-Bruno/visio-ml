@@ -43,7 +43,8 @@
 		62917DF624AF76EF00D258F4 /* ViewerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF524AF76EF00D258F4 /* ViewerPanel.swift */; };
 		62917DF824B3436300D258F4 /* WorkingFolderIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF724B3436300D258F4 /* WorkingFolderIndicator.swift */; };
 		62917DFA24B367F800D258F4 /* AppData+generateSynthetics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */; };
-		62B329E224B77B0E007326CB /* SyntheticsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B329E124B77B0E007326CB /* SyntheticsSettings.swift */; };
+		62F416B424B879D900163E82 /* WorkspaceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B329E124B77B0E007326CB /* WorkspaceSettings.swift */; };
+		62F416B624B8BB8E00163E82 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F416B524B8BB8E00163E82 /* Operation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,7 +87,8 @@
 		62917DF524AF76EF00D258F4 /* ViewerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerPanel.swift; sourceTree = "<group>"; };
 		62917DF724B3436300D258F4 /* WorkingFolderIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingFolderIndicator.swift; sourceTree = "<group>"; };
 		62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppData+generateSynthetics.swift"; sourceTree = "<group>"; };
-		62B329E124B77B0E007326CB /* SyntheticsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntheticsSettings.swift; sourceTree = "<group>"; };
+		62B329E124B77B0E007326CB /* WorkspaceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettings.swift; sourceTree = "<group>"; };
+		62F416B524B8BB8E00163E82 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,9 +165,10 @@
 				620D3DE324ACD32500A26F9A /* AppData.swift */,
 				62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */,
 				620D3DED24ACE5F500A26F9A /* NavigationState.swift */,
+				62F416B524B8BB8E00163E82 /* Operation.swift */,
 				622284D224B61CE2003F98AF /* SyntheticsProcessor.swift */,
-				62B329E124B77B0E007326CB /* SyntheticsSettings.swift */,
 				622284D024B61C5F003F98AF /* SyntheticsTask.swift */,
+				62B329E124B77B0E007326CB /* WorkspaceSettings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F416B624B8BB8E00163E82 /* Operation.swift in Sources */,
 				627461B324AE1DB2003485E7 /* CGPoint.swift in Sources */,
 				62917DFA24B367F800D258F4 /* AppData+generateSynthetics.swift in Sources */,
 				627461B124AE1DB2003485E7 /* DirectoryWatcher.swift in Sources */,
@@ -280,7 +284,6 @@
 				620D3DF224ACE6E500A26F9A /* Toolbar.swift in Sources */,
 				622284D724B636FB003F98AF /* KeyboardHandler.swift in Sources */,
 				62917DF624AF76EF00D258F4 /* ViewerPanel.swift in Sources */,
-				62B329E224B77B0E007326CB /* SyntheticsSettings.swift in Sources */,
 				627461A524AE1D59003485E7 /* ImageSizePrefKey.swift in Sources */,
 				620D3DF424ACEAAB00A26F9A /* OpenButton.swift in Sources */,
 				6274619F24ADF513003485E7 /* ImageInspector.swift in Sources */,
@@ -291,6 +294,7 @@
 				620D3DD024ACD0A600A26F9A /* AppDelegate.swift in Sources */,
 				627461B224AE1DB2003485E7 /* CIImage.swift in Sources */,
 				620D3DE424ACD32500A26F9A /* AppData.swift in Sources */,
+				62F416B424B879D900163E82 /* WorkspaceSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

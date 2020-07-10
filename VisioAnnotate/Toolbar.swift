@@ -1,11 +1,3 @@
-//
-//  Toolbar.swift
-//  VisioAnnotate
-//
-//  Created by dl on 2020-07-01.
-//  Copyright © 2020 Gaspard+Bruno. All rights reserved.
-//
-
 import SwiftUI
 
 struct Toolbar: View {
@@ -24,7 +16,7 @@ struct Toolbar: View {
       Spacer()
       Button("Synthetics…") {
         withAnimation {
-          self.appData.currentModal = "synthetics"
+          self.appData.navigation.currentModal = "synthetics"
         }
       }
       .environment(\.isEnabled, appData.workingFolder != nil && appData.pendingImages == 0)

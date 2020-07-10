@@ -1,16 +1,8 @@
-//
-//  SyntheticsModal.swift
-//  VisioAnnotate
-//
-//  Created by dl on 2020-07-02.
-//  Copyright © 2020 Gaspard+Bruno. All rights reserved.
-//
-
 import SwiftUI
 
 struct SyntheticsModal: View {
 
-  @Binding var settings: SyntheticsSettings
+  @Binding var settings: WorkspaceSettings
   @ObservedObject var appData = AppData.shared
   
   @State var selectionOnly = false
@@ -21,15 +13,17 @@ struct SyntheticsModal: View {
     : appData.annotatedImages.count
   }
 
+  var totalSynthetics: Int {
+    count * Operation.validCombinations.count
+  }
+
   var body: some View {
     VStack {
       Text("Synthetic image generator")
       ScrollView {
         VStack {
           Form {
-          
             Section(
-              header: Text("Selection"),
               footer: Text("Will apply to \(count) objets")
             ) {
               Toggle("Apply to marked images only", isOn: $selectionOnly)
@@ -39,41 +33,57 @@ struct SyntheticsModal: View {
             Section(
               header: Text("Backgrounds")
             ) {
-              Button("Select folder…") {
-                let panel = NSOpenPanel()
-                panel.canChooseFiles = false
-                panel.canChooseDirectories = true
-                panel.resolvesAliases = true
-                panel.allowsMultipleSelection = false
-                panel.isAccessoryViewDisclosed = false
-                let result = panel.runModal()
-                guard result == .OK, let url = panel.url else {
-                  return
+              HStack {
+                Button("Select folder…") {
+                  let panel = NSOpenPanel()
+                  panel.canChooseFiles = false
+                  panel.canChooseDirectories = true
+                  panel.resolvesAliases = true
+                  panel.allowsMultipleSelection = false
+                  panel.isAccessoryViewDisclosed = false
+                  let result = panel.runModal()
+                  guard result == .OK, let url = panel.url else {
+                    return
+                  }
+                  self.settings.backgrounds = url
                 }
-                self.settings.backgrounds = url
-              }
-              if settings.backgrounds == nil {
-                Text("-")
-              } else {
-                Text("\(settings.backgrounds!.path)")
+                if settings.backgrounds == nil {
+                  Text("-")
+                } else {
+                  Button("X") {
+                    self.settings.backgrounds = nil
+                  }
+                  Text("\(settings.backgrounds!.path)")
+                  .truncationMode(.middle)
+                }
               }
               Toggle("Select background randomly", isOn: .constant(true))
+              .environment(\.isEnabled, false)
             }
 
             Section(header: Text("Geometric Filters")) {
               Toggle("Flip", isOn: .constant(true))
               Toggle("Scale", isOn: .constant(true))
               Toggle("Rotate", isOn: .constant(true))
+              Toggle("Crop", isOn: .constant(true))
             }
+            .environment(\.isEnabled, false)
+
             Section(header: Text("Effects")) {
               Toggle("Gaussian Blur", isOn: .constant(true))
               Toggle("Color Monochrome", isOn: .constant(true))
               Toggle("Emboss", isOn: .constant(true))
               Toggle("Noise", isOn: .constant(true))
             }
+            .environment(\.isEnabled, false)
+
             Section(header: Text("Options")) {
-              Toggle("Combine multiple filters", isOn: .constant(true))
-              Toggle("Randomize parameters multiple times", isOn: .constant(true))
+              HStack {
+                Text("Apply ")
+                TextField("", text: .constant("1"))
+                .frame(width: 80)
+                Text(" times per image")
+              }
             }
             .environment(\.isEnabled, false)
           }
@@ -83,9 +93,9 @@ struct SyntheticsModal: View {
       }
       HStack {
         Spacer()
-        Button("Generate") {
+        Button("Generate \(totalSynthetics) images") {
           withAnimation {
-            self.appData.currentModal = nil
+            self.appData.navigation.currentModal = nil
           }
           DispatchQueue.main.async {
             self.appData.generateSynthetics(selectionOnly: self.selectionOnly)
@@ -93,7 +103,7 @@ struct SyntheticsModal: View {
         }
         Button("Close") {
           withAnimation {
-            self.appData.currentModal = nil
+            self.appData.navigation.currentModal = nil
           }
         }
       }
@@ -108,6 +118,6 @@ struct SyntheticsModal: View {
 
 struct SyntheticsModal_Previews: PreviewProvider {
   static var previews: some View {
-    SyntheticsModal(settings: .constant(SyntheticsSettings()))
+    SyntheticsModal(settings: .constant(WorkspaceSettings()))
   }
 }

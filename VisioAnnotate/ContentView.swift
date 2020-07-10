@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  VisioAnnotate
-//
-//  Created by dl on 2020-07-01.
-//  Copyright © 2020 Gaspard+Bruno. All rights reserved.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -18,7 +10,7 @@ struct ContentView: View {
         Toolbar()
         HStack(spacing: 0) {
           // Navigator
-          if appData.workingFolder != nil && appData.navigationState.isNavigatorVisible {
+          if appData.workingFolder != nil && appData.navigation.isNavigatorVisible {
             ImageNavigator()
           }
           ViewerPanel()
@@ -30,15 +22,15 @@ struct ContentView: View {
         StatusBar()
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
-      if appData.currentModal == "synthetics" {
+      if appData.navigation.currentModal == "synthetics" {
         ZStack(alignment: .top) {
           Color(NSColor.textBackgroundColor).opacity(0.85)
           .onTapGesture {
             withAnimation {
-              self.appData.currentModal = nil
+              self.appData.navigation.currentModal = nil
             }
           }
-          SyntheticsModal(settings: $appData.syntheticsSettings)
+          SyntheticsModal(settings: $appData.settings)
         }
         .transition(.opacity)
       }

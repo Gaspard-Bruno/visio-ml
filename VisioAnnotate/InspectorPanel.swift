@@ -1,11 +1,3 @@
-//
-//  InpectorPanel.swift
-//  VisioAnnotate
-//
-//  Created by dl on 2020-07-02.
-//  Copyright © 2020 Gaspard+Bruno. All rights reserved.
-//
-
 import SwiftUI
 
 struct InspectorTab: View {
@@ -48,10 +40,17 @@ struct InspectorPanel: View {
       .fixedSize()
       Group {
         if currentInspector == "annotation" {
-          AnnotationInspector(annotations: $appData.annotatedImages[appData.activeImageIndex!].annotations)
+          Group {
+            if appData.activeImageIndex == nil {
+              Text("No image selected")
+              .foregroundColor(.secondary)
+            } else {
+              AnnotationInspector(annotations: $appData.annotatedImages[appData.activeImageIndex!].annotations)
+            }
+          }
           .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else if currentInspector == "image" {
-          ImageInspector()
+          ImageInspector(activeImage: appData.activeImage, scaledSize: appData.viewportSize)
           .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
       }

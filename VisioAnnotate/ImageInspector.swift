@@ -1,32 +1,25 @@
-//
-//  ImageInspector.swift
-//  VisioAnnotate
-//
-//  Created by dl on 2020-07-02.
-//  Copyright © 2020 Gaspard+Bruno. All rights reserved.
-//
-
 import SwiftUI
 import CoreImage
 
 struct ImageInspector: View {
 
-  @ObservedObject var appData = AppData.shared
+  let activeImage: AnnotatedImage?
+  let scaledSize: CGSize
 
   var imagePresent: Bool {
-    appData.activeImage != nil && appData.activeImage!.fileExists
+    activeImage != nil && activeImage!.fileExists
   }
 
   var image: AnnotatedImage {
-    appData.activeImage!
+    activeImage!
   }
   
   var imageSize: CGSize {
     CIImage(contentsOf: image.url)!.extent.size
   }
-  
-  var scaledSize: CGSize {
-    appData.viewportSize
+
+  var currentScaleFactor: CGFloat {
+    scaledSize.width / imageSize.width
   }
   
   var body: some View {
@@ -39,13 +32,13 @@ struct ImageInspector: View {
         Divider()
         Text("Scaled width: \(scaledSize.width, specifier: "%.2f")")
         Text("Scaled height: \(scaledSize.height, specifier: "%.2f")")
-        Text("Scale factor: \(appData.currentScaleFactor!, specifier: "%.3f")")
+        Text("Scale factor: \(currentScaleFactor, specifier: "%.3f")")
         Spacer()
-      } else if appData.activeImage != nil {
-        Text("No image selected.")
+      } else if activeImage != nil {
+        Text("No image selected")
         .foregroundColor(.secondary)
       } else {
-        Text("Image missing from file system.")
+        Text("Image missing from file system")
         .foregroundColor(.secondary)
       }
     }
@@ -55,6 +48,6 @@ struct ImageInspector: View {
 
 struct ImageInspector_Previews: PreviewProvider {
   static var previews: some View {
-    ImageInspector()
+    ImageInspector(activeImage: nil, scaledSize: .zero)
   }
 }

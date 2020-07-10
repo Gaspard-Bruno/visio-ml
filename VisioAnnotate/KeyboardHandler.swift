@@ -7,11 +7,6 @@ struct KeyboardHandler: NSViewRepresentable {
     override init(frame frameRect: NSRect) {
       super.init(frame: frameRect)
     }
-
-    //  convenience init(_ store: DataStore) {
-    //    self.init()
-    //    self.store = store
-    //  }
     
     required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")

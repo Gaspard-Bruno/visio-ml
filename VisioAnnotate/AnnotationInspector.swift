@@ -1,24 +1,11 @@
-//
-//  AnnotationInspector.swift
-//  VisioAnnotate
-//
-//  Created by dl on 2020-07-02.
-//  Copyright © 2020 Gaspard+Bruno. All rights reserved.
-//
-
 import SwiftUI
 
 struct AnnotationInspector: View {
 
   @Binding var annotations: [Annotation]
-  @ObservedObject var appData = AppData.shared
-
-  var imagePresent: Bool {
-    appData.activeImage != nil
-  }
 
   var annotationsPresent: Bool {
-    imagePresent && annotations.count > 0
+    annotations.count > 0
   }
 
   var annotationSelected: Bool {
@@ -31,8 +18,6 @@ struct AnnotationInspector: View {
 
   var annotationBody: some View {
     VStack(alignment: .leading) {
-      Text("\(annotation.label)")
-      Divider()
       TextField(annotation.label, text: $annotations[annotations.selectedIndex].label)
       Divider()
       Group {
@@ -54,7 +39,7 @@ struct AnnotationInspector: View {
   var body: some View {
     VStack(alignment: .leading) {
       if !annotationsPresent {
-        Text("Create an annotation by dragging ontop of the image")
+        Text("Create a new annotation by dragging over of the image")
         .foregroundColor(.secondary)
         .padding()
         Spacer()
