@@ -6,11 +6,11 @@ extension AppData {
     SyntheticsTask(annotatedImage: image, settings: settings, operations: ops)
   }
 
-  func generateSynthetics(selectionOnly: Bool) {
+  func generateSynthetics() {
   
     folderWatcher?.suspend()
 
-    let initialSet = selectionOnly
+    let initialSet = settings.markedOnly
       ? annotatedImages.filter { $0.isMarked }
       : annotatedImages
 

@@ -16,6 +16,7 @@ Week 1 (Partial)
  - Smooth image viewer and visual annotation manipulation (fixed severe performance issue)
  - Support for re-positioning annotations (drag-and-drop)
 
+
 Week 2
 
  - Launch state improved with hidden/disabled controls and call to action
@@ -37,6 +38,20 @@ Week 2
  - Automatically saving/restoring workspace (synthetics background setting)
 
 
+Week 3
+
+ - Project updated with new bundle ID, product display name, signing config, repository now public
+ - More settings now automatically saved to workspace: Apply to marked images only, Apply N times
+ - New settings layout including checkbox and text field alignment. Copy also revised.
+ - Ability to exclude specific filters, included by default in synthetics generation
+ - Numeric validation implemented for the "Apply N times" field
+ - Resilliency to invalid/outdated workspace JSON file. It no longer crashes when format is invalid.
+ - [PLANNED] Honour apply N times in generating synthetics
+ - [PLANNED] Honour filter exclusion list in generating synthetics
+ - [PLANNED] Specific filters can now be disabled resulting in multiple combinations being excluded
+ - [PLANNED] "Generate N images" count takes "Apply M times" and disabled filter combinations into consideration
+
+
 KNOWN ISSUES
 ------------
 
@@ -45,5 +60,5 @@ KNOWN ISSUES
  - Synthetics interface does not yet allow for picking specific filters
  - UI freezes briefly when too many images are about to be generated
  - Incompatible with previous version workspace (remove .visioannotate folder to work-around this issue)
- - [NEEDS CONFIRMATION] Sometimes empty PNGs are generated and reported not to be written to disk
- - [NEEDS CONFIRMATION] Sometimes the image inspector is active showing a file missing note instead of "no active/selected image"
+ - [TBC] Sometimes empty PNGs are generated and reported not to be written to disk
+ - [CONFIRMED] Sometimes the image inspector is active showing a file missing note instead of "no active/selected image"

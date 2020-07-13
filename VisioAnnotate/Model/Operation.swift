@@ -1,5 +1,5 @@
 // Synthetic operation (filter)
-enum Operation: String, Hashable {
+enum Operation: String, Hashable, Codable, CaseIterable, Identifiable {
   case flip
   case scale
   case rotate
@@ -9,6 +9,10 @@ enum Operation: String, Hashable {
   case emboss
   case noise
   case crop
+
+  var id: some Hashable {
+    rawValue
+  }
 
   static var validCombinations: [[Operation]] {[
     [.flip],

@@ -149,7 +149,7 @@ class AppData: ObservableObject {
     else {
       return
     }
-    settings = load(jsonFile)
+    settings = load(jsonFile) ?? WorkspaceSettings()
   }
 
   func loadJSON() {
@@ -160,10 +160,10 @@ class AppData: ObservableObject {
     else {
       return
     }
-    annotatedImages = load(jsonFile)
+    annotatedImages = load(jsonFile) ?? []
   }
 
-  func load<T: Decodable>(_ file: URL) -> T {
+  func load<T: Decodable>(_ file: URL) -> T? {
     let data: Data
     do {
       data = try Data(contentsOf: file)
@@ -174,7 +174,7 @@ class AppData: ObservableObject {
       let decoder = JSONDecoder()
       return try decoder.decode(T.self, from: data)
     } catch {
-      fatalError("Couldn't parse \(file.absoluteString) as \(T.self):\n\(error)")
+      return nil
     }
   }
 
