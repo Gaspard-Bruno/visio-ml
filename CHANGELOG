@@ -42,14 +42,15 @@ Week 3
 
  - Project updated with new bundle ID, product display name, signing config, repository now public
  - More settings now automatically saved to workspace: Apply to marked images only, Apply N times
- - New settings layout including checkbox and text field alignment. Copy also revised.
  - Ability to exclude specific filters, included by default in synthetics generation
  - Numeric validation implemented for the "Apply N times" field
  - Resilliency to invalid/outdated workspace JSON file. It no longer crashes when format is invalid.
- - [PLANNED] Honour apply N times in generating synthetics
- - [PLANNED] Honour filter exclusion list in generating synthetics
- - [PLANNED] Specific filters can now be disabled resulting in multiple combinations being excluded
- - [PLANNED] "Generate N images" count takes "Apply M times" and disabled filter combinations into consideration
+ - Now honouring apply N times in generating synthetics
+ - Disable "Generate…" button when image selection results in empty dataset
+ - Now honouring filter exclusion list in generating synthetics
+ - Specific filters can now be disabled resulting in multiple combinations being excluded
+ - "Generate N images" count takes "Apply N times" and disabled filter combinations into consideration
+ - New settings layout including checkbox and text field and filter list alignment. Copy also revised.
 
 
 KNOWN ISSUES
@@ -57,8 +58,8 @@ KNOWN ISSUES
 
  - Pressing del, up/down performs the expected action but also sounds an alert
  - Image navigator does not automatically scroll while selecting items using keyboard
- - Synthetics interface does not yet allow for picking specific filters
+ - [SOLVED] Synthetics interface does not yet allow for picking specific filters
  - UI freezes briefly when too many images are about to be generated
  - Incompatible with previous version workspace (remove .visioannotate folder to work-around this issue)
- - [TBC] Sometimes empty PNGs are generated and reported not to be written to disk
+ - [TBC] Sometimes empty PNGs are generated and reported not to be written to disk (when random extent bounds are zero)
  - [CONFIRMED] Sometimes the image inspector is active showing a file missing note instead of "no active/selected image"

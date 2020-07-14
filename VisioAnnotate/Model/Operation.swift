@@ -218,3 +218,14 @@ enum Operation: String, Hashable, Codable, CaseIterable, Identifiable {
     [.rotate, .emboss, .crop],
   ]}
 }
+
+extension Array where Element == [Operation] {
+  func excluding(operations excludeOperations: [Operation]) -> [[Operation]] {
+    filter { opSet in
+      // combination does not contain an excluded filter
+      !opSet.reduce(into: false) { result, op in
+        result = result || excludeOperations.contains(op)
+      }
+    }
+  }
+}

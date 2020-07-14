@@ -12,14 +12,9 @@ struct SyntheticsModal: View {
   }
 
   var filteredCombinations: [[Operation]] {
-    Operation.validCombinations.filter { opset in
-      // combination does not contain an excluded filter
-      !opset.reduce(into: false) { result, op in
-        result = result || self.settings.excludeOperations.contains(op)
-      }
-    }
+    Operation.validCombinations.excluding(operations: settings.excludeOperations)
   }
-  
+
   var totalSynthetics: Int {
     count * settings.times * filteredCombinations.count
   }
@@ -99,17 +94,38 @@ struct SyntheticsModal: View {
               }
             }
             Divider()
-            Section() {
+            Section(header: Text("Filter operations")) {
               HStack {
-                Text("Filter name")
-                .frame(width: 100, alignment: .leading)
-                Text("Exclude")
+                Spacer()
+                HStack {
+                  Spacer()
+                  Text("Filter")
+                  .bold()
+                  Spacer()
+                }
+                .frame(width: 200)
+                Spacer()
+                HStack {
+                  Text("Exclude")
+                  .bold()
+                }
+                .frame(width: 100)
+                Spacer()
               }
+              .padding()
               ForEach(Operation.allCases) { op in
                 HStack {
-                  Text("\(op.rawValue.capitalized)")
+                  Spacer()
+                  HStack {
+                    Text("\(op.rawValue.capitalized)")
+                    Spacer()
+                  }
+                  .frame(width: 200)
+                  Spacer()
+                  HStack {
+                    Toggle("", isOn: self.makeBinding(op))
+                  }
                   .frame(width: 100)
-                  Toggle("", isOn: self.makeBinding(op))
                   Spacer()
                 }
               }
@@ -129,6 +145,7 @@ struct SyntheticsModal: View {
             self.appData.generateSynthetics()
           }
         }
+        .environment(\.isEnabled, totalSynthetics > 0)
         Button("Close") {
           withAnimation {
             self.appData.navigation.currentModal = nil

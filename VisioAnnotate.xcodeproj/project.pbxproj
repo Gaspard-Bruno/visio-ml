@@ -48,7 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		620D3DCC24ACD0A600A26F9A /* VisioAnnotate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisioAnnotate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		620D3DCC24ACD0A600A26F9A /* Visio ML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Visio ML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		620D3DCF24ACD0A600A26F9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		620D3DD124ACD0A600A26F9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		620D3DD324ACD0A700A26F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		620D3DCD24ACD0A600A26F9A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				620D3DCC24ACD0A600A26F9A /* VisioAnnotate.app */,
+				620D3DCC24ACD0A600A26F9A /* Visio ML.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,9 +192,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		620D3DCB24ACD0A600A26F9A /* VisioAnnotate */ = {
+		620D3DCB24ACD0A600A26F9A /* Visio ML */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 620D3DDF24ACD0A700A26F9A /* Build configuration list for PBXNativeTarget "VisioAnnotate" */;
+			buildConfigurationList = 620D3DDF24ACD0A700A26F9A /* Build configuration list for PBXNativeTarget "Visio ML" */;
 			buildPhases = (
 				620D3DC824ACD0A600A26F9A /* Sources */,
 				620D3DC924ACD0A600A26F9A /* Frameworks */,
@@ -204,9 +204,9 @@
 			);
 			dependencies = (
 			);
-			name = VisioAnnotate;
+			name = "Visio ML";
 			productName = VisioAnnotate;
-			productReference = 620D3DCC24ACD0A600A26F9A /* VisioAnnotate.app */;
+			productReference = 620D3DCC24ACD0A600A26F9A /* Visio ML.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -237,7 +237,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				620D3DCB24ACD0A600A26F9A /* VisioAnnotate */,
+				620D3DCB24ACD0A600A26F9A /* Visio ML */,
 			);
 		};
 /* End PBXProject section */
@@ -481,7 +481,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		620D3DDF24ACD0A700A26F9A /* Build configuration list for PBXNativeTarget "VisioAnnotate" */ = {
+		620D3DDF24ACD0A700A26F9A /* Build configuration list for PBXNativeTarget "Visio ML" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				620D3DE024ACD0A700A26F9A /* Debug */,
