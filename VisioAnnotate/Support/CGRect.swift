@@ -46,4 +46,27 @@ extension CGRect {
   var bottomLeftToCenterCoords: CGRect {
     CGRect(origin: center, size: size)
   }
+  
+  
+  // mac only, flipped coordinate system
+  func exclusion(_ rect: CGRect) -> CGRect {
+    guard self.intersects(rect) else {
+      return self
+    }
+    let i = self.intersection(rect)
+    guard width > i.width || height > i.height else {
+      return CGRect.null
+    }
+    let newSize = CGSize(
+      width: width == i.width ? width : width - i.width,
+      height: height == i.height ? height : height - i.height
+    )
+    return CGRect(
+      origin: CGPoint(
+        x: width == i.width || origin.x != i.origin.x ? origin.x : i.maxX,
+        y: height == i.height || origin.y != i.origin.y ? origin.y : i.maxY
+      ),
+      size: newSize
+    )
+  }
 }

@@ -51,6 +51,13 @@ Week 3
  - Specific filters can now be disabled resulting in multiple combinations being excluded
  - "Generate N images" count takes "Apply N times" and disabled filter combinations into consideration
  - New settings layout including checkbox and text field and filter list alignment. Copy also revised.
+ - Refactored all filters into sepparate files within folder group
+ - Changed window title, about and main menu text
+ - Increased initial window size/minimum size
+ - Cutout filter for both image and annotations (initial version)
+ - [PLANNED] Cutout testing and improvements
+ - [PLANNED] Consistent "N annotations total" message
+ - [PLANNED] Auto-select newly created annotation
 
 
 KNOWN ISSUES

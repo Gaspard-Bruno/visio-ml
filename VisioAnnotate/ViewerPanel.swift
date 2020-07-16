@@ -21,7 +21,7 @@ struct ViewerPanel: View {
         .foregroundColor(.secondary)
       }
     }
-    .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+    .frame(minWidth: 750, maxWidth: .infinity, minHeight: 550, maxHeight: .infinity)
     .background(Color(NSColor.textBackgroundColor))
   }
 }

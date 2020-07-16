@@ -56,7 +56,7 @@ struct InspectorPanel: View {
       }
       
     }
-    .frame(maxWidth: 200, maxHeight: .infinity)
+    .frame(maxWidth: 250, maxHeight: .infinity)
     .background(Color(NSColor.windowBackgroundColor))
   }
 }

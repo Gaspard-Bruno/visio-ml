@@ -44,10 +44,13 @@ struct AnnotationInspector: View {
         .padding()
         Spacer()
       } else if !annotationSelected {
-        Text("Select an annotation to view/edit details")
+        VStack {
+          Text("Select an annotation to view/edit details")
+          Spacer()
+          Text("\(annotations.count) annotations total")
+        }
         .foregroundColor(.secondary)
         .padding()
-        Spacer()
       } else {
         annotationBody
       }

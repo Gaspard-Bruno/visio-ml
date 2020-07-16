@@ -13,7 +13,7 @@ struct ImageNavigator: View {
         Spacer()
       }
     }
-    .frame(minWidth: 80, maxWidth: 200, maxHeight: .infinity)
+    .frame(minWidth: 150, maxWidth: 250, maxHeight: .infinity)
     .background(Color(NSColor.windowBackgroundColor))
     .background(KeyboardHandler())
     .transition(.asymmetric(insertion: .slide, removal: .move(edge: .leading)))
