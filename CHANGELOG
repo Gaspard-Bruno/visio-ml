@@ -55,17 +55,29 @@ Week 3
  - Changed window title, about and main menu text
  - Increased initial window size/minimum size
  - Cutout filter for both image and annotations (initial version)
- - [PLANNED] Cutout testing and improvements
- - [PLANNED] Consistent "N annotations total" message
+ - Cutout testing and improvements
+ - Consistent "N annotations total" message
+ - Project reorg around removing the "Annotate" moniker
+ 
+ Week 4 (Partial?)
+ 
+ - [PLANNED] Repeat filter field needs enter to save
+ - [PLANNED] Enter needed to rename annotation
+ - [PLANNED] Real-time numeric feedback while creating annotation
+ - [PLANNED] Numeric feedback while moving annotation
  - [PLANNED] Auto-select newly created annotation
-
+ - [PLANNED] Numeric input for annotation's dimensions and position
+ - [PLANNED] On-screen annotation label handles
+ - [PLANNED] Show/hide toggle annotation labels
+ - [PLANNED] Disable save json button when just exported
+ - [PLANNED] Back-up JSON auto-saved in workspace
+ - [PLANNED] Rever to annotations.json (reload)
 
 KNOWN ISSUES
 ------------
 
  - Pressing del, up/down performs the expected action but also sounds an alert
  - Image navigator does not automatically scroll while selecting items using keyboard
- - [SOLVED] Synthetics interface does not yet allow for picking specific filters
  - UI freezes briefly when too many images are about to be generated
  - Incompatible with previous version workspace (remove .visioannotate folder to work-around this issue)
  - [TBC] Sometimes empty PNGs are generated and reported not to be written to disk (when random extent bounds are zero)
