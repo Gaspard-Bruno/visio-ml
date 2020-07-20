@@ -60,13 +60,14 @@ Week 3
  - Project reorg around removing the "Annotate" moniker
  
  Week 4 (Partial?)
- 
+
+ - Annotation edit mode with cancel
+ - Enter no longer needed to rename annotation
+ - New numeric input for annotation's dimensions and position
  - [PLANNED] Repeat filter field needs enter to save
- - [PLANNED] Enter needed to rename annotation
  - [PLANNED] Real-time numeric feedback while creating annotation
  - [PLANNED] Numeric feedback while moving annotation
  - [PLANNED] Auto-select newly created annotation
- - [PLANNED] Numeric input for annotation's dimensions and position
  - [PLANNED] On-screen annotation label handles
  - [PLANNED] Show/hide toggle annotation labels
  - [PLANNED] Disable save json button when just exported

@@ -19,17 +19,6 @@ struct SyntheticsModal: View {
     count * settings.times * filteredCombinations.count
   }
   
-  var timesFormatter: some Formatter {
-    let nf = NumberFormatter()
-    nf.allowsFloats = false
-    nf.minimumIntegerDigits = 1
-    nf.maximumIntegerDigits = 3
-    nf.maximumSignificantDigits = 3
-    nf.maximum = 100
-    nf.minimum = 1
-    return nf
-  }
-
   func makeBinding(_ op: Operation) -> Binding<Bool> {
     .init(get: {
       self.settings.excludeOperations.contains(op)
@@ -58,7 +47,7 @@ struct SyntheticsModal: View {
             Section {
               HStack {
                 Text("Apply ")
-                TextField("", value: $settings.times, formatter: timesFormatter)
+                TextField("", value: $settings.times, formatter: .integer)
                 .frame(width: 40)
                 .multilineTextAlignment(.trailing)
                 Text(" times per image")

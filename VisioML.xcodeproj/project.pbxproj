@@ -24,6 +24,7 @@
 		622284D324B61CE3003F98AF /* SyntheticsProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622284D224B61CE2003F98AF /* SyntheticsProcessor.swift */; };
 		622284D524B61D46003F98AF /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622284D424B61D46003F98AF /* UUID.swift */; };
 		622284D724B636FB003F98AF /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622284D624B636FB003F98AF /* KeyboardHandler.swift */; };
+		6268DD7A24C5A280007C0452 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6268DD7924C5A280007C0452 /* Formatter.swift */; };
 		6274619724ADD792003485E7 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = 6274619624ADD792003485E7 /* CHANGELOG */; };
 		6274619924ADE3BF003485E7 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274619824ADE3BF003485E7 /* ImageViewer.swift */; };
 		6274619B24ADE3DC003485E7 /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274619A24ADE3DC003485E7 /* StatusBar.swift */; };
@@ -40,6 +41,7 @@
 		627461B524AE1DB2003485E7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627461AD24AE1D7C003485E7 /* CGSize.swift */; };
 		627461B624AE1DB2003485E7 /* CGAffineTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627461AE24AE1D7C003485E7 /* CGAffineTransform.swift */; };
 		627461B724AE1DB2003485E7 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627461AF24AE1D7C003485E7 /* CGFloat.swift */; };
+		627DEAC124C614EC00E70B73 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DEAC024C614EC00E70B73 /* String.swift */; };
 		62917DF624AF76EF00D258F4 /* ViewerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF524AF76EF00D258F4 /* ViewerPanel.swift */; };
 		62917DF824B3436300D258F4 /* WorkingFolderIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF724B3436300D258F4 /* WorkingFolderIndicator.swift */; };
 		62917DFA24B367F800D258F4 /* AppData+generateSynthetics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */; };
@@ -79,6 +81,7 @@
 		622284D224B61CE2003F98AF /* SyntheticsProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntheticsProcessor.swift; sourceTree = "<group>"; };
 		622284D424B61D46003F98AF /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 		622284D624B636FB003F98AF /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		6268DD7924C5A280007C0452 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		6274619624ADD792003485E7 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
 		6274619824ADE3BF003485E7 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		6274619A24ADE3DC003485E7 /* StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBar.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		627461AD24AE1D7C003485E7 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		627461AE24AE1D7C003485E7 /* CGAffineTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGAffineTransform.swift; sourceTree = "<group>"; };
 		627461AF24AE1D7C003485E7 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		627DEAC024C614EC00E70B73 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		62917DF524AF76EF00D258F4 /* ViewerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerPanel.swift; sourceTree = "<group>"; };
 		62917DF724B3436300D258F4 /* WorkingFolderIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingFolderIndicator.swift; sourceTree = "<group>"; };
 		62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppData+generateSynthetics.swift"; sourceTree = "<group>"; };
@@ -207,7 +211,9 @@
 				627461AD24AE1D7C003485E7 /* CGSize.swift */,
 				627461AA24AE1D7C003485E7 /* CIImage.swift */,
 				627461A924AE1D7C003485E7 /* DirectoryWatcher.swift */,
+				6268DD7924C5A280007C0452 /* Formatter.swift */,
 				627461AC24AE1D7C003485E7 /* Image.swift */,
+				627DEAC024C614EC00E70B73 /* String.swift */,
 				622284D424B61D46003F98AF /* UUID.swift */,
 			);
 			path = Support;
@@ -336,9 +342,11 @@
 				62917DF624AF76EF00D258F4 /* ViewerPanel.swift in Sources */,
 				627461A524AE1D59003485E7 /* ImageSizePrefKey.swift in Sources */,
 				620D3DF424ACEAAB00A26F9A /* OpenButton.swift in Sources */,
+				6268DD7A24C5A280007C0452 /* Formatter.swift in Sources */,
 				6274619F24ADF513003485E7 /* ImageInspector.swift in Sources */,
 				62C7273224BF431D00E332E5 /* Scale.swift in Sources */,
 				6274619924ADE3BF003485E7 /* ImageViewer.swift in Sources */,
+				627DEAC124C614EC00E70B73 /* String.swift in Sources */,
 				6274619B24ADE3DC003485E7 /* StatusBar.swift in Sources */,
 				627461B724AE1DB2003485E7 /* CGFloat.swift in Sources */,
 				622284D524B61D46003F98AF /* UUID.swift in Sources */,
