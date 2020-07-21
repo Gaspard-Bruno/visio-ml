@@ -3,6 +3,7 @@ import SwiftUI
 struct AnnotationInspector: View {
 
   @State var editting = false
+  @State var saving = false
   @State var newName = ""
   @State var x = ""
   @State var y = ""
@@ -23,69 +24,90 @@ struct AnnotationInspector: View {
     annotations[annotations.selectedIndex]
   }
 
+  var body: some View {
+    VStack {
+      if annotationsPresent && annotationSelected {
+        annotationBody
+      } else {
+        VStack {
+          Text(
+            annotationsPresent
+            ? "Select an existing annotation to view or edit details."
+            : "Create a new annotation by dragging over the image."
+          )
+          Spacer()
+          footer
+        }
+        .foregroundColor(.secondary)
+        .padding()
+      }
+    }
+  }
+
   var annotationBody: some View {
-    VStack(alignment: .leading) {
+    VStack {
       if editting {
         TextField("Label", text: $newName)
       } else {
         Text(annotation.label)
       }
       Divider()
-      Group {
-          HStack {
-            Text("Center X:")
-            Spacer()
-            TextField("X position", text: $x)
-            .frame(width: 40)
-            .multilineTextAlignment(.trailing)
-          }
-          HStack {
-            Text("Center Y:")
-            Spacer()
-            TextField("Y position", text: $y)
-            .frame(width: 40)
-            .multilineTextAlignment(.trailing)
-          }
-          HStack {
-            Text("Width:")
-            Spacer()
-            TextField("Width", text: $width)
-            .frame(width: 40)
-            .multilineTextAlignment(.trailing)
-          }
-          HStack {
-            Text("Height:")
-            Spacer()
-            TextField("Height", text: $height)
-            .frame(width: 40)
-            .multilineTextAlignment(.trailing)
-          }
-          // Text("X: \(annotation.coordinates.origin.x, specifier: "%.2f")")
-      }
-      .environment(\.isEnabled, editting)
+      fields
       Divider()
+      buttons
+      Spacer()
+      footer
+    }
+    .padding()
+    .onReceive(AppData.shared.$annotatedImages) { _ in
+      // Something changed with the images
+      // We are interested in the image/annotation selection
+      if !self.saving {
+        self.cancelEditting()
+      }
+    }
+  }
+
+  var fields: some View {
+    Group {
+        HStack {
+          Text("Center X:")
+          Spacer()
+          TextField("X position", text: $x)
+          .frame(width: 40)
+          .multilineTextAlignment(.trailing)
+        }
+        HStack {
+          Text("Center Y:")
+          Spacer()
+          TextField("Y position", text: $y)
+          .frame(width: 40)
+          .multilineTextAlignment(.trailing)
+        }
+        HStack {
+          Text("Width:")
+          Spacer()
+          TextField("Width", text: $width)
+          .frame(width: 40)
+          .multilineTextAlignment(.trailing)
+        }
+        HStack {
+          Text("Height:")
+          Spacer()
+          TextField("Height", text: $height)
+          .frame(width: 40)
+          .multilineTextAlignment(.trailing)
+        }
+        // Text("X: \(annotation.coordinates.origin.x, specifier: "%.2f")")
+    }
+    .environment(\.isEnabled, editting && !saving)
+  }
+
+  var buttons: some View {
+    Group {
       HStack {
         if editting {
-          Button("Save") {
-            self.editting = false
-            self.annotations[self.annotations.selectedIndex].label = self.newName
-            if let cgFloat = self.x.cgFloat {
-              self.annotations[self.annotations.selectedIndex].coordinates.origin.x = cgFloat
-            }
-            if let cgFloat = self.y.cgFloat {
-              self.annotations[self.annotations.selectedIndex].coordinates.origin.y = cgFloat
-            }
-            if let cgFloat = self.width.cgFloat {
-              self.annotations[self.annotations.selectedIndex].coordinates.size.width = cgFloat
-            }
-            if let cgFloat = self.height.cgFloat {
-              self.annotations[self.annotations.selectedIndex].coordinates.size.height = cgFloat
-            }
-            self.x = self.annotation.origin.x.asString
-            self.y = self.annotation.origin.y.asString
-            self.width = self.annotation.size.width.asString
-            self.height = self.annotation.size.width.asString
-          }
+          Button("Save", action: self.save)
           Button("Cancel", action: self.cancelEditting)
         } else {
           Button("Edit") {
@@ -97,45 +119,43 @@ struct AnnotationInspector: View {
       Button("Remove") {
         self.annotations.removeSelectedAnnotation()
       }
-      Spacer()
-      Text("\(annotations.count) annotations total")
     }
-    .padding()
-    .onReceive(AppData.shared.$annotatedImages) { _ in
-      // Something changed with the images
-      // We are interested in the image/annotation selection
-      self.cancelEditting()
-    }
+  }
+
+  var footer: some View {
+    Text("\(annotations.count) annotations total.")
   }
 
   func cancelEditting() {
     editting = false
     newName = ""
-    self.x = self.annotation.origin.x.asString
-    self.y = self.annotation.origin.y.asString
-    self.width = self.annotation.width.asString
-    self.height = self.annotation.height.asString
+    x = annotation.origin.x.asString
+    y = annotation.origin.y.asString
+    width = annotation.width.asString
+    height = annotation.height.asString
   }
 
-  var body: some View {
-    VStack(alignment: .leading) {
-      if !annotationsPresent {
-        Text("Create a new annotation by dragging over of the image")
-        .foregroundColor(.secondary)
-        .padding()
-        Spacer()
-      } else if !annotationSelected {
-        VStack {
-          Text("Select an annotation to view/edit details")
-          Spacer()
-          Text("\(annotations.count) annotations total")
-        }
-        .foregroundColor(.secondary)
-        .padding()
-      } else {
-        annotationBody
-      }
+  func save() {
+    editting = false
+    saving.toggle()
+    annotations[annotations.selectedIndex].label = newName
+    if let cgFloat = x.cgFloat {
+      annotations[annotations.selectedIndex].coordinates.origin.x = cgFloat
     }
+    if let cgFloat = y.cgFloat {
+      annotations[annotations.selectedIndex].coordinates.origin.y = cgFloat
+    }
+    if let cgFloat = width.cgFloat {
+      annotations[annotations.selectedIndex].coordinates.size.width = cgFloat
+    }
+    if let cgFloat = height.cgFloat {
+      annotations[annotations.selectedIndex].coordinates.size.height = cgFloat
+    }
+    x = annotation.origin.x.asString
+    y = annotation.origin.y.asString
+    width = annotation.size.width.asString
+    height = annotation.size.width.asString
+    saving.toggle()
   }
 }
 

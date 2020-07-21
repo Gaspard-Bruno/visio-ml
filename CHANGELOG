@@ -64,10 +64,12 @@ Week 3
  - Annotation edit mode with cancel
  - Enter no longer needed to rename annotation
  - New numeric input for annotation's dimensions and position
+ - Auto-select newly created annotation after dragging
+ - Auto-select moving annotation when dragging begins
+ - Clean up messages, layout on the annotation inspector
  - [PLANNED] Repeat filter field needs enter to save
  - [PLANNED] Real-time numeric feedback while creating annotation
  - [PLANNED] Numeric feedback while moving annotation
- - [PLANNED] Auto-select newly created annotation
  - [PLANNED] On-screen annotation label handles
  - [PLANNED] Show/hide toggle annotation labels
  - [PLANNED] Disable save json button when just exported

@@ -68,7 +68,9 @@ struct AnnotatedImage {
       count += 1
       label = "label_\(count)"
     } while (annotations.first(where: { $0.label == label }) != nil)
-    annotations.append(Annotation(label: label, coordinates: coordinates))
+    let newAnnotation = Annotation(label: label, coordinates: coordinates)
+    annotations.append(newAnnotation)
+    toggle(annotation: newAnnotation)
   }
   
   mutating func toggle(annotation: Annotation) {
@@ -78,6 +80,7 @@ struct AnnotatedImage {
   }
   
   mutating func beginMoving(annotation: Annotation) {
+    toggle(annotation: annotation)
     annotations.indices.forEach { i in
       annotations[i].isMoving = annotations[i].id == annotation.id
     }
