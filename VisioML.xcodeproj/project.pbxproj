@@ -187,9 +187,9 @@
 		620D3DE224ACD27D00A26F9A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				620D3DE324ACD32500A26F9A /* AppData.swift */,
 				620D3DE524ACD51400A26F9A /* AnnotatedImage.swift */,
 				620D3DE724ACD56900A26F9A /* Annotation.swift */,
-				620D3DE324ACD32500A26F9A /* AppData.swift */,
 				62917DF924B367F800D258F4 /* AppData+generateSynthetics.swift */,
 				620D3DED24ACE5F500A26F9A /* NavigationState.swift */,
 				62F416B524B8BB8E00163E82 /* Operation.swift */,

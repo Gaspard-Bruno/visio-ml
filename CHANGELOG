@@ -59,7 +59,8 @@ Week 3
  - Consistent "N annotations total" message
  - Project reorg around removing the "Annotate" moniker
  
- Week 4 (Partial?)
+ 
+Week 4
 
  - Annotation edit mode with cancel
  - Enter no longer needed to rename annotation
@@ -67,14 +68,30 @@ Week 3
  - Auto-select newly created annotation after dragging
  - Auto-select moving annotation when dragging begins
  - Clean up messages, layout on the annotation inspector
- - [PLANNED] Repeat filter field needs enter to save
+ - Repeat filter field no longer needs enter to apply, is now even saved automatically to disk
+ - Port over on-screen annotation label handles
+ - Show/hide toggle annotation labels setting on inspector
+ - [ONGOING] Show draft annotation (being moved, resized, being created or its values being modified numerically)
+ - [REQUESTED] Revisit cut-out behavior (current version should remove hit annotations when intersection occurs)
+
+
+Week 5 (Proposed)
+
+ - [REQUESTED] Separate output folder
+ - [REQUESTED] Ability to cancel and REVERT synthetic generation
+ 
+ 
+Week 6 (Optional)
+
+ - [PROPOSED] New "Must include" column in synthetics modal
  - [PLANNED] Real-time numeric feedback while creating annotation
  - [PLANNED] Numeric feedback while moving annotation
  - [PLANNED] On-screen annotation label handles
  - [PLANNED] Show/hide toggle annotation labels
  - [PLANNED] Disable save json button when just exported
  - [PLANNED] Back-up JSON auto-saved in workspace
- - [PLANNED] Rever to annotations.json (reload)
+ - [PLANNED] Revert to annotations.json (reload)
+
 
 KNOWN ISSUES
 ------------

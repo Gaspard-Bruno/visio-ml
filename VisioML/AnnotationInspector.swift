@@ -11,6 +11,7 @@ struct AnnotationInspector: View {
   @State var height = ""
 
   @Binding var annotations: [Annotation]
+  @Binding var showAnnotationLabels: Bool
 
   var annotationsPresent: Bool {
     annotations.count > 0
@@ -26,6 +27,9 @@ struct AnnotationInspector: View {
 
   var body: some View {
     VStack {
+      Toggle("Show annotation labels", isOn: $showAnnotationLabels)
+      .padding()
+
       if annotationsPresent && annotationSelected {
         annotationBody
       } else {
@@ -161,6 +165,6 @@ struct AnnotationInspector: View {
 
 struct AnnotationInspector_Previews: PreviewProvider {
   static var previews: some View {
-    AnnotationInspector(annotations: .constant([Annotation]()))
+    AnnotationInspector(annotations: .constant([Annotation]()), showAnnotationLabels: .constant(true))
   }
 }

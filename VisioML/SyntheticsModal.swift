@@ -33,6 +33,20 @@ struct SyntheticsModal: View {
     })
   }
 
+  var numberOfTimesBinding: Binding<String> {
+    .init(
+      get: {
+        "\(self.settings.times)"
+      },
+      set: {
+        guard let times = Int($0) else {
+          return
+        }
+        self.settings.times = times
+      }
+    )
+  }
+
   var body: some View {
     VStack {
       Text("Synthetic image generator")
@@ -47,7 +61,7 @@ struct SyntheticsModal: View {
             Section {
               HStack {
                 Text("Apply ")
-                TextField("", value: $settings.times, formatter: .integer)
+                TextField("N", text: numberOfTimesBinding)
                 .frame(width: 40)
                 .multilineTextAlignment(.trailing)
                 Text(" times per image")
