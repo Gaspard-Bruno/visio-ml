@@ -5,7 +5,7 @@ struct ImageViewer: View {
   @Binding var image: AnnotatedImage
   let scaleFactor: CGFloat
   let showAnnotationLabels: Bool
-  let draftAnnotation: Annotation?
+  let draftCoords: CGRect?
 
   @State var creatingAnnotation = false
   @State var movingAnnotation = false
@@ -78,6 +78,13 @@ struct ImageViewer: View {
         .foregroundColor(.green)
         .opacity(0.5)
       }
+      if draftCoords != nil {
+        Rectangle()
+        .frame(width: draftCoords!.size.scaledBy(self.scaleFactor).width, height: draftCoords!.size.scaledBy(self.scaleFactor).height)
+        .position(draftCoords!.origin.scaledBy(self.scaleFactor))
+        .foregroundColor(.green)
+        .opacity(0.5)
+      }
       ForEach(annotations) { annotation in
         Rectangle()
         .frame(width: annotation.size.scaledBy(self.scaleFactor).width, height: annotation.size.scaledBy(self.scaleFactor).height)
@@ -122,6 +129,6 @@ struct ImageViewer: View {
 
 struct ImageViewer_Previews: PreviewProvider {
   static var previews: some View {
-    ImageViewer(image: .constant(AnnotatedImage(url: URL(string: "")!)), scaleFactor: 1.5, showAnnotationLabels: false, draftAnnotation: nil)
+    ImageViewer(image: .constant(AnnotatedImage(url: URL(string: "")!)), scaleFactor: 1.5, showAnnotationLabels: false, draftCoords: nil)
   }
 }

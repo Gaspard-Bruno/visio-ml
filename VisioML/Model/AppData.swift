@@ -32,7 +32,7 @@ class AppData: ObservableObject {
   @Published var annotatedImages = [AnnotatedImage]()
   @Published var workingFolder: URL?
   @Published var viewportSize: CGSize = CGSize.zero
-  @Published var draftAnnotation = Annotation?.none
+  @Published var draftCoords = CGRect?.none
 
   var currentScaleFactor: CGFloat? {
     guard let image = activeImage, let ciImage = CIImage(contentsOf: image.url) else {

@@ -71,17 +71,19 @@ Week 4
  - Repeat filter field no longer needs enter to apply, is now even saved automatically to disk
  - Port over on-screen annotation label handles
  - Show/hide toggle annotation labels setting on inspector
- - [ONGOING] Show draft annotation (being moved, resized, being created or its values being modified numerically)
- - [REQUESTED] Revisit cut-out behavior (current version should remove hit annotations when intersection occurs)
+ - Show draft annotation (being moved, resized, being created or its values being modified numerically)
+ - Preliminary work on seggregated output folder
+ - Perliminary work on rollback feature for synthetics generation
 
 
-Week 5 (Proposed)
+Week 5
 
- - [REQUESTED] Separate output folder
- - [REQUESTED] Ability to cancel and REVERT synthetic generation
+ - [PLANNED] Separate output folder
+ - [PLANNED] Ability to cancel and REVERT synthetic generation
+ - [PLANNED] Revisit cut-out behavior (current version should remove hit annotations when intersection occurs)
  
  
-Week 6 (Optional)
+Week 6+ (Optional)
 
  - [PROPOSED] New "Must include" column in synthetics modal
  - [PLANNED] Real-time numeric feedback while creating annotation

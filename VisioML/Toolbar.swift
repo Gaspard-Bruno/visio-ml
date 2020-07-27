@@ -7,11 +7,22 @@ struct Toolbar: View {
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        WorkingFolderIndicator()
-        Button("JSON Export") {
-          self.appData.saveJSON()
+        HStack {
+          Text("Input folder:")
+          WorkingFolderIndicator()
+          Button("Save JSON") {
+            self.appData.saveJSON()
+          }
+          .environment(\.isEnabled, appData.workingFolder != nil)
         }
-        .environment(\.isEnabled, appData.workingFolder != nil)
+        HStack {
+          Text("Output folder:")
+          WorkingFolderIndicator()
+          Button("Save output") {
+            self.appData.saveJSON()
+          }
+        }
+        .environment(\.isEnabled, false)
       }
       Spacer()
       Button("Synthetics…") {
