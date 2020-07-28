@@ -2,10 +2,10 @@ import SwiftUI
 
 struct OpenButton: View {
 
-  @ObservedObject var appData = AppData.shared
+  let onSelect: (URL) -> ()
 
   var body: some View {
-    Button("Open…") {
+    Button("Select folder…") {
       let panel = NSOpenPanel()
       panel.canChooseFiles = false
       panel.canChooseDirectories = true
@@ -16,13 +16,13 @@ struct OpenButton: View {
       guard result == .OK, let url = panel.url else {
         return
       }
-      self.appData.setWorkingFolder(url)
+      self.onSelect(url)
     }
   }
 }
 
 struct OpenButton_Previews: PreviewProvider {
   static var previews: some View {
-    OpenButton()
+    OpenButton(onSelect: { _ in })
   }
 }

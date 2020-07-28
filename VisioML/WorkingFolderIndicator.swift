@@ -6,7 +6,9 @@ struct WorkingFolderIndicator: View {
 
   var body: some View {
     HStack {
-      OpenButton()
+      OpenButton {
+        self.appData.setWorkingFolder($0)
+      }
       if appData.workingFolder == nil {
         Text("No folder selected")
       } else {

@@ -30,7 +30,9 @@ class AppData: ObservableObject {
     }
   }
   @Published var annotatedImages = [AnnotatedImage]()
+  @Published var outputImages = [AnnotatedImage]()
   @Published var workingFolder: URL?
+  @Published var outFolder: URL?
   @Published var viewportSize: CGSize = CGSize.zero
   @Published var draftCoords = CGRect?.none
 
@@ -85,15 +87,24 @@ class AppData: ObservableObject {
     annotatedImages = []
     settings = WorkspaceSettings()
     workingFolder = nil
+    outFolder = nil
   }
   
-  func setWorkingFolder(_ url: URL) {
+  func unsetOutFolder() {
+    outFolder = nil
+  }
+  
+  private func isDir(_ url: URL) -> Bool {
     var isDirectory: ObjCBool = ObjCBool(false)
     let exists = FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory)
     guard exists && isDirectory.boolValue else {
-      return
+      return false
     }
-    guard let folderWatcher = DirectoryWatcher(url, callback: {
+    return true
+  }
+
+  func setWorkingFolder(_ url: URL) {
+    guard isDir(url), let folderWatcher = DirectoryWatcher(url, callback: {
       self.refreshImages()
     }) else {
       return
@@ -107,6 +118,13 @@ class AppData: ObservableObject {
     if annotatedImages.count > 0 {
       annotatedImages[0].isActive = true
     }
+  }
+
+  func setOutFolder(_ url: URL) {
+    guard isDir(url) else {
+      return
+    }
+    outFolder = url
   }
 
   func refreshImages() {

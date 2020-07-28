@@ -15,14 +15,12 @@ struct Toolbar: View {
           }
           .environment(\.isEnabled, appData.workingFolder != nil)
         }
-        HStack {
-          Text("Output folder:")
-          WorkingFolderIndicator()
-          Button("Save output") {
-            self.appData.saveJSON()
+        if appData.workingFolder != nil {
+          HStack {
+            Text("Output folder:")
+            OutputFolderIndicator()
           }
         }
-        .environment(\.isEnabled, false)
       }
       Spacer()
       Button("Synthetics…") {

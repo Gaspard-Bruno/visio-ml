@@ -9,7 +9,9 @@ struct ViewerPanel: View {
       if appData.workingFolder == nil {
         VStack {
           Text("Please select a working folder to begin.")
-          OpenButton()
+          OpenButton {
+            self.appData.setWorkingFolder($0)
+          }
         }
       } else if appData.activeImage != nil && appData.activeImage!.fileExists {
         ImageViewer(image: $appData.annotatedImages[appData.activeImageIndex!], scaleFactor: appData.currentScaleFactor!, showAnnotationLabels: appData.navigation.showLabels, draftCoords: appData.draftCoords)

@@ -78,8 +78,8 @@ Week 4
 
 Week 5
 
- - [PLANNED] Separate output folder
- - [PLANNED] Ability to cancel and REVERT synthetic generation
+ - [80%] Separate output folder
+ - [30%] Ability to cancel and REVERT synthetic generation
  - [PLANNED] Revisit cut-out behavior (current version should remove hit annotations when intersection occurs)
  
  
