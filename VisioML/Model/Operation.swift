@@ -25,4 +25,16 @@ extension Array where Element == [Operation] {
       }
     }
   }
+
+  func including(operations includeOperations: [Operation]) -> [[Operation]] {
+    includeOperations.count == 0
+    ? self
+    : filter { opSet in
+      // combination does not contain an excluded filter
+      opSet.reduce(into: false) { result, op in
+        result = result || includeOperations.contains(op)
+      }
+    }
+  }
+
 }

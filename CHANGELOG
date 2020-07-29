@@ -78,14 +78,16 @@ Week 4
 
 Week 5
 
+ - Repo renamed, master made default branch (Bruno)
+ - Readme added
  - [80%] Separate output folder
  - [30%] Ability to cancel and REVERT synthetic generation
  - [PLANNED] Revisit cut-out behavior (current version should remove hit annotations when intersection occurs)
+ - [PROPOSED] New "Must include" column in synthetics modal
  
  
 Week 6+ (Optional)
 
- - [PROPOSED] New "Must include" column in synthetics modal
  - [PLANNED] Real-time numeric feedback while creating annotation
  - [PLANNED] Numeric feedback while moving annotation
  - [PLANNED] On-screen annotation label handles

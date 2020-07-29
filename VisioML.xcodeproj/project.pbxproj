@@ -117,6 +117,7 @@
 		62C7273F24BF43C800E332E5 /* Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
 		62C7274124BF446300E332E5 /* Operation+validCombinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operation+validCombinations.swift"; sourceTree = "<group>"; };
 		62F416B524B8BB8E00163E82 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		62F96C4724D1CDC700F96A0E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				6274619624ADD792003485E7 /* CHANGELOG */,
+				62F96C4724D1CDC700F96A0E /* README.md */,
 				620D3DCE24ACD0A600A26F9A /* VisioML */,
 				620D3DCD24ACD0A600A26F9A /* Products */,
 			);

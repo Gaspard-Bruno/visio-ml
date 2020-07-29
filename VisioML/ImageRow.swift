@@ -3,9 +3,7 @@ import SwiftUI
 struct ImageRow: View {
   
   @ObservedObject var appData = AppData.shared
-  
   let annotatedImage: AnnotatedImage
-
 
   private var isSelectedBinding: Binding<Bool> {
     Binding<Bool>(

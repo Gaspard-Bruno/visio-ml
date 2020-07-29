@@ -11,7 +11,13 @@ struct StatusBar: View {
       } else if appData.annotatedImages.count == 0 {
         Text("Current working folder contains no images")
       } else if appData.pendingImages > 0 {
-        Text("\(appData.pendingImages) processing. \(appData.annotatedImages.count - appData.pendingImages) images available")
+        HStack {
+          Text("\(appData.pendingImages) processing. \(appData.annotatedImages.count - appData.pendingImages) images available")
+          Button("Cancel") {
+            self.appData.cancelSynthetics()
+          }
+        }
+
       } else {
         Text("\(appData.annotatedImages.count) images available")
       }

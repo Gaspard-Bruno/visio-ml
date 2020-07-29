@@ -6,6 +6,7 @@ struct WorkspaceSettings {
   var backgrounds: URL?
   var times = 1
   var excludeOperations: [Operation] = []
+  var includeOperations: [Operation] = []
   
 }
 
