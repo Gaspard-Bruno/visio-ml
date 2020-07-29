@@ -1,0 +1,51 @@
+before_all do
+  ensure_git_branch
+  ensure_git_status_clean
+  git_pull
+end
+
+default_platform(:ios)
+
+platform :ios do
+  desc 'Fetch new certificates and provisioning profiles'
+  lane :fetch_certificates_and_profiles do
+    match(type: 'development', readonly: true, generate_apple_certs: false, platform: 'macos')
+    match(type: 'appstore', readonly: true, generate_apple_certs: false, platform: 'macos')
+  end
+
+  desc 'Build and submit the iOS for Testflight.'
+  lane :release_appstore do
+    pkg = app_store_build_app
+    release_to_appstore(pkg: pkg)
+  end
+
+  desc 'Build app for App Store'
+  private_lane :app_store_build_app do
+    gym(
+      scheme: 'Visio ML',
+      export_method: 'app-store',
+      export_options: {
+        provisioningProfiles: {
+          "com.gaspardbruno.visio" => "AppStore_com.gaspardbruno.visio",
+        }
+      },
+      output_directory: 'fastlane/archives',
+      include_symbols: true,
+      include_bitcode: true,
+      clean: true,
+    )
+  end
+
+  desc 'Release app to App Store'
+  private_lane :release_to_appstore do |options|
+    upload_to_app_store(
+      pkg: options[:pkg],
+      force: true,
+      submit_for_review: false,
+      precheck_include_in_app_purchases: false,
+      run_precheck_before_submit: false,
+      skip_screenshots: true,
+      skip_metadata: true,
+    )
+  end
+end
