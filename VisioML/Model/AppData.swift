@@ -35,6 +35,7 @@ class AppData: ObservableObject {
   @Published var outFolder: URL?
   @Published var viewportSize: CGSize = CGSize.zero
   @Published var draftCoords = CGRect?.none
+  var cancelSyntheticsProcess = false
 
   var currentScaleFactor: CGFloat? {
     guard let image = activeImage, let ciImage = CIImage(contentsOf: image.url) else {
@@ -44,7 +45,7 @@ class AppData: ObservableObject {
   }
   
   var pendingImages: Int {
-    annotatedImages.reduce(0) {
+    (outFolder == nil ? annotatedImages : outputImages).reduce(0) {
       $0 + ($1.isEnabled ? 0 : 1)
     }
   }

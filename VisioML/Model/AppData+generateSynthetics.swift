@@ -3,9 +3,18 @@ import Foundation
 extension AppData {
 
   func makeTask(_ image: AnnotatedImage, _ ops: [Operation]) -> SyntheticsTask {
-    SyntheticsTask(annotatedImage: image, settings: settings, operations: ops)
+    SyntheticsTask(annotatedImage: image, folder: outFolder, settings: settings, operations: ops)
   }
 
+  func cancelSynthetics() {
+    cancelSyntheticsProcess.toggle()
+    if self.outFolder == nil {
+      self.annotatedImages.removeAll { !$0.isEnabled }
+    } else {
+      self.outputImages.removeAll { !$0.isEnabled }
+    }
+  }
+  
   func generateSynthetics() {
   
     folderWatcher?.suspend()
@@ -17,6 +26,7 @@ extension AppData {
     let tasks = initialSet.flatMap { img in
       Operation.validCombinations
       .excluding(operations: settings.excludeOperations)
+      .including(operations: settings.includeOperations)
       .flatMap { ops in
         (0 ..< settings.times).map { _ in
           makeTask(img, ops)
@@ -24,9 +34,15 @@ extension AppData {
       }
     }
     tasks.forEach {
-      self.annotatedImages.append(AnnotatedImage(
+      let a = AnnotatedImage(
         url: $0.resultUrl, annotations: [], isEnabled: false
-      ))
+      )
+      if self.outFolder == nil {
+        self.annotatedImages.append(a)
+      } else {
+        self.outputImages.append(a)
+      }
+      
     }
     tasks.processAll { task in
       DispatchQueue.main.async {
@@ -36,11 +52,19 @@ extension AppData {
   }
   
   func syntheticTaskComplete(_ task: SyntheticsTask) {
-    guard let i = annotatedImages.firstIndex(where: { $0.url == task.resultUrl }) else {
-      return
+    if outFolder == nil {
+      guard let i = annotatedImages.firstIndex(where: { $0.url == task.resultUrl }) else {
+        return
+      }
+      annotatedImages[i].annotations = task.resultAnnotations
+      annotatedImages[i].isEnabled.toggle()
+    } else {
+      guard let i = outputImages.firstIndex(where: { $0.url == task.resultUrl }) else {
+        return
+      }
+      outputImages[i].annotations = task.resultAnnotations
+      outputImages[i].isEnabled.toggle()
     }
-    annotatedImages[i].annotations = task.resultAnnotations
-    annotatedImages[i].isEnabled.toggle()
     if pendingImages == 0 {
       folderWatcher?.resume()
     }

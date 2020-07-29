@@ -11,14 +11,21 @@ class SyntheticsTask {
   var resultAnnotations: [Annotation]!
   var resultImage: CIImage!
   
-  init(annotatedImage: AnnotatedImage, settings: WorkspaceSettings, operations: [Operation]) {
+  init(annotatedImage: AnnotatedImage, folder: URL? = nil, settings: WorkspaceSettings, operations: [Operation]) {
     self.source = annotatedImage
     self.settings = settings
     self.operations = operations
-    self.resultUrl = annotatedImage.url
-      .deletingPathExtension()
-      .appendingPathExtension(UUID.tiny())
-      .appendingPathExtension(annotatedImage.url.pathExtension)
+    if let folder = folder {
+      self.resultUrl = folder
+        .appendingPathComponent(annotatedImage.url.deletingPathExtension().lastPathComponent)
+        .appendingPathExtension(UUID.tiny())
+        .appendingPathExtension(annotatedImage.url.pathExtension)
+    } else {
+      self.resultUrl = annotatedImage.url
+        .deletingPathExtension()
+        .appendingPathExtension(UUID.tiny())
+        .appendingPathExtension(annotatedImage.url.pathExtension)
+    }
   }
 
   func process() {
@@ -57,8 +64,12 @@ extension Array where Element == SyntheticsTask {
   func processAll(completion: @escaping (SyntheticsTask) -> ()) {
     DispatchQueue.global(qos: .userInteractive).async {
       self.forEach { task in
-        task.process()
-        completion(task)
+        if !AppData.shared.cancelSyntheticsProcess {
+          task.process()
+          completion(task)
+        } else {
+          print("Process cancelled")
+        }
       }
     }
   }

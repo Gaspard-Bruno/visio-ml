@@ -3,19 +3,18 @@ import SwiftUI
 struct ImageNavigator: View {
 
   @ObservedObject var appData = AppData.shared
-  @State var tab = "input"
 
   var body: some View {
     VStack {
       if appData.outFolder != nil {
         HStack(spacing: 0) {
-          NavigatorTab(label: "Input", key: "input", selection: $tab)
-          NavigatorTab(label: "Output", key: "output", selection: $tab)
+          NavigatorTab(label: "Input", key: .inputFolder, selection: $appData.navigation.navigator)
+          NavigatorTab(label: "Output", key: .outputFolder, selection:  $appData.navigation.navigator)
         }
         .padding(.top, 8)
         .fixedSize()
       }
-      if tab == "input" {
+      if appData.navigation.navigator == .inputFolder {
         ScrollView {
           VStack(spacing: 0) {
             ForEach(appData.annotatedImages) {
@@ -25,10 +24,10 @@ struct ImageNavigator: View {
           }
         }
         .frame(minWidth: 150, maxWidth: 250, maxHeight: .infinity)
-      } else {
+      } else { // .outputFolder
         ScrollView {
           VStack(spacing: 0) {
-            ForEach(appData.annotatedImages) {
+            ForEach(appData.outputImages) {
               ImageRow(annotatedImage: $0)
             }
             Spacer()
@@ -47,8 +46,8 @@ struct ImageNavigator: View {
 struct NavigatorTab: View {
 
   let label: LocalizedStringKey
-  let key: String
-  @Binding var selection: String
+  let key: NavigationState.Navigator
+  @Binding var selection: NavigationState.Navigator
 
   var body: some View {
     Text(label)
