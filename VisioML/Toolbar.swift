@@ -7,13 +7,12 @@ struct Toolbar: View {
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
+        
+        
         HStack {
           Text("Input folder:")
           WorkingFolderIndicator()
-          Button("Save JSON") {
-            self.appData.saveJSON()
-          }
-          .environment(\.isEnabled, appData.workingFolder != nil)
+          
         }
         if appData.workingFolder != nil {
           HStack {
@@ -21,23 +20,29 @@ struct Toolbar: View {
             OutputFolderIndicator()
           }
         }
+//        Button(appData.navigation.isNavigatorVisible ? "Hide Sidebar" : "Show Sidebar") {
+//          withAnimation {
+//            self.appData.toggleNavigator()
+//          }
+//        }
+//        .environment(\.isEnabled, appData.workingFolder != nil)
       }
       Spacer()
-      Button("Synthetics…") {
-        withAnimation {
-          self.appData.navigation.currentModal = "synthetics"
-        }
+      VStack(alignment: .leading) {
+          Button("Synthetics") {
+            withAnimation {
+              self.appData.navigation.currentModal = "synthetics"
+            }
+          }
+          .environment(\.isEnabled, appData.workingFolder != nil && appData.pendingImages == 0)
+          Button("Export") {
+            self.appData.saveJSON()
+          }
+          .environment(\.isEnabled, appData.workingFolder != nil)
       }
-      .environment(\.isEnabled, appData.workingFolder != nil && appData.pendingImages == 0)
-      Button("Navigator") {
-        withAnimation {
-          self.appData.toggleNavigator()
-        }
-      }
-      .environment(\.isEnabled, appData.workingFolder != nil)
     }
     .padding()
-    .frame(height: 80)
+    .frame(height: 70)
     .frame(maxWidth: .infinity)
     .border(Color(NSColor.separatorColor), width: 1)
   }
